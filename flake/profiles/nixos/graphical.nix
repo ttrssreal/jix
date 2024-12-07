@@ -36,6 +36,8 @@ in
         { pkgs, ... }:
         {
           fonts = {
+            # this has to be at the system level bc it looks
+            # like HM cant install fonts per-user?
             packages = with pkgs; [
               # nvim tree
               nerd-fonts.hack
