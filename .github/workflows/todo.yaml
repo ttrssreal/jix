@@ -1,0 +1,52 @@
+# https://github.com/alstr/todo-to-issue-action/?tab=readme-ov-file#url-insertion
+
+name: File issues for todo comments
+
+on:
+  push:
+  workflow_dispatch:
+    inputs:
+      MANUAL_COMMIT_REF:
+        description: The SHA of the commit to get the diff for
+        required: true
+      MANUAL_BASE_REF:
+        description: >
+          By default, the commit entered above is compared
+          to the one directly before it; to go back further,
+          enter an earlier SHA here
+        required: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: File issues
+        uses: alstr/todo-to-issue-action@v5.1.5
+        env:
+          MANUAL_COMMIT_REF: ${{ inputs.MANUAL_COMMIT_REF }}
+          MANUAL_BASE_REF: ${{ inputs.MANUAL_BASE_REF }}
+        with:
+          INSERT_ISSUE_URLS: true
+          AUTO_ASSIGN: true
+          CLOSE_ISSUES: true
+          # write comments in MD
+          ESCAPE: false
+
+      - name: Set Git user
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Commit and Push Changes
+        run: |
+          git add -A
+          if [[ `git status --porcelain` ]]; then
+            git commit -m "Automatically added GitHub issue links to TODOs"
+            git push origin main
+          else
+            echo "No changes to commit"
+          fi
