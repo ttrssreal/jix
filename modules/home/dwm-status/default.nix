@@ -36,6 +36,7 @@ in
       final: prev: {
         # fixes for https://github.com/Gerschtli/dwm-status/issues/175
         # TODO: Remove dwm-status override once network fix makes it into a release
+        # Issue URL: https://github.com/ttrssreal/jix/issues/10
         src = pkgs.fetchFromGitHub {
           owner = "Gerschtli";
           repo = prev.pname;
