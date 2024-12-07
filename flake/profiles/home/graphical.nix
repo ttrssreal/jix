@@ -33,7 +33,7 @@ in
       (
         { lib, pkgs, ... }:
         lib.mkIf (cfg.windowManager == "dwm") {
-          jix.picom.enable = lib.traceVal true;
+          jix.picom.enable = true;
 
           jix.xinit = {
             enable = true;
