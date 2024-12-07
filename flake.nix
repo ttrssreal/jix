@@ -50,9 +50,9 @@
         ./nixos/jess-laptop
         ./nixos/ari
 
-        ./home/jess-at-desk
-        ./home/jess-at-jess-laptop
-        ./home/jess-at-ari
+        ./home/jess/desk.nix
+        ./home/jess/jess-laptop.nix
+        ./home/jess/ari.nix
       ];
 
       systems = [
