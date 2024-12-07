@@ -19,6 +19,12 @@
           };
         };
       }
+
+      {
+        jix.dwm-status.features = [
+          "battery"
+        ];
+      }
     ];
 
     # This value determines the Home Manager release that your

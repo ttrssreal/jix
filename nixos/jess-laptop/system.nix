@@ -6,7 +6,12 @@
     pipewire.enable = true;
   };
 
-  services.thermald.enable = true;
+  services = {
+    thermald.enable = true;
+
+    # used by status bar
+    upower.enable = true;
+  };
 
   hardware.graphics.extraPackages = [
     pkgs.intel-media-driver
