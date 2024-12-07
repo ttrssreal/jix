@@ -6,7 +6,7 @@
   ...
 }:
 let
-  # https://github.com/NixOS/nixpkgs/blob/b11ff5d1d5dbae661a23e8c3a165adbabbfc9a27/nixos/modules/misc/nixpkgs.nix#L42
+  # https://github.com/NixOS/nixpkgs/blob/b11ff5d1d5/nixos/modules/misc/nixpkgs.nix#L42
   overlayType = lib.mkOptionType {
     name = "nixpkgs-overlay";
     description = "nixpkgs overlay";

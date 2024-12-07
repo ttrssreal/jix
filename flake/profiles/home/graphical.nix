@@ -45,7 +45,7 @@ in
 
                 ${lib.getExe pkgs.feh} --bg-max --randomize ${cfg.wallpaperDir}/* &
 
-                # https://github.com/NixOS/nixpkgs/blob/b6aa3932ce2378307f72d10cbaa80f8af1545abc/nixos/modules/services/x11/display-managers/default.nix#L238
+                # https://github.com/NixOS/nixpkgs/blob/b6aa3932ce/nixos/modules/services/x11/display-managers/default.nix#L238
                 ${lib.getExe' pkgs.systemd "systemctl"} --user start --no-block nixos-fake-graphical-session.target
               '';
 
