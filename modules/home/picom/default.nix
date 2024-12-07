@@ -1,4 +1,9 @@
-{ lib, pkgs, config,... }:
+{
+  lib,
+  pkgs,
+  config,
+  ...
+}:
 {
   options.jix.picom.enable = lib.mkEnableOption "picom";
 
