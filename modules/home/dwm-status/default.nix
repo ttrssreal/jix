@@ -18,6 +18,7 @@ in
 
     features = lib.mkOption {
       type = with lib.types; listOf featureType;
+      default = [];
     };
 
     inherit (config.services.dwm-status) extraConfig;
