@@ -23,23 +23,19 @@ in
     inherit (config.services.dwm-status) extraConfig;
   };
 
-  config = lib.mkIf cfg.enable {
-    jix.dwm-status.features = [
+  config.services.dwm-status = lib.mkIf cfg.enable {
+    enable = true;
+
+    order = cfg.features ++ [
       "network"
       "time"
     ];
 
-    services.dwm-status = {
-      enable = true;
-
-      order = cfg.features;
-
-      extraConfig = {
-        network.template = "{IPv4}";
-        time = {
-          format = "%a %d %b %H:%M:%S";
-          update_seconds = true;
-        };
+    extraConfig = {
+      network.template = "{IPv4}";
+      time = {
+        format = "%a %d %b %H:%M:%S";
+        update_seconds = true;
       };
     };
   };
