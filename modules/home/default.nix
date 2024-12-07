@@ -8,5 +8,6 @@
     ./zsh
     ./xinit
     ./bluetooth-connect
+    ./dwm-status
   ];
 }

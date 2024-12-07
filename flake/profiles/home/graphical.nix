@@ -34,6 +34,7 @@ in
         { lib, pkgs, ... }:
         lib.mkIf (cfg.windowManager == "dwm") {
           jix.picom.enable = true;
+          jix.dwm-status.enable = true;
 
           jix.xinit = {
             enable = true;

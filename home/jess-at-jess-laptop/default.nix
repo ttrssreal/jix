@@ -19,21 +19,6 @@
           };
         };
       }
-
-      {
-        services.dwm-status = {
-          enable = true;
-          order = [
-            "network"
-            "time"
-          ];
-
-          extraConfig = {
-            network.template = "{IPv4}";
-            time.format = "%a %d %b %H:%M:%S";
-          };
-        };
-      }
     ];
 
     # This value determines the Home Manager release that your
