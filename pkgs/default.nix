@@ -3,6 +3,7 @@
   # would be nice to do:
   #   `transposition.lib.noOutput = true;`
   # TODO: flake-parts: input only transpositions?
+  # Issue URL: https://github.com/ttrssreal/jix/issues/6
   perInput = system: flake: {
     lib = flake.lib.${system};
   };
