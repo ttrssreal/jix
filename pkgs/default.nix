@@ -12,7 +12,7 @@
     { inputs', ... }:
     {
       jix.overlays = [
-        (final: prev: {
+        (final: _: {
           bluetooth-connect = final.callPackage ./bluetooth-connect.nix { };
 
           inherit (inputs'.erosanix.lib) mkWindowsApp;
