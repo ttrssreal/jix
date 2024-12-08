@@ -37,6 +37,13 @@
       url = "github:emmanuelrosa/erosanix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    git-hooks-nix = {
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        nixpkgs-stable.follows = "stable";
+      };
+      url = "github:cachix/git-hooks.nix";
+    };
   };
 
   outputs =

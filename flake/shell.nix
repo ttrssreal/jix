@@ -1,9 +1,33 @@
+{ inputs, ... }:
 {
+  imports = [
+    inputs.git-hooks-nix.flakeModule
+  ];
+
   perSystem =
-    { pkgs, inputs', ... }:
     {
+      config,
+      pkgs,
+      inputs',
+      ...
+    }:
+    {
+      pre-commit = {
+        check.enable = true;
+        settings.hooks = {
+          treefmt.enable = true;
+          nixfmt-rfc-style.enable = true;
+          deadnix.enable = true;
+        };
+      };
+
       devShells.default = pkgs.mkShell {
         name = "jix-dev-shell";
+
+        shellHook = ''
+          ${config.pre-commit.installationScript}
+        '';
+
         packages = with pkgs; [
           git
           nix
