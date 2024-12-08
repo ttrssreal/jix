@@ -1,0 +1,30 @@
+
+name: Build and cache all the things
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ${{ matrix.runner }}
+
+    strategy:
+      matrix:
+        runner: [ubuntu-24.04]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install nix
+        uses: DeterminateSystems/nix-installer-action@v16
+
+      - name: Magic
+        uses: DeterminateSystems/magic-nix-cache-action@v8
+
+      - name: Install omnix
+        run: nix --accept-flake-config profile install "github:juspay/omnix"
+
+      - name: Build
+        run: om ci run -o built.json -- --refresh --sandbox -j auto --cores 0
