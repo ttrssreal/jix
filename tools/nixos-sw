@@ -1,4 +1,5 @@
 #!/usr/bin/env nix-shell
 #!nix-shell scriptShell.nix -i bash --option extra-experimental-features flakes
+set -exo pipefail
 
 nixos-rebuild switch --flake .
