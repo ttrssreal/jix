@@ -2,4 +2,4 @@
 #!nix-shell scriptShell.nix -i bash --option extra-experimental-features flakes
 set -exo pipefail
 
-home-manager switch --flake .
+home-manager switch --flake . $@
