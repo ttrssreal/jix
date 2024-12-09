@@ -31,6 +31,23 @@ in
     oh-my-zsh = {
       enable = true;
       theme = "robbyrussell";
+      custom = "${
+        (pkgs.fetchFromGitHub {
+          owner = "ohmyzsh";
+          repo = "ohmyzsh";
+          rev = "69a6359f7cf8978d464573fb7b023ee3cd00181a";
+          hash = "sha256-M7oceuWwoJWmToETcmM6ed5UoJ0it5dNaukd5NqcMbs=";
+          postFetch = ''
+            cd $out
+            patchPhase
+          '';
+        }).overrideAttrs
+        {
+          patches = [
+            ./0001-show-hostname-if-ssh.patch
+          ];
+        }
+      }";
       plugins = [
         "git"
         "extract"

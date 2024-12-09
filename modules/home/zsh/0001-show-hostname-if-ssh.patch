@@ -1,0 +1,20 @@
+diff --git a/themes/robbyrussell.zsh-theme b/themes/robbyrussell.zsh-theme
+index cfecfc89..6dd2b223 100644
+--- a/themes/robbyrussell.zsh-theme
++++ b/themes/robbyrussell.zsh-theme
+@@ -1,4 +1,15 @@
+ PROMPT="%(?:%{$fg_bold[green]%}%1{➜%} :%{$fg_bold[red]%}%1{➜%} ) %{$fg[cyan]%}%c%{$reset_color%}"
++
++if [[ $terminfo[colors] -ge 256 ]]; then
++    hostname_color="%F{200}"
++else
++    hostname_color="%F{white}"
++fi
++
++if [[ -n "$SSH_CLIENT" ]]; then
++  PROMPT+=" <${hostname_color}%n%{$reset_color%}@${hostname_color}%m%{$reset_color%}>"
++fi
++
+ PROMPT+=' $(git_prompt_info)'
+ 
+ ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg_bold[blue]%}git:(%{$fg[red]%}"
