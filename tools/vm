@@ -1,0 +1,16 @@
+#!/usr/bin/env nix-shell
+#!nix-shell scriptShell.nix -i bash --option extra-experimental-features flakes
+
+if [ "$#" -ne 1 ]; then
+  echo "Usage: $0 hostname"
+  exit 1
+fi
+
+set -exo pipefail
+
+hostname=$1
+shift 1
+
+nix run .#nixosConfigurations.$hostname.config.system.build.vm $@
+
+rm *.qcow2
