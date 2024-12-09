@@ -22,9 +22,13 @@
       }
 
       {
-        jix.dwm-status.features = [
-          "battery"
-        ];
+        jix.dwm-status = {
+          extraConfig.network.template = "{ESSID} @ {IPv4}";
+
+          features = [
+            "battery"
+          ];
+        };
       }
     ];
 
