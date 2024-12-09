@@ -27,6 +27,7 @@
 
           features = [
             "battery"
+            "audio"
           ];
         };
       }
