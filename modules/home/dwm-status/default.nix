@@ -63,10 +63,10 @@ in
     ];
 
     extraConfig = {
-      network.template = "{IPv4}";
+      network.template = lib.mkDefault "{IPv4}";
       time = {
-        format = "%a %d %b %H:%M:%S";
-        update_seconds = true;
+        format = lib.mkDefault "%a %d %b %H:%M:%S";
+        update_seconds = lib.mkDefault true;
       };
     };
   };
