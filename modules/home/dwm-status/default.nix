@@ -18,6 +18,13 @@ let
   cfg = config.jix.dwm-status;
 in
 {
+  imports = [
+    (lib.mkAliasOptionModule
+      [ "jix" "dwm-status" "extraConfig" ]
+      [ "services" "dwm-status" "extraConfig" ]
+    )
+  ];
+
   options.jix.dwm-status = {
     enable = lib.mkEnableOption "dwm status bar";
 
@@ -25,8 +32,6 @@ in
       type = with lib.types; listOf featureType;
       default = [ ];
     };
-
-    inherit (config.services.dwm-status) extraConfig;
   };
 
   config.services.dwm-status = lib.mkIf cfg.enable {
