@@ -1,3 +1,5 @@
+# convert this to a profile once the cluster becomes multinodal
+
 {
   networking = {
     firewall.enable = false;
