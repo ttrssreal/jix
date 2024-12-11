@@ -3,7 +3,6 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-    stable.url = "github:NixOS/nixpkgs?ref=nixos-24.05";
     nixvim = {
       url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -40,7 +39,6 @@
     git-hooks-nix = {
       inputs = {
         nixpkgs.follows = "nixpkgs";
-        nixpkgs-stable.follows = "stable";
       };
       url = "github:cachix/git-hooks.nix";
     };
