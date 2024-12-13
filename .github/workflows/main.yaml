@@ -2,7 +2,6 @@
 name: Build and cache all the things
 
 on:
-  push:
   workflow_dispatch:
 
 jobs:
