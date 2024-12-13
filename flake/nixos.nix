@@ -38,12 +38,6 @@ in
               stateVersion = lib.mkOption {
                 type = lib.types.str;
               };
-
-              finalSystem = lib.mkOption {
-                internal = true;
-                readOnly = true;
-              };
-
             };
 
             config = {
@@ -59,19 +53,19 @@ in
               ];
 
               specialArgs = { inherit inputs; };
-
-              finalSystem = inputs.nixpkgs.lib.nixosSystem {
-                # pass though flake level + overlayed, package set
-                pkgs = withSystem config.system (lib.getAttr "pkgs");
-
-                inherit (config) modules specialArgs;
-              };
             };
-
           }
         )
       );
   };
 
-  config.flake.nixosConfigurations = lib.mapAttrs (_: lib.getAttr "finalSystem") cfg;
+  config.flake.nixosConfigurations = lib.mapAttrs (
+    _: config:
+    inputs.nixpkgs.lib.nixosSystem {
+      # pass though flake level + overlayed, package set
+      pkgs = withSystem config.system (lib.getAttr "pkgs");
+
+      inherit (config) modules specialArgs;
+    }
+  ) cfg;
 }
