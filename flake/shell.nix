@@ -37,6 +37,8 @@
           rage
 
           inputs'.home-manager.packages.default
+
+          argocd
         ];
 
         NIX_CONFIG = "extra-experimental-features = nix-command flakes";
