@@ -5,5 +5,6 @@
     ./nixos.nix
     ./home.nix
     ./overlays.nix
+    ./install-iso.nix
   ];
 }

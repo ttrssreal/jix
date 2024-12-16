@@ -1,8 +1,4 @@
 {
-  imports = [
-    ./gpu.nix
-  ];
-
   hardware.graphics.enable = true;
 
   networking = {

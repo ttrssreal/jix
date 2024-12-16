@@ -1,6 +1,10 @@
 # Desk (He/They)
 
 {
+  imports = [
+    ./gpu.nix
+  ];
+
   jix.nixos.desk = {
     system = "x86_64-linux";
 
