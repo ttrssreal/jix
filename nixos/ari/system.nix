@@ -57,7 +57,7 @@
               (map (
                 lib.recursiveUpdate {
                   metadata = {
-                    "namespace" = argoCdNamespace.metadata.name;
+                    namespace = argoCdNamespace.metadata.name;
 
                     # these aren't started by addonmanager *but* we can ask her if
                     # she'll babysit them :3
