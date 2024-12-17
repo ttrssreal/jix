@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: guestbook
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: guestbook
+  namespace: apps
+spec:
+  project: apps
+  source:
+    repoURL: https://github.com/argoproj/argocd-example-apps.git
+    targetRevision: d7927a27b4533926b7d86b5f249cd9ebe7625e90
+    path: guestbook
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: guestbook
+  syncPolicy:
+    automated: {}
