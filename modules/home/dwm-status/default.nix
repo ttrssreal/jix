@@ -40,19 +40,20 @@ in
     package = pkgs.dwm-status.overrideAttrs (
       final: prev: {
         # fixes for https://github.com/Gerschtli/dwm-status/issues/175
-        # TODO: Remove dwm-status override once network fix makes it into a release
+        # implements https://github.com/Gerschtli/dwm-status/issues/177
+        # TODO: dwm-status: stop using fork once it reaches parity with upstream
         # Issue URL: https://github.com/ttrssreal/jix/issues/10
         src = pkgs.fetchFromGitHub {
-          owner = "Gerschtli";
+          owner = "ttrssreal";
           repo = prev.pname;
-          rev = "8eede31a129de117b737fb0acf13f9ff453a295f";
-          sha256 = "sha256-VBd7htaj2Xk8zWZ7SmnKKt7QdkdXrO3M2K6vO8Evoug=";
+          rev = "b89daf4fda0a019f764e46d194e3b178f7a9d699";
+          sha256 = "sha256-Zi+SfsSWTnMYMdkfK+K/IKmy8rahDhjD3T6KJ+JL5rw=";
         };
 
         cargoDeps = prev.cargoDeps.overrideAttrs {
           inherit (final) src;
 
-          outputHash = "sha256-KDOcdzdfRwalCCRp96FToc+pFYGWU4RENgioun4qu0U=";
+          outputHash = "sha256-dPqCyFWPqM/A2g23N1Of6BPijGMBu44xXSwVGO4j/Hk=";
         };
       }
     );
@@ -63,7 +64,7 @@ in
     ];
 
     extraConfig = {
-      network.template = lib.mkDefault "{IPv4}";
+      network.template = lib.mkDefault "{LocalIPv4}";
       time = {
         format = lib.mkDefault "%a %d %b %H:%M:%S";
         update_seconds = lib.mkDefault true;
