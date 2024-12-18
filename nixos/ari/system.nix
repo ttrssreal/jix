@@ -12,7 +12,7 @@
     networkmanager.enable = true;
   };
 
-  jix.argocd.targetRevision = "e9725767422d4913388d6e4f2e15f7886a21529a";
+  jix.argocd.targetRevision = "ed72be1463c0bb83d992e4d16f2caf05b2d2f05b";
 
   services = {
     openssh.enable = true;
