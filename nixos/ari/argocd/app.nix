@@ -105,6 +105,7 @@ in
             inherit (config.jix.argocd) targetRevision;
             repoURL = "https://github.com/ttrssreal/jix";
             path = "k8s";
+            directory.recurse = true;
           };
 
           destination = {
