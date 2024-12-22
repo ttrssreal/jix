@@ -7,6 +7,14 @@ metadata:
     cert-manager.io/cluster-issuer: letsencrypt-production
     nginx.ingress.kubernetes.io/ssl-passthrough: "true"
     nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+
+    # mtls
+    nginx.ingress.kubernetes.io/auth-tls-pass-certificate-to-upstream: "true"
+    nginx.ingress.kubernetes.io/auth-tls-verify-client: "on"
+    nginx.ingress.kubernetes.io/auth-tls-verify-depth: "1"
+
+    # FIXME: part of declarative secret management
+    nginx.ingress.kubernetes.io/auth-tls-secret: default/ca-secret
 spec:
   ingressClassName: nginx
   rules:
