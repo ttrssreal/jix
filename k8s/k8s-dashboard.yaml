@@ -1,0 +1,36 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: kubernetes-dashboard
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: kubernetes-dashboard
+  namespace: apps
+spec:
+  project: apps
+  source:
+    chart: kubernetes-dashboard
+    repoURL: https://kubernetes.github.io/dashboard/
+    targetRevision: 7.10.0
+    helm:
+      releaseName: kubernetes-dashboard
+      valuesObject:
+        app:
+          ingress:
+            enabled: true
+            ingressClassName: nginx
+            issuer:
+              name: letsencrypt-production
+              scope: cluster
+            hosts:
+              - dashboard.k8s.jessie.cafe
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: kubernetes-dashboard
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+      allowEmpty: false
