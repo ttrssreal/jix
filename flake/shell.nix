@@ -39,6 +39,8 @@
           inputs'.home-manager.packages.default
 
           argocd
+
+          kubernetes-helm
         ];
 
         NIX_CONFIG = "extra-experimental-features = nix-command flakes";
