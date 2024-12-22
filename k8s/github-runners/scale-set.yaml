@@ -1,0 +1,31 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: gha-runner-scale-set
+  namespace: apps
+  annotations:
+    argocd.argoproj.io/sync-wave: "2"
+spec:
+  project: apps
+  sources:
+    - chart: gha-runner-scale-set
+      repoURL: ghcr.io/actions/actions-runner-controller-charts
+      targetRevision: 0.10.1
+      helm:
+        releaseName: gha-runner-scale-set
+        valuesObject:
+          githubConfigUrl: "https://github.com/ttrssreal/jix"
+          # FIXME: part of declarative secret management
+          githubConfigSecret: jess-gh-pat
+          controllerServiceAccount:
+            namespace: actions-runner-controller
+            name: gha-runner-scale-set-controller-gha-rs-controller
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: github-runners
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+      allowEmpty: false
+
