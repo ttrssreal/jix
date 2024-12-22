@@ -6,7 +6,10 @@
     networkmanager.enable = true;
   };
 
-  services.openssh.enable = true;
+  services.openssh = {
+    settings.PasswordAuthentication = false;
+    enable = true;
+  };
 
   # Bootloader.
   boot = {
