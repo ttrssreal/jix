@@ -10,7 +10,7 @@ jobs:
 
     strategy:
       matrix:
-        runner: [ubuntu-24.04]
+        runner: [gha-runner-scale-set]
 
     steps:
       - name: Checkout
