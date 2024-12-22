@@ -10,7 +10,7 @@ jobs:
 
     strategy:
       matrix:
-        runner: [gha-runner-scale-set]
+        runner: [cluster-runner]
 
     steps:
       - name: Checkout

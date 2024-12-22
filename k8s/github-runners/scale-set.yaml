@@ -12,7 +12,7 @@ spec:
       repoURL: ghcr.io/actions/actions-runner-controller-charts
       targetRevision: 0.10.1
       helm:
-        releaseName: gha-runner-scale-set
+        releaseName: cluster-runner
         valuesObject:
           githubConfigUrl: "https://github.com/ttrssreal/jix"
           # FIXME: part of declarative secret management
