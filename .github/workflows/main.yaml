@@ -18,6 +18,8 @@ jobs:
 
       - name: Install nix
         uses: DeterminateSystems/nix-installer-action@v16
+        with:
+          init: none
 
       - name: Magic
         uses: DeterminateSystems/magic-nix-cache-action@v8
