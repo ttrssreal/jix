@@ -14,6 +14,12 @@ spec:
       helm:
         releaseName: cluster-runner
         valuesObject:
+          template:
+            spec:
+              containers:
+                - name: runner
+                  image: ghcr.io/ttrssreal/runner-image:68502119ecd590681ef10b4af2a829adf03bda35
+                  command: ["/home/runner/run.sh"]
           githubConfigUrl: "https://github.com/ttrssreal/jix"
           # FIXME: part of declarative secret management
           githubConfigSecret: jess-gh-pat
