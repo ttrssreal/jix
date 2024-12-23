@@ -18,7 +18,7 @@ spec:
             spec:
               containers:
                 - name: runner
-                  image: ghcr.io/ttrssreal/runner-image:68502119ecd590681ef10b4af2a829adf03bda35
+                  image: ghcr.io/ttrssreal/runner-image:2652739d391ebaed2cff5f1713669906ad0878b7
                   command: ["/home/runner/run.sh"]
           githubConfigUrl: "https://github.com/ttrssreal/jix"
           # FIXME: part of declarative secret management
