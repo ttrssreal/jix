@@ -11,3 +11,5 @@ RUN curl -LO https://github.com/actions/runner-images/raw/${TARGET_TOOLSET_REV}/
 RUN sudo apt-get update -y
 
 RUN ./install_pkgs.sh toolset-2204.json
+
+USER root
