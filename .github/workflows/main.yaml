@@ -19,8 +19,15 @@ jobs:
       - name: Magic
         uses: DeterminateSystems/magic-nix-cache-action@v8
 
+      - name: Setup Attic cache
+        uses: ryanccn/attic-action@v0
+        with:
+          endpoint: ari:8080
+          cache: nix-cache
+          token: ${{ secrets.ATTIC_TOKEN }}
+
       - name: Install omnix
         run: nix --accept-flake-config profile install "github:juspay/omnix"
 
       - name: Build
-        run: om ci run -o built.json -- --refresh --sandbox -j auto --cores 0
+        run: om ci run -- --refresh --sandbox -j auto --cores 0
