@@ -16,11 +16,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Install nix
-        uses: DeterminateSystems/nix-installer-action@v16
-        with:
-          init: none
-
       - name: Magic
         uses: DeterminateSystems/magic-nix-cache-action@v8
 
