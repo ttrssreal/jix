@@ -18,7 +18,7 @@ spec:
             spec:
               containers:
                 - name: runner
-                  image: ghcr.io/ttrssreal/nix-runner-image:24227344751c15fdab411730145a9d658303720d
+                  image: ghcr.io/ttrssreal/nix-runner-image:35e79d9ebafbcd081f7c81a53d4f08c804ab1d49
                   env:
                     - name: RUNNER_ALLOW_RUNASROOT
                       value: "true"
