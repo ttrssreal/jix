@@ -3,7 +3,7 @@
 {
   inputs,
   lib,
-  options,
+  config,
   ...
 }:
 {
@@ -34,7 +34,7 @@
         packages.install-iso = inputs.nixos-generators.nixosGenerate {
           inherit pkgs;
 
-          inherit (options.jix.install-iso) modules;
+          inherit (config.jix.install-iso) modules;
 
           format = "iso";
         };
