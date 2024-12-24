@@ -18,3 +18,4 @@ RUN apt-get update -y
 RUN ./install_pkgs.sh toolset-2204.json
 
 RUN ./nix-installer install --no-confirm
+ENV PATH="${PATH}:/nix/var/nix/profiles/default/bin"
