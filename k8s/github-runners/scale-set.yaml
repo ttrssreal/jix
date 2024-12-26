@@ -12,7 +12,7 @@ spec:
       repoURL: ghcr.io/actions/actions-runner-controller-charts
       targetRevision: 0.10.1
       helm:
-        releaseName: cluster-runner
+        releaseName: nix
         valuesObject:
           template:
             spec:
@@ -27,11 +27,11 @@ spec:
           # FIXME: part of declarative secret management
           githubConfigSecret: jess-gh-pat
           controllerServiceAccount:
-            namespace: actions-runner-controller
+            namespace: arc-system
             name: gha-runner-scale-set-controller-gha-rs-controller
   destination:
     server: "https://kubernetes.default.svc"
-    namespace: github-runners
+    namespace: arc-runners
   syncPolicy:
     automated:
       prune: true

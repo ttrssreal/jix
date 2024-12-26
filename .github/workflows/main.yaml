@@ -10,7 +10,7 @@ jobs:
 
     strategy:
       matrix:
-        runner: [cluster-runner]
+        runner: [nix]
 
     steps:
       - name: Checkout
