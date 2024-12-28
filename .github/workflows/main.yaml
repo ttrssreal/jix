@@ -22,7 +22,7 @@ jobs:
       - name: Setup Attic cache
         uses: ryanccn/attic-action@v0
         with:
-          endpoint: ari:8080
+          endpoint: http://ari:8080
           cache: nix-cache
           token: ${{ secrets.ATTIC_TOKEN }}
 
