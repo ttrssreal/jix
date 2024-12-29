@@ -3,10 +3,15 @@ name: Build and cache all the things
 
 on:
   workflow_dispatch:
+  pull_request:
+  schedule:
+    # https://crontab.guru/#0_13_*_*_tue
+    - cron: "0 13 * * tue"
 
 jobs:
   build:
     runs-on: ${{ matrix.runner }}
+    environment: build
 
     strategy:
       matrix:
