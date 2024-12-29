@@ -5,6 +5,7 @@
 {
   home.packages = with pkgs; [
     xgpro
+    tsMuxer
 
     # TODO: Manage firefox profiles in nix
     # Issue URL: https://github.com/ttrssreal/jix/issues/5
