@@ -1,0 +1,46 @@
+
+name: Update Flake Inputs
+
+on:
+  workflow_dispatch:
+  schedule:
+    # https://crontab.guru/#0_13_*_*_wed
+    - cron: "0 13 * * wed"
+
+env:
+  branch_name: chore/gha-update-flake
+
+jobs:
+  build:
+    runs-on: nix
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Flake update
+        run: nix flake update
+
+      - name: Set Git user
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Git commit
+        run: |
+          git checkout -b ${{ env.branch_name }}
+          git add -A
+          if [[ `git status --porcelain` ]]; then
+            git commit -m "flake: update inputs"
+            git push origin ${{ env.branch_name }}
+          else
+            echo "Inputs all up to date"
+          fi
+
+      - name: Create pull request
+        run: |
+          gh pr create -B main -H ${{ env.branch_name }} \
+            --title "Bot: flake update" \
+            --body "Weekly flake update :3"
+        env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
