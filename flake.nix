@@ -21,9 +21,6 @@
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
-    tsMuxer.url = "github:ttrssreal/tsMuxer-nix";
-    tsMuxer.inputs.nixpkgs.follows = "nixpkgs";
-
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
     # mkWindowsApp
