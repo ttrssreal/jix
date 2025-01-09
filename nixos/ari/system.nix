@@ -1,18 +1,5 @@
 {
-  config,
-  ...
-}:
-{
-  imports = [
-    ./argocd
-  ];
-
-  networking = {
-    firewall.enable = false;
-    networkmanager.enable = true;
-  };
-
-  jix.argocd.targetRevision = "73c33e78b938258628355c2d01547ab3d6572934";
+  networking.networkmanager.enable = true;
 
   services = {
     openssh.enable = true;
@@ -56,16 +43,6 @@
           max-size = 256 * 1024; # 256 KiB
         };
       };
-    };
-
-    # kuwubernetes
-    kubernetes = {
-      masterAddress = config.networking.hostName;
-
-      roles = [
-        "master"
-        "node"
-      ];
     };
   };
 

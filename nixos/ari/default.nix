@@ -2,6 +2,10 @@
 # all by herself atm :3
 
 {
+  imports = [
+    ./kubernetes.nix
+  ];
+
   jix.nixos.ari = {
     system = "x86_64-linux";
 
