@@ -72,8 +72,14 @@ let
   };
 in
 {
-  options.jix.argocd.targetRevision = lib.mkOption {
-    type = lib.types.str;
+  options.jix.argocd = {
+    targetRevision = lib.mkOption {
+      type = lib.types.str;
+    };
+
+    sources = lib.mkOption {
+      type = with lib.types; listOf str;
+    };
   };
 
   config.services.kubernetes.addonManager = {
@@ -101,12 +107,12 @@ in
         spec = {
           project = appsProject.metadata.name;
 
-          source = {
+          sources = map (path: {
             inherit (config.jix.argocd) targetRevision;
             repoURL = "https://github.com/ttrssreal/jix";
-            path = "k8s";
+            inherit path;
             directory.recurse = true;
-          };
+          }) config.jix.argocd.sources;
 
           destination = {
             server = "https://kubernetes.default.svc";

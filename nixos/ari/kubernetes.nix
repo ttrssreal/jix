@@ -10,7 +10,18 @@
           ./argocd
         ];
 
-        jix.argocd.targetRevision = "73c33e78b938258628355c2d01547ab3d6572934";
+        jix.argocd = {
+          targetRevision = "73c33e78b938258628355c2d01547ab3d6572934";
+
+          sources = [
+            "k8s/argocd-server"
+            "k8s/cert-manager"
+            "k8s/github-runners"
+            "k8s/ingress"
+            "k8s/k8s-dashboard"
+          ];
+        };
+
         networking.firewall.enable = false;
 
         services = {
