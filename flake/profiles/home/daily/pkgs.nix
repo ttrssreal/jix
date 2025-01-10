@@ -55,5 +55,6 @@
     p7zip
     jetbrains.idea-ultimate
     baobab
+    jetbrains.clion
   ];
 }
