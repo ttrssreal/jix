@@ -13,8 +13,6 @@ spec:
   source:
     chart: ingress-nginx
     repoURL: https://kubernetes.github.io/ingress-nginx
-    # https://github.com/argoproj/argo-cd/issues/4047
-    # i want to put a commit id here, even if semver is "good enough"
     targetRevision: 4.11.3
     helm:
       releaseName: ingress-nginx
