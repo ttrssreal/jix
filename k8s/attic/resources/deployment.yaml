@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: attic-api
+  namespace: attic
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: attic-api
+  template:
+    metadata:
+      labels:
+        app: attic-api
+    spec:
+      containers:
+      - name: attic-api
+        image: ghcr.io/zhaofengli/attic:b8c5ab4518f776624fee261385abb98348cd26cf
+        args: ["--mode", "api-server", "-f", "/etc/attic/atticd.yaml"]
+        env:
+        - name: ATTIC_SERVER_TOKEN_RS256_SECRET_BASE64
+          valueFrom:
+            secretKeyRef:
+              # FIXME: part of declarative secret management
+              name: attic-creds
+              key: token
+        - name: AWS_ACCESS_KEY_ID
+          valueFrom:
+            secretKeyRef:
+              # FIXME: part of declarative secret management
+              name: attic-creds
+              key: key-id
+        - name: AWS_SECRET_ACCESS_KEY
+          valueFrom:
+            secretKeyRef:
+              # FIXME: part of declarative secret management
+              name: attic-creds
+              key: secret-key
+        volumeMounts:
+        - name: config
+          mountPath: "/etc/attic"
+          readOnly: true
+        ports:
+        - containerPort: 8080
+      volumes:
+      - name: config
+        configMap:
+          name: attic-config
+          items:
+            - key: "atticd.yaml"
+              path: "atticd.yaml"

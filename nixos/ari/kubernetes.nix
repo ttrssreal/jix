@@ -14,6 +14,7 @@
           targetRevision = "e175c71b696752df431c2b313bd406731e7e149f";
 
           sources = [
+            "k8s/attic"
             "k8s/argocd-server"
             "k8s/cert-manager"
             "k8s/github-runners"

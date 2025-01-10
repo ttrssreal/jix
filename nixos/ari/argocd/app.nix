@@ -111,7 +111,6 @@ in
             inherit (config.jix.argocd) targetRevision;
             repoURL = "https://github.com/ttrssreal/jix";
             inherit path;
-            directory.recurse = true;
           }) config.jix.argocd.sources;
 
           destination = {

@@ -20,6 +20,8 @@
           endpoint = "https://nix-cache-b5eea907c395.s3.us-west-002.backblazeb2.com";
         };
 
+        database.url = "postgresql://attic@ari/attic";
+
         # Data chunking
         #
         # Warning: If you change any of the values here, it will be
@@ -43,6 +45,26 @@
           max-size = 256 * 1024; # 256 KiB
         };
       };
+    };
+
+    postgresql = {
+      enable = true;
+      enableTCPIP = true;
+
+      authentication = ''
+        host all all all trust
+      '';
+
+      ensureDatabases = [
+        "attic"
+      ];
+
+      ensureUsers = [
+        {
+          name = "attic";
+          ensureDBOwnership = true;
+        }
+      ];
     };
   };
 
