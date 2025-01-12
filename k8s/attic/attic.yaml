@@ -1,3 +1,5 @@
+# Broken, see: https://github.com/zhaofengli/attic/issues/219
+
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
