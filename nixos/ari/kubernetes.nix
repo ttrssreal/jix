@@ -20,23 +20,46 @@
             "k8s/github-runners"
             "k8s/ingress"
             "k8s/k8s-dashboard"
+            "k8s/longhorn"
           ];
         };
 
         networking.firewall.enable = false;
 
-        services = {
-          # kuwubernetes
-          kubernetes = {
-            masterAddress = config.networking.hostName;
+        # https://github.com/longhorn/longhorn/issues/2166#issuecomment-1740179416
+        systemd.tmpfiles.rules = [
+          "L+ /usr/local/bin - - - - /run/current-system/sw/bin/"
+        ];
 
-            roles = [
-              "master"
-              "node"
-            ];
-          };
+        services.openiscsi = {
+          enable = true;
+          name = "iqn.2025-01.cafe.jessie.iscsi:ari";
         };
 
+        # kuwubernetes
+        services.kubernetes = {
+          masterAddress = config.networking.hostName;
+          apiserver.allowPrivileged = true;
+
+          kubelet.cni.config = [
+            # https://github.com/NixOS/nixpkgs/blob/bf21e7aff3/nixos/modules/services/cluster/kubernetes/flannel.nix#L38
+            {
+              name = "mynet";
+              type = "flannel";
+              cniVersion = "0.3.1";
+              delegate = {
+                isDefaultGateway = true;
+                bridge = "mynet";
+                hairpinMode = true; # let longhorn-manager healthcheck itself
+              };
+            }
+          ];
+
+          roles = [
+            "master"
+            "node"
+          ];
+        };
       }
     )
   ];
