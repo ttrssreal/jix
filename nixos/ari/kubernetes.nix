@@ -20,15 +20,22 @@
             "k8s/github-runners"
             "k8s/ingress"
             "k8s/k8s-dashboard"
+            "k8s/longhorn"
           ];
         };
 
         networking.firewall.enable = false;
 
         services = {
+          openiscsi = {
+            enable = true;
+            name = "iqn.2025-01.cafe.jessie.iscsi:ari";
+          };
+
           # kuwubernetes
           kubernetes = {
             masterAddress = config.networking.hostName;
+            apiserver.allowPrivileged = true;
 
             roles = [
               "master"
