@@ -1,0 +1,19 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: radicale
+  namespace: apps
+spec:
+  project: apps
+  source:
+    # https://github.com/h3ndrk/radicale-k8s
+    repoURL: "https://github.com/ttrssreal/jix"
+    path: "k8s/radicale-calendar/resources"
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: radicale
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+      allowEmpty: false
