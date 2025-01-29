@@ -2,8 +2,7 @@
   description = "Nix configs for my computers :3";
 
   inputs = {
-    # nixpkgs-unstable + fixes
-    nixpkgs.url = "github:ttrssreal/nixpkgs/nixpkgs-jix";
+    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
 
     nixvim.url = "github:nix-community/nixvim";
     nixvim.inputs.nixpkgs.follows = "nixpkgs";
