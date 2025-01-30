@@ -4,43 +4,27 @@ name: Update Flake Inputs
 on:
   workflow_dispatch:
   schedule:
-    # https://crontab.guru/#0_13_*_*_wed
-    - cron: "0 13 * * wed"
-
-env:
-  branch_name: chore/gha-update-flake
+    - cron: '0 0 * * 0' # runs weekly on Sunday at 00:00
 
 jobs:
-  build:
-    runs-on: nix
+  lockfile:
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Flake update
-        run: nix flake update
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@v16
 
-      - name: Set Git user
-        run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+      - name: Update flake.lock
+        uses: DeterminateSystems/update-flake-lock@v24
+        with:
+          pr-title: "Bot: flake update"
+          pr-assignees: ttrssreal
+          pr-body: |
+            Weekly flake update :3
+          git-author-name: "github-actions[bot]"
+          git-author-email: 'github-actions[bot]@users.noreply.github.com'
+          token: ${{ secrets.GH_TOKEN_FOR_UPDATES }}
 
-      - name: Git commit
-        run: |
-          git checkout -b ${{ env.branch_name }}
-          git add -A
-          if [[ `git status --porcelain` ]]; then
-            git commit -m "flake: update inputs"
-            git push origin ${{ env.branch_name }}
-          else
-            echo "Inputs all up to date"
-          fi
-
-      - name: Create pull request
-        run: |
-          gh pr create -B main -H ${{ env.branch_name }} \
-            --title "Bot: flake update" \
-            --body "Weekly flake update :3"
-        env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

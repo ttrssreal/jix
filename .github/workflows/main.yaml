@@ -25,6 +25,7 @@ jobs:
         uses: DeterminateSystems/magic-nix-cache-action@v8
 
       - name: Setup Attic cache
+        if: github.event_name != 'pull_request'
         uses: ryanccn/attic-action@v0
         with:
           endpoint: http://ari:8080
