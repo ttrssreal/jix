@@ -11,7 +11,7 @@
         ];
 
         jix.argocd = {
-          targetRevision = "e175c71b696752df431c2b313bd406731e7e149f";
+          targetRevision = "1704689edd5746497f29bf739eb40b661df41a67";
 
           sources = [
             "k8s/attic"
