@@ -11,12 +11,12 @@
 let
   XGecu = fetchgit {
     url = "https://github.com/Kreeblah/XGecu_Software";
-    rev = "c1c9cd86d1b81b45ae369f6000eb0267559065ae";
+    rev = "d7bdbe217fcd1d5a0455ef5cbeb044cb8bded4bc";
     deepClone = false;
     sparseCheckout = [
       "Xgpro/12"
     ];
-    sha256 = "FkMva2bMjjeOWdurhlqTXK3WzmAN3PRfusu+cikdKfM=";
+    hash = "sha256-QCz+p9xGJFq06YpPlHEMG7eh2kejpo3itmVFaEY5vtc=";
   };
   Xgpro = runCommand "XgproV1267" { } ''
     mkdir -p $out
