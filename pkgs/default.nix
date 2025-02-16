@@ -19,6 +19,10 @@
           inherit (inputs'.erosanix.lib) mkWindowsApp;
           xgpro = final.callPackage ./xgpro.nix { };
         })
+
+        (_: _: {
+          inherit (inputs'.pwndbg.packages) pwndbg;
+        })
       ];
     };
 }
