@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: home-assistant
+  namespace: apps
+spec:
+  project: apps
+  source:
+    repoURL: "https://github.com/ttrssreal/jix"
+    path: "k8s/home-assistant/resources"
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: home-assistant
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+      allowEmpty: false

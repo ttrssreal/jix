@@ -1,0 +1,70 @@
+# https://github.com/abalage/home-assistant-k8s/blob/3d3c0b2621f6/base/deployment.yml
+#
+# [!IMPORTANT]
+# Need to add this line to runtime `configuration.yaml`:
+# http: !include http.yaml
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: home-assistant
+  namespace: home-assistant
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: home-assistant
+  template:
+    metadata:
+      labels:
+        app: home-assistant
+    spec:
+      hostNetwork: true
+      automountServiceAccountToken: false
+      containers:
+      - name: core
+        image: "ghcr.io/home-assistant/home-assistant:2025.2.4"
+        imagePullPolicy: IfNotPresent
+        securityContext:
+          privileged: true
+        ports:
+          - name: http
+            containerPort: 8123
+            protocol: TCP
+        livenessProbe:
+          tcpSocket:
+            port: 8123
+          initialDelaySeconds: 0
+          failureThreshold: 3
+          timeoutSeconds: 1
+          periodSeconds: 10
+        readinessProbe:
+          tcpSocket:
+            port: 8123
+          initialDelaySeconds: 0
+          failureThreshold: 3
+          timeoutSeconds: 1
+          periodSeconds: 10
+        startupProbe:
+          tcpSocket:
+            port: 8123
+          initialDelaySeconds: 0
+          failureThreshold: 30
+          timeoutSeconds: 1
+          periodSeconds: 5
+        volumeMounts:
+          - name: ha-config-root
+            mountPath: /config
+          - name: http-config
+            mountPath: /config/http.yaml
+            subPath: http.yaml
+      restartPolicy: Always
+      volumes:
+        - name: http-config
+          configMap:
+            name: home-assistant-http
+        - name: ha-config-root
+          persistentVolumeClaim:
+            claimName: home-assistant-config-root
