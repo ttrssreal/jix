@@ -1,3 +1,4 @@
+{ pkgs, ... }:
 {
   hardware.graphics.enable = true;
 
@@ -10,6 +11,10 @@
     settings.PasswordAuthentication = false;
     enable = true;
   };
+
+  services.udev.packages = [
+    pkgs.particle-cli
+  ];
 
   # Bootloader.
   boot = {

@@ -15,6 +15,7 @@
         (final: _: {
           bluetooth-connect = final.callPackage ./bluetooth-connect.nix { };
           tsMuxer = final.callPackage ./ts-muxer.nix { };
+          particle-cli = final.callPackage ./particle-cli.nix { };
 
           inherit (inputs'.erosanix.lib) mkWindowsApp;
           xgpro = final.callPackage ./xgpro.nix { };

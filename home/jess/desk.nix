@@ -12,9 +12,16 @@
     username = "jess";
 
     modules = [
-      {
-        programs.alacritty.settings.font.size = lib.mkForce 10;
-      }
+      (
+        { pkgs, ... }:
+        {
+          programs.alacritty.settings.font.size = lib.mkForce 10;
+
+          home.packages = [
+            pkgs.particle-cli
+          ];
+        }
+      )
     ];
 
     # This value determines the Home Manager release that your
