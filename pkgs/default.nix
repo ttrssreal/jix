@@ -17,12 +17,11 @@
           tsMuxer = final.callPackage ./ts-muxer.nix { };
           particle-cli = final.callPackage ./particle-cli.nix { };
 
+          pwndbg-unwrapped = inputs'.pwndbg.packages.pwndbg;
+          pwndbg = final.callPackage ./pwndbg.nix { };
+
           inherit (inputs'.erosanix.lib) mkWindowsApp;
           xgpro = final.callPackage ./xgpro.nix { };
-        })
-
-        (_: _: {
-          inherit (inputs'.pwndbg.packages) pwndbg;
         })
       ];
     };
