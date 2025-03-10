@@ -9,7 +9,7 @@
   };
 
   perSystem =
-    { inputs', ... }:
+    { inputs', pkgs, ... }:
     {
       jix.overlays = [
         (final: _: {
@@ -24,5 +24,15 @@
           xgpro = final.callPackage ./xgpro.nix { };
         })
       ];
+
+      packages = {
+        inherit (pkgs)
+          bluetooth-connect
+          tsMuxer
+          particle-cli
+          pwndbg
+          xgpro
+          ;
+      };
     };
 }
