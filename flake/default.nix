@@ -6,5 +6,6 @@
     ./home.nix
     ./overlays.nix
     ./install-iso.nix
+    ./templates.nix
   ];
 }
