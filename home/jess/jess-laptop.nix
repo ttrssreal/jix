@@ -31,6 +31,15 @@
           ];
         };
       }
+
+      {
+        services.barrier.client = {
+          enable = true;
+          enableCrypto = false;
+          server = "desk";
+          enableDragDrop = true;
+        };
+      }
     ];
 
     # This value determines the Home Manager release that your
