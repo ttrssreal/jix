@@ -23,7 +23,7 @@
 
       {
         jix.dwm-status = {
-          extraConfig.network.template = "{ESSID} @ {IPv4}";
+          extraConfig.network.template = "{LocalIPv4} @ {ESSID} @ {IPv4}";
 
           features = [
             "battery"
