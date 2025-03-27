@@ -27,5 +27,7 @@ in
       mapleader = " ";
       maplocalleader = "\\";
     };
+
+    filetype.extension.sage = "python";
   };
 }
