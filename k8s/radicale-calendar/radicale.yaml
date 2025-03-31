@@ -1,3 +1,7 @@
+# CalDAV calendar server
+#
+# https://github.com/h3ndrk/radicale-k8s
+
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
@@ -6,7 +10,6 @@ metadata:
 spec:
   project: apps
   source:
-    # https://github.com/h3ndrk/radicale-k8s
     repoURL: "https://github.com/ttrssreal/jix"
     path: "k8s/radicale-calendar/resources"
   destination:
