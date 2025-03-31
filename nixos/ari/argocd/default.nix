@@ -11,7 +11,7 @@ let
   argo-cd = pkgs.fetchFromGitHub {
     owner = "argoproj";
     repo = "argo-cd";
-    rev = "4471603de2a8f3e7e0bdfbd9d487468b6b20a354";
+    rev = "a7178be1c1ebe08a61e326037173d2ef979cb3f8";
     hash = "sha256-NzMMzlLxGuPSCX2JiwRtWnEhS84Czm4O3a3E9jgBcU8=";
   };
 
