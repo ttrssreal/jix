@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: plausible-analytics
+  namespace: plausible-analytics
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-production
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: analytics.jessie.cafe
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: radicale
+                port:
+                  name: dav
+  tls:
+    - hosts:
+      - analytics.jessie.cafe
+      secretName: plausible-analytics-cert

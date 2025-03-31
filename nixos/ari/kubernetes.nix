@@ -21,6 +21,7 @@
             "k8s/ingress"
             "k8s/k8s-dashboard"
             "k8s/longhorn"
+            "k8s/plausible-analytics"
             "k8s/radicale-calendar"
             "k8s/home-assistant"
           ];

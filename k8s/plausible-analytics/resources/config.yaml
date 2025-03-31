@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: plausible-analytics-env
+data:
+  DATABASE_URL: postgresql://plausible@ari:5432/plausible
+  BASE_URL: https://analytics.jessie.cafe

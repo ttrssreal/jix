@@ -57,11 +57,16 @@
 
       ensureDatabases = [
         "attic"
+        "plausible"
       ];
 
       ensureUsers = [
         {
           name = "attic";
+          ensureDBOwnership = true;
+        }
+        {
+          name = "plausible";
           ensureDBOwnership = true;
         }
       ];
