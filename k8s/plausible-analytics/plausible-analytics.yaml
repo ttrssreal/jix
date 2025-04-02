@@ -9,35 +9,37 @@ metadata:
   namespace: apps
 spec:
   project: apps
-  source:
-    chart: plausible-analytics
-    repoURL: https://zekker6.github.io/helm-charts/
-    targetRevision: 0.11.1
-    helm:
-      releaseName: plausible-analytics
-      valuesObject:
-        baseURL: https://analytics.jessie.cafe
-        database:
-          enabled: true
-          url: postgresql://plausible@ari:5432/plausible
-        ingress:
-          enabled: true
-          disableRegistration: true
-          annotations:
-            cert-manager.io/cluster-issuer: letsencrypt-production
-          hosts:
-            - host: analytics.jessie.cafe
-              paths:
-                # https://github.com/plausible/analytics/discussions/2519
-                - path: /js/script.js
-                  pathType: Exact
-                - path: /api/event
-                  pathType: Exact
-          className: nginx
-          tls:
-            - hosts:
-              - analytics.jessie.cafe
-              secretName: plausible-analytics-cert
+  sources:
+    - chart: plausible-analytics
+      repoURL: https://zekker6.github.io/helm-charts/
+      targetRevision: 0.11.1
+      helm:
+        releaseName: plausible-analytics
+        valuesObject:
+          baseURL: https://analytics.jessie.cafe
+          database:
+            enabled: true
+            url: postgresql://plausible@ari:5432/plausible
+          ingress:
+            enabled: true
+            disableRegistration: true
+            annotations:
+              cert-manager.io/cluster-issuer: letsencrypt-production
+            hosts:
+              - host: analytics.jessie.cafe
+                paths:
+                  # https://github.com/plausible/analytics/discussions/2519
+                  - path: /js/script.js
+                    pathType: Exact
+                  - path: /api/event
+                    pathType: Exact
+            className: nginx
+            tls:
+              - hosts:
+                - analytics.jessie.cafe
+                secretName: plausible-analytics-cert
+    - repoURL: "https://github.com/ttrssreal/jix"
+      path: "k8s/plausible-analytics/resources"
   destination:
     server: "https://kubernetes.default.svc"
     namespace: plausible-analytics
