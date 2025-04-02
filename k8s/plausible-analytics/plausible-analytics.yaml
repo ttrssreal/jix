@@ -28,8 +28,11 @@ spec:
           hosts:
             - host: analytics.jessie.cafe
               paths:
-                - path: /
-                  pathType: Prefix
+                # https://github.com/plausible/analytics/discussions/2519
+                - path: /js/script.js
+                  pathType: Exact
+                - path: /api/event
+                  pathType: Exact
           className: nginx
           tls:
             - hosts:
