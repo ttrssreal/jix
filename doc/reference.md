@@ -1,7 +1,6 @@
 ## Deploy
 
 <!-- TODO: tailscale -->
-     Issue URL: https://github.com/ttrssreal/jix/issues/29
 Deploy to a remote machine (ex. ari the little server)
 ```console
 nixos-rebuild switch --flake . --target-host ari --use-remote-sudo
