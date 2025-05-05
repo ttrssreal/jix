@@ -1,3 +1,4 @@
+from pwndbg.commands import CommandCategory
 import pwndbg
 import argparse
 
@@ -33,7 +34,7 @@ parser = argparse.ArgumentParser(description="Ladybird LibJS un-nanbox JS Value"
 
 parser.add_argument("addr", type=int, help="JS Value pointer")
 
-@pwndbg.commands.ArgparsedCommand(parser)
+@pwndbg.commands.Command(parser, category=CommandCategory.MISC)
 def unnanbox_lb(addr) -> None:
     try:
         value = pwndbg.aglib.memory.read(addr, 8)

@@ -1,3 +1,4 @@
+from pwndbg.commands import CommandCategory
 import pwndbg
 import argparse
 
@@ -8,7 +9,7 @@ parser = argparse.ArgumentParser(description="find leaks to some mmap")
 parser.add_argument("address", help="address we start searching from")
 parser.add_argument("map", type=str, help="mmap we want to leak")
 
-@pwndbg.commands.ArgparsedCommand(parser)
+@pwndbg.commands.Command(parser, category=CommandCategory.MEMORY)
 def leak_search(address=None, map=None) -> None:
     address = address.cast(
         pwndbg.aglib.typeinfo.pvoid
