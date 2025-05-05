@@ -9,5 +9,6 @@
     ./xinit
     ./bluetooth-connect
     ./dwm-status
+    ./home-backup
   ];
 }
