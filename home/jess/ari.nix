@@ -9,6 +9,7 @@
 
     modules = [
       # TODO: home-backup: for ari
+      # Issue URL: https://github.com/ttrssreal/jix/issues/34
       { jix.home-backup.enable = false; }
     ];
 

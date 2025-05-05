@@ -42,6 +42,7 @@
       }
 
       # TODO: home-backup: for jess-laptop
+      # Issue URL: https://github.com/ttrssreal/jix/issues/35
       { jix.home-backup.enable = false; }
     ];
 
