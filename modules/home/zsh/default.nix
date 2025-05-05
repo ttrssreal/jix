@@ -60,7 +60,7 @@ in
     enableCompletion = true;
     history.ignoreSpace = true;
 
-    initExtra =
+    initContent =
       # https://github.com/nix-community/home-manager/issues/2751
       ''
         export EDITOR="nvim" # ??
