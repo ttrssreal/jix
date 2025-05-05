@@ -15,6 +15,17 @@
       {
         programs.alacritty.settings.font.size = lib.mkForce 10;
       }
+
+      {
+        jix.home-backup = {
+          hostname = "desk";
+          exclude = [
+            "/home/jess/code"
+            "/home/jess/.cache"
+            "/home/jess/.local/share/containers"
+          ];
+        };
+      }
     ];
 
     # This value determines the Home Manager release that your

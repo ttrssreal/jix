@@ -7,6 +7,11 @@
     homeDirectory = "/home/jess";
     username = "jess";
 
+    modules = [
+      # TODO: home-backup: for ari
+      { jix.home-backup.enable = false; }
+    ];
+
     # This value determines the Home Manager release that your
     # configuration is compatible with. This helps avoid breakage
     # when a new Home Manager release introduces backwards

@@ -38,6 +38,13 @@ in
 
     { nixpkgs.config.allowUnfree = true; }
 
+    (
+      { lib, ... }:
+      {
+        jix.home-backup.enable = lib.mkDefault true;
+      }
+    )
+
     {
       jix = {
         zsh.enable = true;

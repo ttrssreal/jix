@@ -40,6 +40,9 @@
           enableDragDrop = true;
         };
       }
+
+      # TODO: home-backup: for jess-laptop
+      { jix.home-backup.enable = false; }
     ];
 
     # This value determines the Home Manager release that your
