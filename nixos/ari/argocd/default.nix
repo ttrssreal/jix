@@ -12,7 +12,7 @@ let
     owner = "argoproj";
     repo = "argo-cd";
     rev = "a7178be1c1ebe08a61e326037173d2ef979cb3f8";
-    hash = "sha256-NzMMzlLxGuPSCX2JiwRtWnEhS84Czm4O3a3E9jgBcU8=";
+    hash = "sha256-AUSBqeof34vgIZ7VisT8Mo+P7OQXSf1914jt4220DY0=";
   };
 
   # resource definitions
