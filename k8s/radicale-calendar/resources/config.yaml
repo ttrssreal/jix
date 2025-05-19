@@ -12,3 +12,8 @@ data:
 
     [storage]
     filesystem_folder = /data/collections
+
+    [auth]
+    type = htpasswd
+    htpasswd_filename = /secret/users
+    htpasswd_encryption = autodetect

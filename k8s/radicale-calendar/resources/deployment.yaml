@@ -30,6 +30,9 @@ spec:
           mountPath: /config/config
           subPath: config
           readOnly: true
+        - name: users
+          mountPath: /secret
+          readOnly: true
       restartPolicy: Always
       volumes:
       - name: collections
@@ -38,3 +41,6 @@ spec:
       - name: config
         configMap:
           name: config
+      - name: users
+        secret:
+          secretName: users
