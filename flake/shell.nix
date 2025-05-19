@@ -41,8 +41,6 @@
           # k8s
           argocd
           kubernetes-helm
-
-          attic-client
         ];
 
         NIX_CONFIG = "extra-experimental-features = nix-command flakes";

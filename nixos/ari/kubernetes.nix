@@ -14,7 +14,6 @@
           targetRevision = "HEAD";
 
           sources = [
-            "k8s/attic"
             "k8s/argocd-server"
             "k8s/cert-manager"
             "k8s/github-runners"
