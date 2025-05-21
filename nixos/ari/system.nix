@@ -27,6 +27,6 @@
 
   boot.loader.grub = {
     enable = true;
-    device = "/dev/sda";
+    device = "/dev/disk/by-id/ata-Samsung_SSD_840_PRO_Series_S1ATNSADC61770E";
   };
 }
