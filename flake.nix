@@ -34,6 +34,9 @@
 
     pwndbg.url = "github:pwndbg/pwndbg";
     pwndbg.inputs.nixpkgs.follows = "nixpkgs";
+
+    colmena.url = "github:zhaofengli/colmena";
+    colmena.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs =

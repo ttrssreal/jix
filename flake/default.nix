@@ -7,5 +7,6 @@
     ./overlays.nix
     ./install-iso.nix
     ./templates.nix
+    ./deploy.nix
   ];
 }

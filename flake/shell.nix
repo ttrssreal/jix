@@ -41,6 +41,8 @@
           # k8s
           argocd
           kubernetes-helm
+
+          inputs'.colmena.packages.colmena
         ];
 
         NIX_CONFIG = "extra-experimental-features = nix-command flakes";

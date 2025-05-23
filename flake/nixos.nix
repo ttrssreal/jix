@@ -38,6 +38,21 @@ in
               stateVersion = lib.mkOption {
                 type = lib.types.str;
               };
+
+              deployment = lib.mkOption {
+                type = lib.types.submodule {
+                  options = {
+                    enable = lib.mkEnableOption "this deployment";
+
+                    cfg = lib.mkOption {
+                      description = "The colmena `deployment` option";
+                      type = lib.types.attrs;
+                      default = { };
+                    };
+                  };
+                };
+                default.enable = false;
+              };
             };
 
             config = {
