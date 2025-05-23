@@ -3,7 +3,7 @@
 <!-- TODO: tailscale -->
 Deploy to a remote machine (ex. ari the little server)
 ```console
-nixos-rebuild switch --flake . --target-host ari --use-remote-sudo
+colmena apply --on ari
 ```
 
 Locally (will `set -x`):

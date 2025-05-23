@@ -1,6 +1,9 @@
 {
   networking.networkmanager.enable = true;
 
+  # let colmena escalate to root
+  security.sudo.wheelNeedsPassword = false;
+
   services = {
     openssh.enable = true;
 

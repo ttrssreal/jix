@@ -9,6 +9,18 @@
   jix.nixos.ari = {
     system = "x86_64-linux";
 
+    deployment = {
+      enable = true;
+      cfg = {
+        targetUser = "jess";
+        privilegeEscalationCommand = [
+          "sudo"
+          "-H"
+          "--"
+        ];
+      };
+    };
+
     profiles.base.enable = true;
 
     users.jess = {
