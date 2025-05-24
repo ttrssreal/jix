@@ -38,10 +38,6 @@
 
           inputs'.home-manager.packages.default
 
-          # k8s
-          argocd
-          kubernetes-helm
-
           inputs'.colmena.packages.colmena
         ];
 
