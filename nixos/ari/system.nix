@@ -4,6 +4,11 @@
   # let colmena escalate to root
   security.sudo.wheelNeedsPassword = false;
 
+  jix.hostKey = {
+    generate = true;
+    publicKey = ./hostKey.pub;
+  };
+
   services = {
     openssh.enable = true;
 
