@@ -3,5 +3,6 @@
     ./dwm
     ./podman
     ./pipewire
+    ./hostKey
   ];
 }
