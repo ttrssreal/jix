@@ -14,7 +14,7 @@ in
     privateKey = lib.mkOption {
       type = lib.types.attrs;
       default = {
-        path = "/etc/ssh/ssh_host_ed25519_key";
+        path = "/etc/ssh/jix_ssh_host_ed25519_key";
         type = "ed25519";
         bits = 521;
       };
