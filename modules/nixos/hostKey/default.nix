@@ -9,6 +9,7 @@ let
 in
 {
   options.jix.hostKey = {
+    enable = lib.mkEnableOption "host key checking";
     generate = lib.mkEnableOption "host key generation";
 
     privateKey = lib.mkOption {
@@ -29,7 +30,7 @@ in
   config = {
     system.activationScripts = {
       # https://github.com/NixOS/nixpkgs/blob/f593188ca95a/nixos/modules/services/networking/ssh/sshd.nix#L792-L806
-      generateHostKey = lib.mkIf cfg.generate (
+      generateHostKey = lib.mkIf (cfg.enable && cfg.generate) (
         let
           key = cfg.privateKey;
         in
@@ -52,7 +53,7 @@ in
         ''
       );
 
-      checkHostKey = {
+      checkHostKey = lib.mkIf (cfg.enable && cfg.generate) {
         deps = lib.optional cfg.generate "generateHostKey";
         text = ''
           key=${cfg.privateKey.path}
