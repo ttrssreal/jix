@@ -1,5 +1,8 @@
-#!/usr/bin/env nix-shell
-#!nix-shell scriptShell.nix -i bash --option extra-experimental-features flakes
+#!/usr/bin/env nix
+#! nix develop ..
+#! nix --extra-experimental-features ``nix-command flakes``
+#! nix --command bash
+
 set -exo pipefail
 
 home-manager switch --flake . $@
