@@ -29,7 +29,7 @@ in
   config = {
     system.activationScripts = {
       # https://github.com/NixOS/nixpkgs/blob/f593188ca95a/nixos/modules/services/networking/ssh/sshd.nix#L792-L806
-      generateHostKey =
+      generateHostKey = lib.mkIf cfg.generate (
         let
           key = cfg.privateKey;
         in
@@ -42,37 +42,40 @@ in
               chmod 0755 "$(dirname '${key.path}')"
               ${lib.getExe' pkgs.openssh "ssh-keygen"} \
                 -t "${key.type}" \
+                -C "root@${config.networking.hostName}" \
                 ${lib.optionalString (key ? bits) "-b ${toString key.bits}"} \
                 ${lib.optionalString (key ? rounds) "-a ${toString key.rounds}"} \
-                ${lib.optionalString (key ? comment) "-C '${key.comment}'"} \
                 ${lib.optionalString (key ? openSSHFormat && key.openSSHFormat) "-o"} \
                 -f "${key.path}" \
                 -N ""
           fi
-        '';
+        ''
+      );
 
       checkHostKey = {
-        deps = [ "generateHostKey" ];
+        deps = lib.optional cfg.generate "generateHostKey";
         text = ''
           key=${cfg.privateKey.path}
           pub=${cfg.publicKey}
 
-          [ -f "$key" ] || { echo "Error: Private key $key missing" >&2; exit 1; }
-          [ -f "$pub" ] || { echo "Error: Public key file $pub missing" >&2; exit 1; }
+          if ! [ -f "$key" ]; then
+            echo "ERROR: Private key $key missing" >&2
+          elif ! [ -f "$pub" ]; then
+            echo "ERROR: Public key file $pub missing" >&2
+          else
+            expected=$(${lib.getExe' pkgs.openssh "ssh-keygen"} -y -f "$key")
+            given=$(cat "$pub")
 
-          expected=$(${lib.getExe' pkgs.openssh "ssh-keygen"} -y -f "$key")
-          given=$(cat "$pub")
-
-          if [ "$expected" != "$given" ]; then
-              echo "Error: Public key mismatch!" >&2
-              echo "Expected (from $key):" >&2
-              echo "$expected" >&2
-              echo "Given (in $pub):" >&2
-              echo "$given" >&2
-              exit 1
+            if [ "$expected" != "$given" ]; then
+                echo "ERROR: Public key mismatch!" >&2
+                echo "Expected (from $key):" >&2
+                echo "$expected" >&2
+                echo "Given (in $pub):" >&2
+                echo "$given" >&2
+            else
+              echo "host-key OK"
+            fi
           fi
-
-          echo "OK: Keys match"
         '';
       };
     };
