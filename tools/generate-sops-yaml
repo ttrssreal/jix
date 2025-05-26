@@ -1,0 +1,19 @@
+#!/usr/bin/env nix
+#! nix shell nixpkgs#yq-go
+#! nix nixpkgs#coreutils-full
+#! nix nixpkgs#sops
+#! nix --extra-experimental-features ``nix-command flakes``
+#! nix --command bash
+
+set -exo pipefail
+
+new_sops_yaml=$(mktemp)
+
+nix eval .#jix.sops-yaml --json | yq -p json -o yaml > $new_sops_yaml
+install -C $new_sops_yaml .sops.yaml
+
+for filename in secrets/*; do
+  sops updatekeys $filename
+done
+
+rm $new_sops_yaml

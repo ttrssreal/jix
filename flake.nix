@@ -37,6 +37,9 @@
 
     colmena.url = "github:zhaofengli/colmena";
     colmena.inputs.nixpkgs.follows = "nixpkgs";
+
+    sops-nix.url = "github:Mic92/sops-nix";
+    sops-nix.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs =
@@ -45,6 +48,7 @@
       imports = [
         ./flake
         ./pkgs
+        ./sops.yaml.nix
 
         ./nixos/desk
         ./nixos/jess-laptop

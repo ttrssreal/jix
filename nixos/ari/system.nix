@@ -5,6 +5,7 @@
   security.sudo.wheelNeedsPassword = false;
 
   jix.hostKey = {
+    enable = true;
     generate = true;
     publicKey = ./hostKey.pub;
   };

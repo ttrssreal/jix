@@ -33,8 +33,8 @@
           nix
 
           # secrets manager
-          inputs'.agenix.packages.default
-          rage
+          sops
+          ssh-to-age
 
           inputs'.home-manager.packages.default
 

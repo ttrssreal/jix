@@ -10,6 +10,10 @@ Locally (will `set -x`):
 `sudo nixos-sw`
 `hm-sw`
 
+## Secrets
+
+With pgp key in local keyring run `sops edit secrets/nixos.yaml` to edit nixos secrets.
+
 ## Hack
 
 HM:
