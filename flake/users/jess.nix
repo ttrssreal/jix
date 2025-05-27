@@ -7,7 +7,7 @@
 let
   cfg = config.users.jess;
 
-  home = config.users.homeConfigurations."jess@${name}";
+  home = config.users.homeConfigurations."jess@${name}" or null;
 in
 {
   options.users.jess = {
@@ -56,12 +56,12 @@ in
       users.users.jess = cfg.extraConfig;
     }
 
-    {
+    (lib.mkIf (home != null) {
       home-manager = {
         inherit (home) extraSpecialArgs;
 
         users.jess.imports = home.modules;
       };
-    }
+    })
   ];
 }
