@@ -22,8 +22,8 @@ in
         nodeSpecialArgs = mapDeployable (_: lib.getAttr "specialArgs");
       };
     }
-    // (lib.mapAttrs (hostname: host: {
-      imports = config.flake.nixosConfigurations.${hostname}._module.args.modules;
+    // (lib.mapAttrs (_: host: {
+      imports = host.modules;
       deployment = host.deployment.cfg;
     }) deployable)
   );
