@@ -49,6 +49,10 @@ in
     )
 
     {
+      virtualisation.vmVariant.users.users.jess.password = "password";
+    }
+
+    {
       users.users.jess = cfg.extraConfig;
     }
 
