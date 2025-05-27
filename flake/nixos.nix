@@ -23,7 +23,8 @@ in
 
             options = {
               system = lib.mkOption {
-                type = lib.types.enum lib.platforms.all;
+                type = with lib.types; nullOr (enum lib.platforms.all);
+                default = null;
               };
 
               modules = lib.mkOption {
@@ -69,7 +70,13 @@ in
               modules = [
                 ../modules/nixos
 
-                { nixpkgs.hostPlatform = config.system; }
+                # in contexts such as test nodes, this will be made read-only and
+                # set to the realized nixpkgs hostPlatform.
+                # https://github.com/NixOS/nixpkgs/blob/fdf56ea52203/nixos/modules/misc/nixpkgs/read-only.nix
+                (lib.mkIf (config.system != null) {
+                  nixpkgs.hostPlatform = config.system;
+                })
+
                 { networking.hostName = name; }
                 { system.stateVersion = config.stateVersion; }
               ];
