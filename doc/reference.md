@@ -14,6 +14,11 @@ Locally (will `set -x`):
 
 With pgp key in local keyring run `sops edit secrets/nixos.yaml` to edit nixos secrets.
 
+## Tests
+
+Run `nix build -L .#test-<name>` to execute a test, and
+`nix build -L .#test-<name>.driverInteractive` to debug tests.
+
 ## Hack
 
 HM:
