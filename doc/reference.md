@@ -1,28 +1,21 @@
 ## Deploy
 
-<!-- TODO: tailscale -->
-Deploy to a remote machine (ex. ari the little server)
+Deploy to a remote machine:
 ```console
-colmena apply --on ari
+colmena apply --on <name>
 ```
 
-Locally (will `set -x`):
-`sudo nixos-sw`
-`hm-sw`
+Local is `sudo nixos-sw`, and `hm-sw` for home manager.
 
 ## Secrets
 
-With pgp key in local keyring run `sops edit secrets/nixos.yaml` to edit nixos secrets.
+With PGP key in local keyring run `sops edit secrets/nixos.yaml` to edit nixos secrets.
 
 ## Tests
 
 Run `nix build -L .#test-<name>` to execute a test, and
 `nix build -L .#test-<name>.driverInteractive` to debug tests.
 
-## Hack
+## Hacking
 
-HM:
-```console
-home-manager switch --flake . --override-input home-manager /home/jess/.../home-manager
-```
-
+home-manager: `home-manager switch --flake . --override-input home-manager <hm-path>`
