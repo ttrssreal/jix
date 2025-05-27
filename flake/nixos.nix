@@ -49,6 +49,12 @@ in
                 };
               };
 
+              flakeExpose = lib.mkOption {
+                type = lib.types.bool;
+                description = "Should this be a public configuration";
+                default = true;
+              };
+
               # the instantiated system configuration
               nixosConfiguration = lib.mkOption {
                 internal = true;
@@ -82,5 +88,8 @@ in
       );
   };
 
-  config.flake.nixosConfigurations = lib.mapAttrs (_: lib.getAttr "nixosConfiguration") cfg;
+  config.flake.nixosConfigurations = lib.pipe cfg [
+    (lib.filterAttrs (_: lib.getAttr "flakeExpose"))
+    (lib.mapAttrs (_: lib.getAttr "nixosConfiguration"))
+  ];
 }
