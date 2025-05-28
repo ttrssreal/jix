@@ -49,7 +49,7 @@
             hello_out = machine.succeed("hello")
             assert "Hello, world!" in hello_out, "Package `hello` not installed."
 
-          with subtest("Login as jess"):
+          with subtest("Check jess exists"):
             etc_passwd_out = machine.succeed("cat /etc/passwd")
             assert "jess" in etc_passwd_out, "/etc/passwd doesn't contain jess"
         '';
