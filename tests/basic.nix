@@ -52,6 +52,15 @@
           with subtest("Check jess exists"):
             etc_passwd_out = machine.succeed("cat /etc/passwd")
             assert "jess" in etc_passwd_out, "/etc/passwd doesn't contain jess"
+
+          with subtest("Login as jess"):
+            machine.wait_until_tty_matches("1", "login: ")
+            machine.send_chars("jess\n")
+            machine.wait_until_tty_matches("1", "Password: ")
+            machine.send_chars("password\n")
+
+            jess_meow = machine.succeed("su jess -s /bin/sh -c \"echo meow\"")
+            assert "meow" in jess_meow, "`su jess` and `echo meow` didn't work :("
         '';
       };
     };
