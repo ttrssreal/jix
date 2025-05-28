@@ -1,5 +1,5 @@
 {
-  jix.nixos.jess-laptop = {
+  jix.nixos.nodes.jess-laptop = {
     system = "x86_64-linux";
 
     profiles.graphical = {

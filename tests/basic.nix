@@ -4,9 +4,8 @@
   ...
 }:
 {
-  jix.nixos.basic = {
+  jix.nixos.test-nodes.basic = {
     profiles.base.enable = true;
-    flakeExpose = false;
 
     users.jess = {
       enable = true;
@@ -36,7 +35,7 @@
         name = "basic";
 
         node.specialArgs = { inherit inputs; };
-        nodes.machine.imports = config.jix.nixos.basic.modules;
+        nodes.machine.imports = config.jix.nixos.test-nodes.basic.modules;
 
         testScript = ''
           machine.start()

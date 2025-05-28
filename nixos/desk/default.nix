@@ -5,7 +5,7 @@
     ./gpu.nix
   ];
 
-  jix.nixos.desk = {
+  jix.nixos.nodes.desk = {
     system = "x86_64-linux";
 
     profiles.graphical = {

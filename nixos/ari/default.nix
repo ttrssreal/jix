@@ -1,7 +1,7 @@
 # Ari (She/Her) tiny server running kubernetes
 
 {
-  jix.nixos.ari = {
+  jix.nixos.nodes.ari = {
     system = "x86_64-linux";
 
     deployment = {

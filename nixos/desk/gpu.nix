@@ -1,5 +1,5 @@
 {
-  jix.nixos.desk.modules = [
+  jix.nixos.nodes.desk.modules = [
     (
       { config, ... }:
 
