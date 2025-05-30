@@ -49,7 +49,6 @@
         ./flake
         ./pkgs
         ./tests
-        ./sops.yaml.nix
 
         ./nixos/desk
         ./nixos/jess-laptop

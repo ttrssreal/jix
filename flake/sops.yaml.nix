@@ -10,7 +10,7 @@
       };
 
       ssh = lib.mapAttrs (_: key: lib.trim (lib.readFile key)) {
-        ari = ./nixos/ari/hostKey.pub;
+        ari = ../nixos/ari/hostKey.pub;
       };
     in
     {

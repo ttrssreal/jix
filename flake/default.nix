@@ -8,5 +8,6 @@
     ./install-iso.nix
     ./templates.nix
     ./deploy.nix
+    ./sops.yaml.nix
   ];
 }
