@@ -16,6 +16,8 @@
     pkgs.particle-cli
   ];
 
+  hardware.bluetooth.enable = true;
+
   # Bootloader.
   boot = {
     loader.grub = {
