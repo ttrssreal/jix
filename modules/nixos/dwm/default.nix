@@ -23,8 +23,8 @@ in
               src = pkgs.fetchFromGitHub {
                 owner = "ttrssreal";
                 repo = "dwm";
-                rev = "c7f44d913d249bfb3dcd6ba1a6c51d052806c6aa";
-                hash = "sha256-Srj+oAYYK652AcOnQICa4w6jbMm5pQc1q6wuY829oY4=";
+                rev = "6ad82b7a9d46bae8e6d803f37c081806b332b32d";
+                hash = "sha256-0tcpLfn/Au0ZSWyglrwkZPs6ilG+88gaRklbm9Q02os=";
               };
 
               nativeBuildInputs = with pkgs; [
