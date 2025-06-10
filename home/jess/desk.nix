@@ -36,6 +36,22 @@
           };
         };
       }
+
+      (
+        { pkgs, lib, ... }:
+        {
+          jix.xinit.init.adjustDisplay = lib.hm.dag.entryAfter [ "beginScript" ] ''
+            ${lib.getExe pkgs.xorg.xrandr} \
+              --output HDMI-0 \
+              --auto \
+              --pos 0x0 \
+              --output DP-0 \
+              --auto \
+              --scale 1x1 \
+              --right-of HDMI-0
+          '';
+        }
+      )
     ];
 
     # This value determines the Home Manager release that your
