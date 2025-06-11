@@ -38,7 +38,8 @@ writers.writePython3Bin "bluetooth-connect" { inherit libraries; } ''
   name_map[b"disconnect"] = None
 
 
-  p = subp.Popen(["${lib.getExe dmenu}"],  # noqa: E501
+  # TODO: dwm/dmenu: put font info in one place
+  p = subp.Popen(["${lib.getExe dmenu}", "-fn", "monospace:size=35"],  # noqa: E501
                  stdout=subp.PIPE,
                  stdin=subp.PIPE,
                  stderr=subp.PIPE)
