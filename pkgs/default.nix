@@ -15,7 +15,6 @@
         (final: _: {
           bluetooth-connect = final.callPackage ./bluetooth-connect.nix { };
           tsMuxer = final.callPackage ./ts-muxer.nix { };
-          particle-cli = final.callPackage ./particle-cli.nix { };
 
           pwndbg-unwrapped = inputs'.pwndbg.packages.pwndbg;
           pwndbg = final.callPackage ./pwndbg.nix { };
@@ -29,7 +28,6 @@
         inherit (pkgs)
           bluetooth-connect
           tsMuxer
-          particle-cli
           pwndbg
           xgpro
           ;
