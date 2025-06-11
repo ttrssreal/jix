@@ -39,6 +39,7 @@ writers.writePython3Bin "bluetooth-connect" { inherit libraries; } ''
 
 
   # TODO: dwm/dmenu: put font info in one place
+  # Issue URL: https://github.com/ttrssreal/jix/issues/37
   p = subp.Popen(["${lib.getExe dmenu}", "-fn", "monospace:size=35"],  # noqa: E501
                  stdout=subp.PIPE,
                  stdin=subp.PIPE,
