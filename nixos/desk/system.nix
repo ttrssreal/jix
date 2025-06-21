@@ -16,6 +16,8 @@
     pkgs.particle-cli
   ];
 
+  jix.dwm.fontSize = 15;
+
   hardware.bluetooth.enable = true;
 
   # Bootloader.
