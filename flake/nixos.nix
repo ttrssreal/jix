@@ -85,29 +85,30 @@ let
         };
       };
     };
+
+  mkNodesOption =
+    description: extra:
+    lib.mkOption {
+      type =
+        with lib.types;
+        attrsOf (submodule {
+          imports = [
+            nixosConfigModule
+            extra
+          ];
+        });
+      inherit description;
+      default = { };
+    };
 in
 {
   options.jix.nixos = {
-    nodes = lib.mkOption {
-      type =
-        with lib.types;
-        attrsOf (submodule {
-          imports = [ nixosConfigModule ];
-          flakeExpose = true;
-        });
-      description = "Configs for real nodes";
-      default = { };
+    nodes = mkNodesOption "Configs for real nodes" {
+      flakeExpose = true;
     };
 
-    test-nodes = lib.mkOption {
-      type =
-        with lib.types;
-        attrsOf (submodule {
-          imports = [ nixosConfigModule ];
-          flakeExpose = false;
-        });
-      description = "Configs for testing";
-      default = { };
+    test-nodes = mkNodesOption "Configs for testing" {
+      flakeExpose = false;
     };
   };
 
