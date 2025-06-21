@@ -4,6 +4,7 @@
   python3Packages,
   dmenu,
   lib,
+  dmenuFontSize ? 20,
 }:
 let
   libraries = with python3Packages; [
@@ -38,9 +39,9 @@ writers.writePython3Bin "bluetooth-connect" { inherit libraries; } ''
   name_map[b"disconnect"] = None
 
 
-  # TODO: dwm/dmenu: put font info in one place
-  # Issue URL: https://github.com/ttrssreal/jix/issues/37
-  p = subp.Popen(["${lib.getExe dmenu}", "-fn", "monospace:size=35"],  # noqa: E501
+  p = subp.Popen(["${lib.getExe dmenu}",  # noqa: E501
+                  "-fn",
+                  "monospace:size=${toString dmenuFontSize}"],
                  stdout=subp.PIPE,
                  stdin=subp.PIPE,
                  stderr=subp.PIPE)

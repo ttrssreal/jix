@@ -15,11 +15,20 @@ in
       type = with lib.types; attrsOf str;
       default = { };
     };
+
+    dmenuFontSize = lib.mkOption {
+      type = lib.types.int;
+      description = ''
+        The font size of the option picker.
+      '';
+    };
   };
 
   config = {
     home.packages = [
-      pkgs.bluetooth-connect
+      (pkgs.bluetooth-connect.override {
+        inherit (cfg) dmenuFontSize;
+      })
     ];
 
     # mappings

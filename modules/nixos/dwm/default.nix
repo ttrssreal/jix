@@ -8,7 +8,17 @@ let
   cfg = config.jix.dwm;
 in
 {
-  options.jix.dwm.enable = lib.mkEnableOption "dwm";
+  options.jix.dwm = {
+    enable = lib.mkEnableOption "dwm";
+
+    fontSize = lib.mkOption {
+      type = lib.types.int;
+      description = ''
+        The font size of status bar text.
+      '';
+      default = 20;
+    };
+  };
 
   config = {
     services = lib.mkIf cfg.enable {
@@ -20,12 +30,20 @@ in
           enable = true;
           package = pkgs.dwm.overrideAttrs (
             final: prev: {
-              src = pkgs.fetchFromGitHub {
-                owner = "ttrssreal";
-                repo = "dwm";
-                rev = "6ad82b7a9d46bae8e6d803f37c081806b332b32d";
-                hash = "sha256-0tcpLfn/Au0ZSWyglrwkZPs6ilG+88gaRklbm9Q02os=";
+              src = pkgs.fetchgit {
+                name = "dwm";
+                url = "git://git.suckless.org/dwm";
+                rev = "e81f17d4c196aaed6893fd4beed49991caa3e2a4";
+                hash = "sha256-URaV5ZgeJ7QbMKEa9QvtwT95fl+s/cLwpM1bmn3hLUw=";
               };
+
+              patches = [
+                ./dwm-config-001.patch
+
+                (pkgs.replaceVars ./update-fontsize-dyn.patch {
+                  inherit (cfg) fontSize;
+                })
+              ];
 
               nativeBuildInputs = with pkgs; [
                 pkg-config
