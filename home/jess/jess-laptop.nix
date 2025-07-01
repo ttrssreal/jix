@@ -14,6 +14,7 @@
       {
         jix.bluetooth-connect = {
           enable = true;
+          dmenuFontSize = 15;
 
           deviceAddrs = {
             "headphones" = "AC:80:0A:73:8A:3E";

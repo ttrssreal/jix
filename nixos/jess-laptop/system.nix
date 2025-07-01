@@ -4,6 +4,7 @@
   jix = {
     podman.enable = true;
     pipewire.enable = true;
+    dwm.fontSize = 15;
   };
 
   services = {
