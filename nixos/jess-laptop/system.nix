@@ -1,6 +1,10 @@
 # Yoga 7 14ITL5
 { pkgs, ... }:
 {
+  imports = [
+    ./wireguard.nix
+  ];
+
   jix = {
     podman.enable = true;
     pipewire.enable = true;

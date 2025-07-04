@@ -19,3 +19,7 @@ Run `nix build -L .#test-<name>` to execute a test, and
 ## Hacking
 
 home-manager: `home-manager switch --flake . --override-input home-manager <hm-path>`
+
+## Wireguard
+
+Start and stop the `wireguard-wg0.service` unit
