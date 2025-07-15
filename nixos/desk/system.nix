@@ -1,5 +1,9 @@
 { pkgs, ... }:
 {
+  imports = [
+    ./ghidra-server.nix
+  ];
+
   hardware.graphics.enable = true;
 
   networking = {
