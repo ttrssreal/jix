@@ -27,5 +27,4 @@ in
       age.sshKeyFile = config.jix.hostKey.privateKey.path;
     };
   };
-
 }
