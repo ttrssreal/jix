@@ -39,6 +39,7 @@
     colmena.inputs.nixpkgs.follows = "nixpkgs";
 
     # TODO: sops-nix: remove pr patch once merged
+    # Issue URL: https://github.com/ttrssreal/jix/issues/38
     # https://github.com/Mic92/sops-nix/pull/779
     sops-nix.url = "github:Mic92/sops-nix/pull/779/merge";
     sops-nix.inputs.nixpkgs.follows = "nixpkgs";
