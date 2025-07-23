@@ -13,6 +13,7 @@
 
   services = {
     thermald.enable = true;
+    tlp.enable = true;
 
     # used by status bar
     upower.enable = true;
