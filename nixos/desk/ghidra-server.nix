@@ -5,6 +5,13 @@
   ...
 }:
 {
+  sops.secrets.ghidra-server-users = {
+    owner = "ghidra";
+    group = "ghidra";
+    restartUnits = [ "ghidra-server.service" ];
+    path = "/var/lib/ghidra-server/repositories/users";
+  };
+
   users = {
     groups.ghidra = { };
     users.ghidra = {

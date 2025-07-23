@@ -6,6 +6,12 @@
 
   hardware.graphics.enable = true;
 
+  jix.hostKey = {
+    enable = true;
+    generate = true;
+    publicKey = ./hostKey.pub;
+  };
+
   networking = {
     firewall.enable = false;
     networkmanager.enable = true;
@@ -23,7 +29,10 @@
     pkgs.particle-cli
   ];
 
-  jix.dwm.fontSize = 15;
+  jix = {
+    dwm.fontSize = 15;
+    sops.enable = true;
+  };
 
   hardware.bluetooth.enable = true;
 
