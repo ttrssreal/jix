@@ -17,17 +17,15 @@ in
   config = {
     assertions = [
       {
-        assertion = !cfg.enable;
-        # wait until this is merged to fully integrate secrets
-        message = "https://github.com/Mic92/sops-nix/pull/779";
+        assertion = config.jix.hostKey.enable;
+        message = "The option `jix.hostKey` must be set to use secrets.";
       }
     ];
 
     sops = lib.mkIf cfg.enable {
       defaultSopsFile = ../../../secrets/nixos.yaml;
-      age.sshKeyPaths = [
-        config.jix.hostKey.privateKey.path
-      ];
+      age.sshKeyFile = config.jix.hostKey.privateKey.path;
     };
   };
+
 }
