@@ -14,7 +14,7 @@ in
 
   options.jix.sops.enable = lib.mkEnableOption "sops-nix";
 
-  config = {
+  config = lib.mkIf cfg.enable {
     assertions = [
       {
         assertion = config.jix.hostKey.enable;
