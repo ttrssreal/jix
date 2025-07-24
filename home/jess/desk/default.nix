@@ -24,19 +24,24 @@
         };
       }
 
-      {
-        jix.sops.enable = true;
+      (
+        { config, ... }:
+        {
+          jix.sops.enable = true;
+          sops.secrets.home-backup-repo-password-jess-at-desk = { };
 
-        jix.home-backup = {
-          enable = true;
-          hostname = "desk";
-          exclude = [
-            "/home/jess/code"
-            "/home/jess/.cache"
-            "/home/jess/.local/share/containers"
-          ];
-        };
-      }
+          jix.home-backup = {
+            enable = true;
+            hostname = "desk";
+            passwordFile = config.sops.secrets.home-backup-repo-password-jess-at-desk.path;
+            exclude = [
+              "/home/jess/code"
+              "/home/jess/.cache"
+              "/home/jess/.local/share/containers"
+            ];
+          };
+        }
+      )
 
       {
         jix.bluetooth-connect = {

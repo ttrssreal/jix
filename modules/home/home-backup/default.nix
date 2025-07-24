@@ -19,12 +19,14 @@ in
     hostname = lib.mkOption {
       type = lib.types.str;
     };
+    passwordFile = lib.mkOption {
+      type = lib.types.str;
+    };
   };
 
-  config = {
+  config = lib.mkIf cfg.enable {
     sops.secrets = {
       home-backup-bucket = { };
-      home-backup-repo-password = { };
       home-backup-access-key-id = { };
       home-backup-secret-access-key = { };
     };
@@ -38,13 +40,13 @@ in
       AWS_SECRET_ACCESS_KEY=${config.sops.placeholder.home-backup-secret-access-key}
     '';
 
-    services.restic = lib.mkIf cfg.enable {
+    services.restic = {
       enable = true;
       backups = {
         home = {
           initialize = true;
           repositoryFile = config.sops.templates.homeBackupRepositoryFile.path;
-          passwordFile = config.sops.secrets.home-backup-repo-password.path;
+          passwordFile = cfg.passwordFile;
           environmentFile = config.sops.templates.homeBackupCredsEnvironmentFile.path;
           paths = [
             config.home.homeDirectory
