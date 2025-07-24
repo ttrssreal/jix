@@ -17,7 +17,18 @@
       }
 
       {
+        jix.homeKey = {
+          enable = true;
+          generate = true;
+          publicKey = ./homeKey.pub;
+        };
+      }
+
+      {
+        jix.sops.enable = true;
+
         jix.home-backup = {
+          enable = true;
           hostname = "desk";
           exclude = [
             "/home/jess/code"

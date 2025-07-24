@@ -10,5 +10,7 @@
     ./bluetooth-connect
     ./dwm-status
     ./home-backup
+    ./home-key
+    ./sops
   ];
 }

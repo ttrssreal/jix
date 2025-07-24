@@ -57,7 +57,7 @@
         ./nixos/jess-laptop
         ./nixos/ari
 
-        ./home/jess/desk.nix
+        ./home/jess/desk
         ./home/jess/jess-laptop.nix
         ./home/jess/ari.nix
       ];

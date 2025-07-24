@@ -5,7 +5,6 @@
 }:
 let
   cfg = config.jix.home-backup;
-  bucket = "https://s3.us-west-002.backblazeb2.com/home-backups-c054294cc6b8";
 in
 {
   imports = [
@@ -22,17 +21,35 @@ in
     };
   };
 
-  config.services.restic = lib.mkIf cfg.enable {
-    enable = true;
-    backups = {
-      home = {
-        initialize = true;
-        repository = "s3:${bucket}/${config.home.username}/${cfg.hostname}";
-        passwordFile = "${config.home.homeDirectory}/.keys/restic-backups-home/password";
-        environmentFile = "${config.home.homeDirectory}/.keys/restic-backups-home/b2-creds";
-        paths = [
-          config.home.homeDirectory
-        ];
+  config = {
+    sops.secrets = {
+      home-backup-bucket = { };
+      home-backup-repo-password = { };
+      home-backup-access-key-id = { };
+      home-backup-secret-access-key = { };
+    };
+
+    sops.templates.homeBackupRepositoryFile.content = ''
+      s3:${config.sops.placeholder.home-backup-bucket}/${config.home.username}/${cfg.hostname}
+    '';
+
+    sops.templates.homeBackupCredsEnvironmentFile.content = ''
+      AWS_ACCESS_KEY_ID=${config.sops.placeholder.home-backup-access-key-id}
+      AWS_SECRET_ACCESS_KEY=${config.sops.placeholder.home-backup-secret-access-key}
+    '';
+
+    services.restic = lib.mkIf cfg.enable {
+      enable = true;
+      backups = {
+        home = {
+          initialize = true;
+          repositoryFile = config.sops.templates.homeBackupRepositoryFile.path;
+          passwordFile = config.sops.secrets.home-backup-repo-password.path;
+          environmentFile = config.sops.templates.homeBackupCredsEnvironmentFile.path;
+          paths = [
+            config.home.homeDirectory
+          ];
+        };
       };
     };
   };

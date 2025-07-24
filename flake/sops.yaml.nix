@@ -12,6 +12,7 @@
       ssh = lib.mapAttrs (_: key: lib.trim (lib.readFile key)) {
         ari = ../nixos/ari/hostKey.pub;
         desk = ../nixos/desk/hostKey.pub;
+        "jess@desk" = ../home/jess/desk/homeKey.pub;
       };
     in
     {
@@ -27,6 +28,7 @@
               age = [
                 ssh.ari
                 ssh.desk
+                ssh."jess@desk"
               ];
             }
           ];
