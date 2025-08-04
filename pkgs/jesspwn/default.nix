@@ -5,9 +5,9 @@
   lib,
 }:
 stdenv.mkDerivation {
-  name = "jesspwn";
+  name = "pwndbg";
 
-  src = ./jesspwn;
+  src = ./.;
 
   nativeBuildInputs = [
     makeWrapper

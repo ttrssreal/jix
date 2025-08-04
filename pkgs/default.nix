@@ -17,7 +17,7 @@
           tsMuxer = final.callPackage ./ts-muxer.nix { };
 
           pwndbg-unwrapped = inputs'.pwndbg.packages.pwndbg;
-          pwndbg = final.callPackage ./pwndbg.nix { };
+          pwndbg = final.callPackage ./jesspwn { };
 
           inherit (inputs'.erosanix.lib) mkWindowsApp;
           xgpro = final.callPackage ./xgpro.nix { };
