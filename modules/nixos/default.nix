@@ -5,5 +5,6 @@
     ./pipewire
     ./hostKey
     ./sops
+    ./buildtime-secrets
   ];
 }

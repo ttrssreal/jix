@@ -33,6 +33,19 @@
             }
           ];
         }
+        {
+          path_regex = "secrets/buildtime.yaml";
+          key_groups = [
+            {
+              pgp = [
+                pgp.jess
+              ];
+              age = [
+                ssh.desk
+              ];
+            }
+          ];
+        }
       ];
     };
 }

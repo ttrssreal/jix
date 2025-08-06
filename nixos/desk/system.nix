@@ -32,6 +32,7 @@
   jix = {
     dwm.fontSize = 15;
     sops.enable = true;
+    buildtimeSecrets.enable = true;
   };
 
   hardware.bluetooth.enable = true;

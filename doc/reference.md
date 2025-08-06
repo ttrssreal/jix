@@ -9,6 +9,15 @@ Local is `sudo nixos-sw`, and `hm-sw` for home manager.
 
 ## Secrets
 
+Buildtime and activationtime secrets. To add a new buildtime secret: `sops edit secrets/buildtime.yaml`,
+enable the module and put this in the derivation,
+```
+requiredSystemFeatures = [ "buildtime-secrets" ];
+buildtimeSecrets = [ credentialsSecret ];
+```
+
+NixOS secrets in `secrets/nixos.yaml` are decrypted at activation-time.
+
 With PGP key in local keyring run `sops edit secrets/nixos.yaml` to edit nixos secrets.
 
 ## Tests
