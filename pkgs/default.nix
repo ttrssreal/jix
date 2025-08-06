@@ -21,6 +21,8 @@
 
           inherit (inputs'.erosanix.lib) mkWindowsApp;
           xgpro = final.callPackage ./xgpro.nix { };
+
+          binary-ninja = final.callPackage ./binary-ninja.nix { };
         })
       ];
 
@@ -30,6 +32,7 @@
           tsMuxer
           pwndbg
           xgpro
+          binary-ninja
           ;
       };
     };
