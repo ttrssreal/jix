@@ -9,10 +9,15 @@
   };
 
   perSystem =
-    { inputs', pkgs, ... }:
+    {
+      inputs',
+      pkgs,
+      config,
+      ...
+    }:
     {
       jix.overlays = [
-        (final: _: {
+        (final: prev: {
           bluetooth-connect = final.callPackage ./bluetooth-connect.nix { };
           tsMuxer = final.callPackage ./ts-muxer.nix { };
 
@@ -23,6 +28,14 @@
           xgpro = final.callPackage ./xgpro.nix { };
 
           binary-ninja = final.callPackage ./binary-ninja.nix { };
+
+          pwninit = final.callPackage ./pwninit {
+            pwninit-unwrapped = prev.pwninit;
+          };
+
+          pwntools = prev.pwntools.override {
+            debugger = config.packages.pwndbg;
+          };
         })
       ];
 
@@ -33,6 +46,8 @@
           pwndbg
           xgpro
           binary-ninja
+          pwntools
+          pwninit
           ;
       };
     };

@@ -56,5 +56,6 @@
     jetbrains.idea-ultimate
     baobab
     jetbrains.clion
+    pwninit
   ];
 }
