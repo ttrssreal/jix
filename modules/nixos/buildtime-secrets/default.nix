@@ -20,12 +20,12 @@ in
   config = {
     assertions = [
       {
-        assertion = config.jix.hostKey.enable;
+        assertion = !cfg.enable || config.jix.hostKey.enable;
         message = "This machine needs a hostKey to decrypt buildtime secrets.";
       }
     ];
 
-    nix.settings = {
+    nix.settings = lib.mkIf cfg.enable {
       system-features = [ "buildtime-secrets" ];
       pre-build-hook = pkgs.writeShellScript "buildtime-secrets-decrypt" ''
         set -eo pipefail
