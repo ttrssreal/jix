@@ -12,6 +12,14 @@
 
     modules = [
       {
+        jix.homeKey = {
+          enable = true;
+          generate = true;
+          publicKey = ./homeKey.pub;
+        };
+      }
+
+      {
         jix.bluetooth-connect = {
           enable = true;
           dmenuFontSize = 15;
@@ -42,9 +50,19 @@
         };
       }
 
-      # TODO: home-backup: for jess-laptop
-      # Issue URL: https://github.com/ttrssreal/jix/issues/35
-      { jix.home-backup.enable = false; }
+      (
+        { config, ... }:
+        {
+          jix.sops.enable = true;
+          sops.secrets.home-backup-repo-password-jess-at-jess-laptop = { };
+
+          jix.home-backup = {
+            enable = true;
+            passwordFile = config.sops.secrets.home-backup-repo-password-jess-at-jess-laptop.path;
+            hostname = "jess-laptop";
+          };
+        }
+      )
     ];
 
     # This value determines the Home Manager release that your

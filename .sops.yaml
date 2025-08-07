@@ -4,6 +4,7 @@ creation_rules:
           - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGdXzGIGojiTBR6ihaiWkD907bjPxQtT9X5MS+aEJPQ3 root@ari
           - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHH7C7Of3ks53MPxQLdjE3/6U4aP/paexUnus45hZyB/ root@desk
           - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBvN+lcZWtwQmaBAvMavioGzKuYpri6hA87LHLF634tj jess@desk
+          - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICk0WIlzz2d+BklFE18Wu0/oAX7T7dC6M9+anqvXlY1c jess@jess-laptop
         pgp:
           - 80923BD1ECD0E436671DC8E9BA3350686C918606
     path_regex: secrets/nixos.yaml

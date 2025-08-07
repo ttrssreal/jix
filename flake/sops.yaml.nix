@@ -13,6 +13,7 @@
         ari = ../nixos/ari/hostKey.pub;
         desk = ../nixos/desk/hostKey.pub;
         "jess@desk" = ../home/jess/desk/homeKey.pub;
+        "jess@jess-laptop" = ../home/jess/jess-laptop/homeKey.pub;
       };
     in
     {
@@ -29,6 +30,7 @@
                 ssh.ari
                 ssh.desk
                 ssh."jess@desk"
+                ssh."jess@jess-laptop"
               ];
             }
           ];
