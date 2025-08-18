@@ -9,7 +9,7 @@ let
 in
 {
   imports = [
-    inputs.nixvim.homeManagerModules.default
+    inputs.nixvim.homeModules.default
 
     ./plugins.nix
     ./keymaps.nix

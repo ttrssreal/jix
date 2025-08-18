@@ -20,11 +20,13 @@
 
       nvim-tree = {
         enable = true;
-        autoReloadOnWrite = true;
         openOnSetup = true;
-        disableNetrw = true;
-        git.enable = true;
-        sortBy = "case_sensitive";
+        settings = {
+          git.enable = true;
+          sort_by = "case_sensitive";
+          auto_reload_on_write = true;
+          disable_netrw = true;
+        };
       };
 
       telescope = {
