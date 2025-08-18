@@ -1,4 +1,3 @@
-{ lib, ... }:
 {
   jix.home."jess@desk" = {
     profiles = {
@@ -12,24 +11,24 @@
     username = "jess";
 
     modules = [
-      {
-        programs.alacritty.settings.font.size = lib.mkForce 10;
-      }
-
-      {
-        jix.homeKey = {
-          enable = true;
-          generate = true;
-          publicKey = ./homeKey.pub;
-        };
-      }
-
       (
-        { config, ... }:
         {
-          jix.sops.enable = true;
-          sops.secrets.home-backup-repo-password-jess-at-desk = { };
+          pkgs,
+          lib,
+          config,
+          ...
+        }:
+        {
+          jix.homeKey = {
+            enable = true;
+            generate = true;
+            publicKey = ./homeKey.pub;
+          };
 
+          jix.backblaze-rclone.enable = true;
+          jix.sops.enable = true;
+
+          sops.secrets.home-backup-repo-password-jess-at-desk = { };
           jix.home-backup = {
             enable = true;
             hostname = "desk";
@@ -40,23 +39,16 @@
               "/home/jess/.local/share/containers"
             ];
           };
-        }
-      )
 
-      {
-        jix.bluetooth-connect = {
-          enable = true;
-          dmenuFontSize = 15;
+          jix.bluetooth-connect = {
+            enable = true;
+            dmenuFontSize = 15;
 
-          deviceAddrs = {
-            "headphones" = "AC:80:0A:73:8A:3E";
+            deviceAddrs = {
+              "headphones" = "AC:80:0A:73:8A:3E";
+            };
           };
-        };
-      }
 
-      (
-        { pkgs, lib, ... }:
-        {
           jix.xinit.init.adjustDisplay = lib.hm.dag.entryAfter [ "beginScript" ] ''
             ${lib.getExe pkgs.xorg.xrandr} \
               --output HDMI-0 \
@@ -67,12 +59,10 @@
               --scale 1x1 \
               --right-of HDMI-0
           '';
+
+          programs.alacritty.settings.font.size = lib.mkForce 10;
         }
       )
-
-      {
-        jix.backblaze-rclone.enable = true;
-      }
     ];
 
     # This value determines the Home Manager release that your
