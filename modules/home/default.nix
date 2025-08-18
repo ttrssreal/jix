@@ -12,5 +12,6 @@
     ./home-backup
     ./home-key
     ./sops
+    ./backblaze-rclone
   ];
 }
