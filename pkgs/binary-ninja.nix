@@ -14,6 +14,8 @@
   lib,
   runCommand,
   awscli2,
+  fetchFromGitHub,
+  system,
 }:
 let
   fetchS3 = lib.fetchers.withNormalizedHash { } (
@@ -39,6 +41,15 @@ let
         aws s3 cp --endpoint-url=${s3Endpoint} s3://${s3Path} $out
       ''
   );
+
+  libxml_2_13_5_pkgs = fetchFromGitHub {
+    owner = "nixos";
+    repo = "nixpkgs";
+    rev = "c75a2bda2fced25c24213d13011813a4c0affb5e";
+    hash = "sha256-YcinmcTg6/CCSgqkZjTtrmlCt9iQpcgxjtuVU/t3/rU=";
+  };
+
+  inherit (import libxml_2_13_5_pkgs { inherit system; }) libxml2;
 in
 stdenv.mkDerivation {
   name = "binary-ninja";
@@ -58,6 +69,7 @@ stdenv.mkDerivation {
     libxkbcommon
     qt6.qtbase
     qt6.qtwayland
+    libxml2
   ];
 
   nativeBuildInputs = [
