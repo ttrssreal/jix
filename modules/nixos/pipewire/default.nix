@@ -1,8 +1,8 @@
-{ lib, ... }:
+{ lib, config, ... }:
 {
   options.jix.pipewire.enable = lib.mkEnableOption "pipewire";
 
-  config = {
+  config = lib.mkIf config.jix.pipewire.enable {
     services.pipewire = {
       enable = true;
 

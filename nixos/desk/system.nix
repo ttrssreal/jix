@@ -33,6 +33,7 @@
     dwm.fontSize = 15;
     sops.enable = true;
     buildtimeSecrets.enable = true;
+    pipewire.enable = true;
   };
 
   hardware.bluetooth.enable = true;
