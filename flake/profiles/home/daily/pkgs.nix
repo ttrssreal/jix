@@ -57,5 +57,6 @@
     baobab
     jetbrains.clion
     pwninit
+    nix-conf-edit
   ];
 }
