@@ -36,6 +36,8 @@
           pwntools = prev.pwntools.override {
             debugger = config.packages.pwndbg;
           };
+
+          nix-conf-edit = final.callPackage ./nix-conf-edit.nix { };
         })
       ];
 
@@ -48,6 +50,7 @@
           binary-ninja
           pwntools
           pwninit
+          nix-conf-edit
           ;
       };
     };
