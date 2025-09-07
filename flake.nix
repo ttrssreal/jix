@@ -33,6 +33,7 @@
     nixos-generators.inputs.nixpkgs.follows = "nixpkgs";
 
     # TODO: pwndbg: latest is broken, can flake input be updated yet?
+    # Issue URL: https://github.com/ttrssreal/jix/issues/39
     pwndbg.url = "github:pwndbg/pwndbg/aa524de27a45a9e76f18565931db72bd33678482";
     pwndbg.inputs.nixpkgs.follows = "nixpkgs";
 
