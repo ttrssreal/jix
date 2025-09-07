@@ -20,7 +20,7 @@ EOF
 
 flakify() {
   if [ ! -e flake.nix ]; then
-    nix flake new -t github:ttrssreal/jix .
+    nix flake new --refresh -t github:ttrssreal/jix .
     direnv allow
   elif [ ! -e .envrc ]; then
     echo "use flake" > .envrc
