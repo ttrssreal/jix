@@ -32,7 +32,8 @@
     nixos-generators.url = "github:nix-community/nixos-generators";
     nixos-generators.inputs.nixpkgs.follows = "nixpkgs";
 
-    pwndbg.url = "github:pwndbg/pwndbg";
+    # TODO: pwndbg: latest is broken, can flake input be updated yet?
+    pwndbg.url = "github:pwndbg/pwndbg/aa524de27a45a9e76f18565931db72bd33678482";
     pwndbg.inputs.nixpkgs.follows = "nixpkgs";
 
     colmena.url = "github:zhaofengli/colmena";

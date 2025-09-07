@@ -450,16 +450,17 @@
         "uv2nix": "uv2nix"
       },
       "locked": {
-        "lastModified": 1755339423,
-        "narHash": "sha256-JNNvWahVrhuJVSRUHCVx71gQpfnq5Ess4v3QK0yZ7rk=",
+        "lastModified": 1748252404,
+        "narHash": "sha256-zavmYooLNZRSDn5+mp1fwnd6M40EPI0VKdzxn377XpQ=",
         "owner": "pwndbg",
         "repo": "pwndbg",
-        "rev": "870825cd5f63c669d1b5794a2d4207f1af719522",
+        "rev": "aa524de27a45a9e76f18565931db72bd33678482",
         "type": "github"
       },
       "original": {
         "owner": "pwndbg",
         "repo": "pwndbg",
+        "rev": "aa524de27a45a9e76f18565931db72bd33678482",
         "type": "github"
       }
     },
