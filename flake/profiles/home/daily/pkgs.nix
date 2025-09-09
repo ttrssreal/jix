@@ -58,5 +58,6 @@
     jetbrains.clion
     pwninit
     nix-conf-edit
+    linuxKernel.packages.linux_xanmod.perf
   ];
 }
