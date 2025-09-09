@@ -57,7 +57,7 @@
     baobab
     jetbrains.clion
     pwninit
-    nix-conf-edit
+    scripts.nix-conf-edit
     linuxKernel.packages.linux_xanmod.perf
   ];
 }

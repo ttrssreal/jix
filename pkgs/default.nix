@@ -37,7 +37,9 @@
             debugger = config.packages.pwndbg;
           };
 
-          nix-conf-edit = final.callPackage ./nix-conf-edit.nix { };
+          scripts = {
+            nix-conf-edit = final.callPackage ./scripts/nix-conf-edit.nix { };
+          };
         })
       ];
 
@@ -50,6 +52,9 @@
           binary-ninja
           pwntools
           pwninit
+          ;
+
+        inherit (pkgs.scripts)
           nix-conf-edit
           ;
       };
