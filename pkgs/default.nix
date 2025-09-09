@@ -39,6 +39,7 @@
 
           scripts = {
             nix-conf-edit = final.callPackage ./scripts/nix-conf-edit.nix { };
+            nixpkgs-print-out-paths = final.callPackage ./scripts/nixpkgs-print-out-paths.nix { };
           };
         })
       ];
@@ -56,6 +57,7 @@
 
         inherit (pkgs.scripts)
           nix-conf-edit
+          nixpkgs-print-out-paths
           ;
       };
     };
