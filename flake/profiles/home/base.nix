@@ -16,6 +16,7 @@ in
           vim = "nvim";
           gs = "git status";
           mrow = "echo mrow";
+          curlo = "curl -LO";
         };
         language.base = "en_NZ.UTF-8";
       };
