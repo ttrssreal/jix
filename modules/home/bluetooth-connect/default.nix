@@ -24,7 +24,7 @@ in
     };
   };
 
-  config = {
+  config = lib.mkIf cfg.enable {
     home.packages = [
       (pkgs.bluetooth-connect.override {
         inherit (cfg) dmenuFontSize;
