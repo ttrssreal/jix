@@ -1,6 +1,4 @@
 {
-  networking.networkmanager.enable = true;
-
   # let colmena escalate to root
   security.sudo.wheelNeedsPassword = false;
 
@@ -32,6 +30,26 @@
         }
       ];
     };
+  };
+
+  networking = {
+    networkmanager.enable = true;
+
+    interfaces.eno1 = {
+      ipv4.addresses = [
+        {
+          address = "192.168.150.2";
+          prefixLength = 24;
+        }
+      ];
+    };
+
+    defaultGateway = {
+      address = "192.168.150.1";
+      interface = "eno1";
+    };
+
+    nameservers = [ "192.168.150.1" ];
   };
 
   boot.loader.grub = {
