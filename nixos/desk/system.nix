@@ -42,7 +42,7 @@
   boot = {
     loader.grub = {
       enable = true;
-      device = "/dev/sdb";
+      device = "/dev/nvme0n1";
       useOSProber = true;
     };
 
