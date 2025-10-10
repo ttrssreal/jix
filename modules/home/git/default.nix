@@ -1,6 +1,7 @@
 {
   lib,
   config,
+  pkgs,
   ...
 }:
 let
@@ -11,6 +12,11 @@ in
     enable = lib.mkEnableOption "git";
 
     githubForceSSH = lib.mkOption {
+      type = lib.types.bool;
+      default = true;
+    };
+
+    autostartGpgAgent = lib.mkOption {
       type = lib.types.bool;
       default = true;
     };
@@ -27,6 +33,11 @@ in
     extraConfig = lib.mkIf cfg.githubForceSSH {
       url."ssh://git@github.com/".insteadOf = "https://github.com/";
     };
+    signing.signer = "${pkgs.writeShellScript "gnupg-signer" ''
+      "${lib.getExe pkgs.gnupg}" \
+        ${lib.optionalString (!cfg.autostartGpgAgent) "--no-autostart"} \
+        "$@"
+    ''}";
     ignores = [
       ".direnv"
       ".envrc"

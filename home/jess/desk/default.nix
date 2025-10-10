@@ -61,6 +61,15 @@
           '';
 
           programs.alacritty.settings.font.size = lib.mkForce 10;
+
+          jix.git.autostartGpgAgent = false;
+
+          programs.gpg.enable = true;
+
+          services.gpg-agent = {
+            enable = true;
+            pinentry.package = pkgs.pinentry-gtk2;
+          };
         }
       )
     ];

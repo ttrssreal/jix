@@ -41,7 +41,6 @@ in
       jix = {
         zsh.enable = true;
         git.enable = true;
-        gpg.enable = true;
         jessvim.enable = true;
       };
     }

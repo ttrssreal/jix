@@ -2,7 +2,6 @@
   imports = [
     ./alacritty
     ./git
-    ./gpg
     ./jessvim
     ./picom
     ./zsh
