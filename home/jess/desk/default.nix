@@ -62,7 +62,7 @@
 
           programs.alacritty.settings.font.size = lib.mkForce 10;
 
-          jix.git.autostartGpgAgent = false;
+          jix.git.autostartGpgAgent = true;
 
           programs.gpg.enable = true;
 
