@@ -5,6 +5,10 @@
   ];
 
   hardware.graphics.enable = true;
+  programs.virt-manager.enable = true;
+  users.groups.libvirtd.members = [ "jess" ];
+  virtualisation.libvirtd.enable = true;
+  virtualisation.spiceUSBRedirection.enable = true;
 
   jix.hostKey = {
     enable = true;
