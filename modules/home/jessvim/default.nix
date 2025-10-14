@@ -19,6 +19,11 @@ in
   options.jix.jessvim.enable = lib.mkEnableOption "jessvim";
 
   config.programs.nixvim = lib.mkIf cfg.enable {
+    clipboard = {
+      register = "unnamedplus";
+      providers.xclip.enable = true;
+    };
+
     enable = true;
     defaultEditor = true;
     colorschemes.tokyonight.enable = true;
