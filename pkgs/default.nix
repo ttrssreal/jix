@@ -19,7 +19,6 @@
       jix.overlays = [
         (final: prev: {
           bluetooth-connect = final.callPackage ./bluetooth-connect.nix { };
-          tsMuxer = final.callPackage ./ts-muxer.nix { };
 
           pwndbg-unwrapped = inputs'.pwndbg.packages.pwndbg;
           pwndbg = final.callPackage ./jesspwn { };
@@ -47,7 +46,6 @@
       packages = {
         inherit (pkgs)
           bluetooth-connect
-          tsMuxer
           pwndbg
           xgpro
           binary-ninja
