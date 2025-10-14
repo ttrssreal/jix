@@ -11,6 +11,7 @@ creation_rules:
   - key_groups:
       - age:
           - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEEvzKJsGyNVi2k6pQVS3Qvi3zm8vVkbVALNo/lKe+VQ root@desk
+          - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIwkykAOaKE67Xe4hqJVHTjIm6EwBWqFGj7oqLWQjxKI ci
         pgp:
           - 80923BD1ECD0E436671DC8E9BA3350686C918606
     path_regex: secrets/buildtime.yaml

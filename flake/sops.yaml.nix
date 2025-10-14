@@ -14,6 +14,7 @@
         desk = ../nixos/desk/hostKey.pub;
         "jess@desk" = ../home/jess/desk/homeKey.pub;
         "jess@jess-laptop" = ../home/jess/jess-laptop/homeKey.pub;
+        ci = ../.github/ci.pub;
       };
     in
     {
@@ -44,6 +45,7 @@
               ];
               age = [
                 ssh.desk
+                ssh.ci
               ];
             }
           ];

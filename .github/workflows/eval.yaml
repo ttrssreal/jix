@@ -1,0 +1,27 @@
+name: Eval
+
+on:
+  workflow_dispatch:
+  push:
+
+jobs:
+  eval:
+    strategy:
+      matrix:
+        os:
+          - ubuntu-latest
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5.0.0
+
+      - name: Install nix
+        uses: DeterminateSystems/nix-installer-action@v20
+
+      - name: Setup gha cache
+        uses: DeterminateSystems/magic-nix-cache-action@v13
+
+      - name: Eval
+        run: ./.github/ci.sh eval
