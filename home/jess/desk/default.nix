@@ -70,6 +70,24 @@
             enable = true;
             pinentry.package = pkgs.pinentry-gtk2;
           };
+
+          programs.ssh = {
+            enable = true;
+            matchBlocks = {
+              "adair" = {
+                remoteForwards = [
+                  {
+                    bind.address = "/run/user/1000/gnupg/S.gpg-agent";
+                    host.address = "/run/user/1000/gnupg/S.gpg-agent.extra";
+                  }
+                  {
+                    bind.address = "/home/jess/.gnupg/S.gpg-agent";
+                    host.address = "/run/user/1000/gnupg/S.gpg-agent.extra";
+                  }
+                ];
+              };
+            };
+          };
         }
       )
     ];
