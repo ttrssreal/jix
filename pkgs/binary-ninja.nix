@@ -32,13 +32,13 @@ let
       {
         nativeBuildInputs = [ awscli2 ];
         requiredSystemFeatures = [ "buildtime-secrets" ];
-        buildtimeSecrets = [ credentialsSecret ];
+        requiredSecrets = [ (lib.strings.toJSON credentialsSecret) ];
 
         inherit outputHash outputHashAlgo;
       }
       ''
-        export AWS_SHARED_CREDENTIALS_FILE=/secrets/${credentialsSecret}
-        aws s3 cp --endpoint-url=${s3Endpoint} s3://${s3Path} $out
+        export AWS_SHARED_CREDENTIALS_FILE=/secrets/"${credentialsSecret.name}"
+        aws s3 cp --endpoint-url="${s3Endpoint}" s3://"${s3Path}" $out
       ''
   );
 
@@ -80,7 +80,10 @@ stdenv.mkDerivation {
     name = "binaryninja_linux_stable_personal.zip";
     s3Path = "nix-private-66670f8190bb/binaryninja_linux_stable_personal.zip";
     s3Endpoint = "https://s3.us-west-002.backblazeb2.com";
-    credentialsSecret = "binary-ninja-src-credentials";
+    credentialsSecret = {
+      name = "binary-ninja-src-credentials";
+      hash = "meow";
+    };
     hash = "sha256-5F/L1S+a+uGHnL9FAml2tV4AAgEIDJ99PG3NET+Mc9o=";
   };
 

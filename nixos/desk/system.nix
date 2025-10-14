@@ -36,7 +36,7 @@
   jix = {
     dwm.fontSize = 15;
     sops.enable = true;
-    buildtimeSecrets.enable = true;
+    buildtime-secrets.enable = true;
     pipewire.enable = true;
   };
 
