@@ -22,10 +22,6 @@
     # Issue URL: https://github.com/ttrssreal/jix/issues/2
     openssh
 
-    # TODO: Declarative barrier server in nix
-    # Issue URL: https://github.com/ttrssreal/jix/issues/1
-    barrier
-
     vscode
     discord
     flameshot

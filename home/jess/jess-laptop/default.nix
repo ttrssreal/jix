@@ -45,13 +45,6 @@
               "headphones" = "AC:80:0A:73:8A:3E";
             };
           };
-
-          services.barrier.client = {
-            enable = true;
-            enableCrypto = false;
-            server = "desk";
-            enableDragDrop = true;
-          };
         }
       )
     ];
