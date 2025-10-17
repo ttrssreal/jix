@@ -72,7 +72,8 @@ if [ "$is_install" = true ]; then
   } > "$pre_build_hook"
 
   {
-    echo "system-features = buildtime-secrets"
+    default_sys_feat="kvm nixos-test benchmark big-parallel"
+    echo "system-features = $default_sys_feat buildtime-secrets"
     echo "pre-build-hook = $pre_build_hook"
   } |>/dev/null tee -a /etc/nix/nix.custom.conf
 
