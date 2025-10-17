@@ -1,5 +1,6 @@
 {
   lib,
+  config,
   ...
 }:
 {
@@ -24,6 +25,31 @@
           }
           {
             "<leader>f" = ":NvimTreeToggle<CR>";
+            "<leader>s" = config.lib.nixvim.mkRaw ''
+              function()
+                local api = require('nvim-tree.api')
+
+                local node = api.tree.get_node_under_cursor()
+                if not node then
+                  vim.notify("No node under cursor", vim.log.levels.WARN)
+                  return
+                end
+
+                local function live_grep(path)
+                  require('telescope.builtin').live_grep({
+                    search_dirs = { path },
+                    prompt_title = "Searching in " .. path,
+                  })
+                end
+
+                if node.type == "link" then
+                  live_grep(node.link_to)
+                else
+                  local path = vim.fn.fnamemodify(node.absolute_path, ":.");
+                  live_grep(path, "Searching in " .. path)
+                end
+              end
+            '';
             "<C-h>" = "<C-w>h";
             "<C-j>" = "<C-w>j";
             "<C-k>" = "<C-w>k";
