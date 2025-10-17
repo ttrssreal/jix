@@ -17,7 +17,6 @@ eval:
 
   binary-ninja:
   bluetooth-connect:
-  install-iso:
   nix-conf-edit:
   nixpkgs-print-out-paths:
   pwndbg:
@@ -45,7 +44,6 @@ build:
 
   binary-ninja:
   bluetooth-connect:
-  install-iso:
   nix-conf-edit:
   nixpkgs-print-out-paths:
   pwndbg:

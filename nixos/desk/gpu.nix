@@ -23,13 +23,4 @@
       }
     )
   ];
-
-  jix.install-iso.modules = [
-    {
-      # install and add nvidia drivers to supported list so the install
-      # media will boot on this hardware
-      services.xserver.videoDrivers = [ "nvidia" ];
-      hardware.nvidia.open = true;
-    }
-  ];
 }
