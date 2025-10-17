@@ -23,6 +23,7 @@ jobs:
 
       - uses: DeterminateSystems/update-flake-lock@v27
         with:
+          commit-msg: "flake.lock: update"
           pr-title: "Update flake.lock"
           pr-labels: |
             dependencies
