@@ -37,6 +37,8 @@
               "/home/jess/code"
               "/home/jess/.cache"
               "/home/jess/.local/share/containers"
+              "/home/jess/silver-desktop-etc-ssh-dir"
+              "/home/jess/silver-desktop-var-dir"
             ];
           };
 
