@@ -1,4 +1,4 @@
-name: "Flake.lock: update Nix dependencies"
+name: "Update nix dependencies"
 
 on:
   workflow_dispatch:
