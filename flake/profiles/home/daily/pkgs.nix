@@ -34,7 +34,6 @@
     ffmpeg
     cntr
     alsa-utils
-    pwndbg
     patchelf
     whois
     burpsuite
