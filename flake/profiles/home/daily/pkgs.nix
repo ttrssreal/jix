@@ -54,5 +54,6 @@
     scripts.nix-conf-edit
     linuxKernel.packages.linux_xanmod.perf
     scripts.nixpkgs-print-out-paths
+    binary-ninja
   ];
 }
