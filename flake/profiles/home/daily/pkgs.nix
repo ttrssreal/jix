@@ -52,7 +52,7 @@
     jetbrains.clion
     pwninit
     scripts.nix-conf-edit
-    linuxKernel.packages.linux_xanmod.perf
+    perf
     scripts.nixpkgs-print-out-paths
     binary-ninja
     resetti
