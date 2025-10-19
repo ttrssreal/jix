@@ -40,6 +40,8 @@
             nix-conf-edit = final.callPackage ./scripts/nix-conf-edit.nix { };
             nixpkgs-print-out-paths = final.callPackage ./scripts/nixpkgs-print-out-paths.nix { };
           };
+
+          resetti = final.callPackage ./resetti.nix { };
         })
       ];
 
@@ -51,6 +53,7 @@
           binary-ninja
           pwntools
           pwninit
+          resetti
           ;
 
         inherit (pkgs.scripts)

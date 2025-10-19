@@ -55,5 +55,6 @@
     linuxKernel.packages.linux_xanmod.perf
     scripts.nixpkgs-print-out-paths
     binary-ninja
+    resetti
   ];
 }
