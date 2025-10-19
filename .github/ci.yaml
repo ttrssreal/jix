@@ -24,6 +24,7 @@ eval:
   pwntools:
   test-basic:
   xgpro:
+  resetti:
 
 build:
   devShells:
@@ -51,3 +52,4 @@ build:
   pwntools:
   test-basic:
   xgpro:
+  resetti:
