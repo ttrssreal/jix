@@ -48,6 +48,11 @@ if [ "$is_install" = true ]; then
       --no-link
   )"
 
+  if [ "$?" != "0" ]; then
+    echo "error: failed to build buildtime-secrets-nix"
+    exit 1
+  fi
+
   {
     echo '{'
     echo '  "backend_config": {'
