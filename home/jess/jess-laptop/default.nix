@@ -12,7 +12,7 @@
 
     modules = [
       (
-        { config, ... }:
+        { config, pkgs, ... }:
         {
           jix.homeKey = {
             enable = true;
@@ -22,6 +22,12 @@
 
           jix.backblaze-rclone.enable = true;
           jix.sops.enable = true;
+
+          programs.gpg.enable = true;
+          services.gpg-agent = {
+            enable = true;
+            pinentry.package = pkgs.pinentry-gtk2;
+          };
 
           sops.secrets.home-backup-repo-password-jess-at-jess-laptop = { };
           jix.home-backup = {
