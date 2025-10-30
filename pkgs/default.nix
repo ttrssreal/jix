@@ -46,6 +46,7 @@
           fetchS3 = inputs'.buildtime-secrets-nix.packages.lib.fetchS3;
 
           # TODO: find a better place to put overlays that don't add new packages
+          # Issue URL: https://github.com/ttrssreal/jix/issues/44
           displaylink = prev.displaylink.overrideAttrs {
             # override `requireFile`
             src = final.fetchS3 {
