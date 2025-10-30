@@ -20,6 +20,7 @@
             publicKey = ./homeKey.pub;
           };
 
+          jix.backblaze-rclone.enable = true;
           jix.sops.enable = true;
 
           sops.secrets.home-backup-repo-password-jess-at-jess-laptop = { };
