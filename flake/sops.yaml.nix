@@ -12,6 +12,7 @@
       ssh = lib.mapAttrs (_: key: lib.trim (lib.readFile key)) {
         ari = ../nixos/ari/hostKey.pub;
         desk = ../nixos/desk/hostKey.pub;
+        jess-laptop = ../nixos/jess-laptop/hostKey.pub;
         "jess@desk" = ../home/jess/desk/homeKey.pub;
         "jess@jess-laptop" = ../home/jess/jess-laptop/homeKey.pub;
         ci = ../.github/ci.pub;
@@ -46,6 +47,7 @@
               age = [
                 ssh.desk
                 ssh.ci
+                ssh.jess-laptop
               ];
             }
           ];

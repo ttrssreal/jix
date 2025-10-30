@@ -3,12 +3,19 @@
 {
   imports = [
     ./wireguard.nix
+    ./displaylink.nix
   ];
 
   jix = {
     podman.enable = true;
     pipewire.enable = true;
     dwm.fontSize = 15;
+    buildtime-secrets.enable = true;
+    hostKey = {
+      enable = true;
+      generate = true;
+      publicKey = ./hostKey.pub;
+    };
   };
 
   services = {

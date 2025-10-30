@@ -42,6 +42,23 @@
           };
 
           resetti = final.callPackage ./resetti.nix { };
+
+          fetchS3 = inputs'.buildtime-secrets-nix.packages.lib.fetchS3;
+
+          # TODO: find a better place to put overlays that don't add new packages
+          displaylink = prev.displaylink.overrideAttrs {
+            # override `requireFile`
+            src = final.fetchS3 {
+              name = "displaylink-620.zip";
+              s3Path = "nix-private-66670f8190bb/displaylink-620.zip";
+              s3Endpoint = "https://s3.us-west-002.backblazeb2.com";
+              credentialsSecret = {
+                name = "displaylink-driver-src-credentials";
+                hash = "meow";
+              };
+              hash = "sha256-JQO7eEz4pdoPkhcn9tIuy5R4KyfsCniuw6eXw/rLaYE=";
+            };
+          };
         })
       ];
 
