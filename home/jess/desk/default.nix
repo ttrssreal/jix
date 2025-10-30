@@ -105,6 +105,8 @@
               };
             };
           };
+
+          home.packages = [ pkgs.davinci-resolve ];
         }
       )
     ];

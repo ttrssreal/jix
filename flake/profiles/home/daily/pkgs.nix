@@ -56,6 +56,5 @@
     scripts.nixpkgs-print-out-paths
     binary-ninja
     resetti
-    davinci-resolve
   ];
 }
