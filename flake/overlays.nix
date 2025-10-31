@@ -23,10 +23,32 @@ in
         default = [ ];
       };
 
-      config._module.args.pkgs = import inputs.nixpkgs {
-        inherit system;
-        inherit (config.jix) overlays;
-        config.allowUnfree = true;
+      config = {
+        _module.args.pkgs = import inputs.nixpkgs {
+          inherit system;
+          inherit (config.jix) overlays;
+          config.allowUnfree = true;
+        };
+
+        jix.overlays = [
+          inputs.buildtime-secrets-nix.overlays.default
+
+          (final: prev: {
+            displaylink = prev.displaylink.overrideAttrs {
+              # override `requireFile`
+              src = final.fetchs3 {
+                name = "displaylink-620.zip";
+                s3Path = "nix-private-66670f8190bb/displaylink-620.zip";
+                s3Endpoint = "https://s3.us-west-002.backblazeb2.com";
+                credentialsSecret = {
+                  name = "displaylink-driver-src-credentials";
+                  hash = "meow";
+                };
+                hash = "sha256-JQO7eEz4pdoPkhcn9tIuy5R4KyfsCniuw6eXw/rLaYE=";
+              };
+            };
+          })
+        ];
       };
     };
 }

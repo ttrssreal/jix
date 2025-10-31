@@ -37,11 +37,11 @@
         "treefmt-nix": "treefmt-nix"
       },
       "locked": {
-        "lastModified": 1761836685,
-        "narHash": "sha256-7ciOJrNP16Ehizlr2xi/fXJa/31h3jZcXlekDfwg+yQ=",
+        "lastModified": 1761886271,
+        "narHash": "sha256-dTv3cpWekdmExRXf7nfm99ZFO+mIriWbw2Zg4QF6Q/A=",
         "owner": "ttrssreal",
         "repo": "buildtime-secrets-nix",
-        "rev": "a7aff6479ec9853630ed401dd5564c64236e5d95",
+        "rev": "f789530000b8b3f05111c0acbf465d822c62da61",
         "type": "github"
       },
       "original": {
