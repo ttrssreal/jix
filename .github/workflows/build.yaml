@@ -41,5 +41,8 @@ jobs:
               ./.github/ci.sh install
             '
 
+      - name: Setup upterm session
+        uses: owenthereal/action-upterm@v1
+
       - name: Build
         run: ./.github/ci.sh build
