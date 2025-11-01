@@ -36,6 +36,9 @@
             enable = true;
             passwordFile = config.sops.secrets.home-backup-repo-password-jess-at-jess-laptop.path;
             hostname = "jess-laptop";
+            exclude = [
+              "/home/jess/.local/share/containers"
+            ];
           };
 
           jix.dwm-status = {
