@@ -11,6 +11,8 @@
     username = "jess";
 
     modules = [
+      ./monitor.nix
+
       (
         { config, pkgs, ... }:
         {
@@ -52,38 +54,6 @@
               "headphones" = "AC:80:0A:73:8A:3E";
             };
           };
-
-          home.packages = [
-            (pkgs.writeShellApplication {
-              name = "configure-monitor-at-parents-house";
-
-              runtimeInputs = [
-                pkgs.xrandr
-              ];
-
-              text = ''
-                if [ "$#" -lt 1 ]; then
-                  echo >&2 "usage: $(basename "$0" || echo "$0") <relative screen position>"
-                  echo >&2 "relative screen position: a relative position from the laptop " \
-                           "screen. One of:"
-                  echo >&2 "    left-of"
-                  echo >&2 "    right-of"
-                  echo >&2 "    above"
-                  echo >&2 "    below"
-                  echo >&2 "    same-as"
-                  echo >&2 "As specified by xrandr(1)"
-                  exit 1
-                fi
-
-                declare -r screen_pos=$1
-
-                xrandr \
-                  --output DVI-I-1-1 \
-                  --auto \
-                  "--$screen_pos" eDP-1
-              '';
-            })
-          ];
         }
       )
     ];

@@ -1,5 +1,5 @@
 # Yoga 7 14ITL5
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 {
   imports = [
     ./wireguard.nix
@@ -21,6 +21,17 @@
   services = {
     thermald.enable = true;
     tlp.enable = true;
+
+    # auto configure monitors
+    udev.extraRules = ''
+      ACTION=="change", SUBSYSTEM=="drm", RUN+="${pkgs.writeShellScript "start autorandr for jess" ''
+        ${lib.getExe' pkgs.systemd "systemctl"} start \
+          --user \
+          --machine=jess@.host \
+          --no-block \
+          autorandr.service
+      ''}"
+    '';
 
     # used by status bar
     upower.enable = true;
