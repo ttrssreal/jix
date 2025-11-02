@@ -27,7 +27,9 @@ def leak_search(address=None, map=None) -> None:
     print("Starting address:", memory.get(map_page.vaddr))
     print("Ending address:", memory.get(map_page.end))
 
-    # Cache vmmap pages to avoid repeated lookups
+    # Cache vmmap pages to avoid repeated lookups during this scan
+    # Note: This cache is local to this function call and will not persist
+    # across different scans or memory layout changes
     vmmap_cache = {}
     
     for leak in range(pwndbg.lib.memory.round_down(addr, 8), map_page.end, 8):
