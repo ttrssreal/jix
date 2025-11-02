@@ -108,6 +108,16 @@
           };
 
           home.packages = [ pkgs.davinci-resolve ];
+
+          xdg.mimeApps = {
+            enable = true;
+            defaultApplications = {
+              "text/plain" = [ "jessvim.desktop" ];
+              "text/x-c" = [ "jessvim.desktop" ];
+              "text/x-diff" = [ "jessvim.desktop" ];
+              "image/svg+xml" = [ "feh.desktop" ];
+            };
+          };
         }
       )
     ];
