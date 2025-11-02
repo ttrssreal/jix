@@ -2,6 +2,7 @@
   inputs,
   config,
   lib,
+  pkgs,
   ...
 }:
 let
@@ -18,21 +19,32 @@ in
 
   options.jix.jessvim.enable = lib.mkEnableOption "jessvim";
 
-  config.programs.nixvim = lib.mkIf cfg.enable {
-    clipboard = {
-      register = "unnamedplus";
-      providers.xclip.enable = true;
+  config = {
+    programs.nixvim = lib.mkIf cfg.enable {
+      clipboard = {
+        register = "unnamedplus";
+        providers.xclip.enable = true;
+      };
+
+      enable = true;
+      defaultEditor = true;
+      colorschemes.tokyonight.enable = true;
+
+      globals = {
+        mapleader = " ";
+        maplocalleader = "\\";
+      };
+
+      filetype.extension.sage = "python";
+
     };
 
-    enable = true;
-    defaultEditor = true;
-    colorschemes.tokyonight.enable = true;
-
-    globals = {
-      mapleader = " ";
-      maplocalleader = "\\";
+    xdg.desktopEntries = {
+      jessvim = {
+        name = "JessVim";
+        exec = "${lib.getExe pkgs.alacritty} -e ${lib.getExe config.programs.nixvim.build.package} %F";
+        mimeType = [ "text/plain" ];
+      };
     };
-
-    filetype.extension.sage = "python";
   };
 }
