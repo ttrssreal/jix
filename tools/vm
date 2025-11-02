@@ -13,6 +13,14 @@ fi
 hostname=$1
 shift 1
 
+# Store initial qcow2 files to avoid deleting user files
+initial_qcow2_files=$(ls *.qcow2 2>/dev/null || true)
+
 nix run .#nixosConfigurations.$hostname.config.system.build.vm -- $@
 
-rm *.qcow2
+# Only remove newly created qcow2 files
+for file in *.qcow2; do
+  if [ -f "$file" ] && ! echo "$initial_qcow2_files" | grep -q "^$file$"; then
+    rm "$file"
+  fi
+done 2>/dev/null || true

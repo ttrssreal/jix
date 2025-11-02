@@ -18,21 +18,23 @@ class BreakOnMatchingCallStack(pwndbg.gdblib.bpoint.Breakpoint):
             print("stack_frame_bp: Cant get stack frame")
             return
 
-        matched = []
+        # Use sets to avoid repeated conversions in the loop
+        functions_set = set(self.functions)
+        matched = set()
         print("function:", self.functions)
         print("frame:", frame)
 
         while frame:
-            for func in list(set(self.functions) - set(matched)):
+            for func in functions_set - matched:
                 if func in frame.name():
-                    matched.append(func)
+                    matched.add(func)
 
             print("matched:", matched)
 
             frame = frame.parent()
             print("frame:", frame)
 
-        return len(self.functions) == len(matched)
+        return len(functions_set) == len(matched)
 
 parser = argparse.ArgumentParser(description="set a breakpoint ...")
 

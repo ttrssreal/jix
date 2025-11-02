@@ -8,6 +8,7 @@
 set -exo pipefail
 
 new_sops_yaml=$(mktemp)
+trap "rm -f $new_sops_yaml" EXIT
 
 nix eval .#jix.sops-yaml --json | yq -p json -o yaml > $new_sops_yaml
 install -C $new_sops_yaml .sops.yaml
@@ -15,5 +16,3 @@ install -C $new_sops_yaml .sops.yaml
 for filename in secrets/*; do
   sops updatekeys $filename
 done
-
-rm $new_sops_yaml

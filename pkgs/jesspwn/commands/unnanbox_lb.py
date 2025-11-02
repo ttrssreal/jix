@@ -42,17 +42,17 @@ def unnanbox_lb(addr) -> None:
         print(f"Cannot access memory at address {addr:#x}")
         return
 
-    tag = int.from_bytes(value[6:8][::-1])
-    kind = tags[tag]
+    tag = int.from_bytes(value[6:8], byteorder="big")
+    kind = tags.get(tag, "unknown")
     print(f"type = {kind}")
 
     if tag == BOOLEAN_TAG:
         print("value = unimplemented")
     elif tag == INT32_TAG:
-        int_value = int.from_bytes(value[0:6][::-1])
+        int_value = int.from_bytes(value[0:6], byteorder="big")
         print(f"value = {int_value:#x}")
     elif tag == OBJECT_TAG:
-        ptr = int.from_bytes(value[0:6][::-1])
+        ptr = int.from_bytes(value[0:6], byteorder="big")
         print(f"value = {ptr:#x}")
     elif tag == STRING_TAG:
         print("value = unimplemented")

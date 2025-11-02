@@ -27,6 +27,9 @@ def leak_search(address=None, map=None) -> None:
     print("Starting address:", memory.get(map_page.vaddr))
     print("Ending address:", memory.get(map_page.end))
 
+    # Cache vmmap pages to avoid repeated lookups
+    vmmap_cache = {}
+    
     for leak in range(pwndbg.lib.memory.round_down(addr, 8), map_page.end, 8):
         value = pwndbg.aglib.memory.read(leak, 8)
         addr = int.from_bytes(value, byteorder="little")
@@ -35,7 +38,11 @@ def leak_search(address=None, map=None) -> None:
         if addr == 0:
             continue
 
-        page = pwndbg.aglib.vmmap.find(addr)
+        # Use cached vmmap lookup to reduce redundant find() calls
+        if addr not in vmmap_cache:
+            vmmap_cache[addr] = pwndbg.aglib.vmmap.find(addr)
+        page = vmmap_cache[addr]
+        
         if page is None:
             continue
 
