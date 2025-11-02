@@ -1,3 +1,6 @@
 result
 .pre-commit-config.yaml
 *.qcow2
+__pycache__/
+*.pyc
+*.pyo
