@@ -107,8 +107,6 @@
             };
           };
 
-          home.packages = [ pkgs.davinci-resolve ];
-
           xdg.mimeApps = {
             enable = true;
             defaultApplications = {
