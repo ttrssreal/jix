@@ -38,6 +38,7 @@ in
           };
         };
       });
+    default = { };
   };
 
   config.systemd.services = lib.mkMerge (
