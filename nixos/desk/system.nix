@@ -9,6 +9,9 @@
   users.groups.libvirtd.members = [ "jess" ];
   virtualisation.libvirtd.enable = true;
   virtualisation.spiceUSBRedirection.enable = true;
+  virtualisation.libvirtd.qemu.vhostUserPackages = [
+    pkgs.virtiofsd
+  ];
 
   jix.hostKey = {
     enable = true;
