@@ -13,6 +13,8 @@
     pkgs.virtiofsd
   ];
 
+  services.tailscale.enable = true;
+
   jix.hostKey = {
     enable = true;
     generate = true;
