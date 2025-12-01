@@ -116,6 +116,10 @@
               "image/svg+xml" = [ "feh.desktop" ];
             };
           };
+
+          home.packages = [
+            pkgs.ninjabrain-bot
+          ];
         }
       )
     ];

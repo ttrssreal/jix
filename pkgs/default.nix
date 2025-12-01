@@ -42,6 +42,8 @@
           };
 
           resetti = final.callPackage ./resetti.nix { };
+
+          ninjabrain-bot = final.callPackage ./ninjabrain-bot { };
         })
       ];
 
@@ -54,6 +56,7 @@
           pwntools
           pwninit
           resetti
+          ninjabrain-bot
           ;
 
         inherit (pkgs.scripts)

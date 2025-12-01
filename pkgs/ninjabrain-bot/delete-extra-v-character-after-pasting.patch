@@ -1,0 +1,15 @@
+diff --git a/src/main/java/ninjabrainbot/io/KeyPresser.java b/src/main/java/ninjabrainbot/io/KeyPresser.java
+index 08928c3..cf63493 100644
+--- a/src/main/java/ninjabrainbot/io/KeyPresser.java
++++ b/src/main/java/ninjabrainbot/io/KeyPresser.java
+@@ -34,6 +34,10 @@ public class KeyPresser {
+ 		robot.keyRelease(CTRL_KEYCODE);
+ 		Thread.sleep(50);
+ 		robot.keyRelease(KeyEvent.VK_V);
++		Thread.sleep(50);
++		robot.keyPress(KeyEvent.VK_BACK_SPACE);
++		Thread.sleep(50);
++		robot.keyRelease(KeyEvent.VK_BACK_SPACE);
+ 	}
+ 
+ 	public void releaseC() {
