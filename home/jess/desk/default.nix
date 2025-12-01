@@ -40,6 +40,7 @@
               "/home/jess/silver-desktop-etc-ssh-dir"
               "/home/jess/silver-desktop-var-dir"
               "/home/jess/media/raw" # obs
+              "/home/jess/vm" # obs
             ];
           };
 
