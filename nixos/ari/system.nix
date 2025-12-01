@@ -1,8 +1,4 @@
 {
-  imports = [
-    ./headscale.nix
-  ];
-
   # let colmena escalate to root
   security.sudo.wheelNeedsPassword = false;
 
@@ -37,7 +33,6 @@
   };
 
   networking = {
-    firewall.enable = false;
     networkmanager.enable = true;
 
     interfaces.eno1 = {
