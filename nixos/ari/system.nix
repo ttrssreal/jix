@@ -16,6 +16,7 @@
 
   services = {
     openssh.enable = true;
+    tailscale.enable = true;
 
     postgresql = {
       enable = true;
