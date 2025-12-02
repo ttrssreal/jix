@@ -1,6 +1,12 @@
 {
+  imports = [
+    ./radicale.nix
+  ];
+
   # let colmena escalate to root
   security.sudo.wheelNeedsPassword = false;
+
+  jix.sops.enable = true;
 
   jix.hostKey = {
     enable = true;
