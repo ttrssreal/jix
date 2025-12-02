@@ -1,6 +1,7 @@
 {
   imports = [
     ./radicale.nix
+    ./availability-listener.nix
   ];
 
   # let colmena escalate to root
