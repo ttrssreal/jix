@@ -5,13 +5,38 @@ on:
   push:
 
 jobs:
+  plan:
+    runs-on: ubuntu-latest
+
+    outputs:
+      plan: ${{ steps.plan.outputs.plan }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5.0.0
+
+      - name: Install nix
+        uses: DeterminateSystems/nix-installer-action@v20
+
+      - name: Calculate jobs
+        id: plan
+        run: |
+          ./.github/ci.py \
+            -c ./.github/ci.yaml \
+            plan eval \
+            >> "$GITHUB_OUTPUT"
+
   eval:
+    needs: plan
     strategy:
       matrix:
         os:
           - ubuntu-latest
+        job-spec: ${{ fromJSON(needs.plan.outputs.plan) }}
 
     runs-on: ${{ matrix.os }}
+
+    name: ${{ matrix.job-spec.name }}
 
     steps:
       - name: Checkout
@@ -22,6 +47,8 @@ jobs:
 
       - name: Setup gha cache
         uses: DeterminateSystems/magic-nix-cache-action@v13
+        with:
+          use-flakehub: false
 
       - name: Eval
-        run: ./.github/ci.sh eval
+        run: ${{ matrix.job-spec.command }}

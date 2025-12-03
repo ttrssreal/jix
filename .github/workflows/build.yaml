@@ -5,41 +5,68 @@ on:
   pull_request:
 
 jobs:
-  build:
-    strategy:
-      matrix:
-        os:
-          - ubuntu-latest
+  plan:
+    runs-on: ubuntu-latest
 
-    runs-on: ${{ matrix.os }}
+    outputs:
+      plan: ${{ steps.plan.outputs.plan }}
 
     steps:
-      - name: Free Disk Space (Ubuntu)
-        if: matrix.os == 'ubuntu-latest'
-        uses: jlumbroso/free-disk-space@main
-        with:
-          tool-cache: true
-
       - name: Checkout
         uses: actions/checkout@v5.0.0
 
       - name: Install nix
         uses: DeterminateSystems/nix-installer-action@v20
 
+      - name: Calculate jobs
+        id: plan
+        run: |
+          ./.github/ci.py \
+            -c ./.github/ci.yaml \
+            plan build \
+            >> "$GITHUB_OUTPUT"
+
+  build:
+    needs: plan
+    strategy:
+      matrix:
+        os:
+          - ubuntu-latest
+        job-spec: ${{ fromJSON(needs.plan.outputs.plan) }}
+
+    runs-on: ${{ matrix.os }}
+
+    name: ${{ matrix.job-spec.name }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5.0.0
+
+      - name: Free Disk Space
+        uses: wimpysworld/nothing-but-nix@v6
+
+      - name: Install nix
+        uses: DeterminateSystems/nix-installer-action@v20
+
       - name: Setup gha cache
         uses: DeterminateSystems/magic-nix-cache-action@v13
+        with:
+          use-flakehub: false
 
-      - name: Setup buildtime-secrets-nix
+      - name: Write key to disk
+        id: key_file
         env:
           CI_KEY: ${{ secrets.CI_KEY }}
         run: |
-          sudo \
-            --preserve-env=CI_KEY \
-            --preserve-env=GITHUB_WORKSPACE \
-            -i sh -c '
-              cd "$GITHUB_WORKSPACE" &&
-              ./.github/ci.sh install
-            '
+          key_file=$(mktemp)
+          >"$key_file" echo "$CI_KEY" 
+          >>"$GITHUB_OUTPUT" echo "key_file=$key_file"
+
+      - name: Install buildtime-secrets-nix
+        uses: ttrssreal/buildtime-secrets-nix-install-action@main
+        with:
+          ci-key-file: ${{ steps.key_file.outputs.key_file }}
+          sops-file: secrets/buildtime.yaml
 
       - name: Build
-        run: ./.github/ci.sh build
+        run: ${{ matrix.job-spec.command }}

@@ -1,55 +1,19 @@
 eval:
-  devShells:
-    x86_64-linux:
-      default:
+  homeConfigurations: true
+  nixosConfigurations: true
+  packages: true
 
-  homeConfigurations:
-    jess@adair: { activationPackage: }
-    jess@ari: { activationPackage: }
-    jess@desk: { activationPackage: }
-    jess@jess-laptop: { activationPackage: }
-
-  nixosConfigurations:
-    adair: { config: { system: { build: { toplevel: }}}}
-    ari: { config: { system: { build: { toplevel: }}}}
-    desk: { config: { system: { build: { toplevel: }}}}
-    jess-laptop: { config: { system: { build: { toplevel: }}}}
-
-  binary-ninja:
-  bluetooth-connect:
-  nix-conf-edit:
-  nixpkgs-print-out-paths:
-  pwndbg:
-  pwninit:
-  pwntools:
-  test-basic:
-  xgpro:
-  resetti:
+  extra:
+    devShells:
+      x86_64-linux:
+        default:
 
 build:
-  devShells:
-    x86_64-linux:
-      default:
+  homeConfigurations: true
+  nixosConfigurations: true
+  packages: true
 
-  homeConfigurations:
-    jess@adair: { activationPackage: }
-    jess@ari: { activationPackage: }
-    jess@desk: { activationPackage: }
-    jess@jess-laptop: { activationPackage: }
-
-  nixosConfigurations:
-    adair: { config: { system: { build: { toplevel: }}}}
-    ari: { config: { system: { build: { toplevel: }}}}
-    desk: { config: { system: { build: { toplevel: }}}}
-    jess-laptop: { config: { system: { build: { toplevel: }}}}
-
-  binary-ninja:
-  bluetooth-connect:
-  nix-conf-edit:
-  nixpkgs-print-out-paths:
-  pwndbg:
-  pwninit:
-  pwntools:
-  test-basic:
-  xgpro:
-  resetti:
+  extra:
+    devShells:
+      x86_64-linux:
+        default:
