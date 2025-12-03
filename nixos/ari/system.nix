@@ -42,6 +42,7 @@
 
   networking = {
     networkmanager.enable = true;
+    firewall.enable = false;
 
     interfaces.eno1 = {
       ipv4.addresses = [
