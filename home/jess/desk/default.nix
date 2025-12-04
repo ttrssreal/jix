@@ -66,59 +66,46 @@
 
           programs.alacritty.settings.font.size = lib.mkForce 10;
 
-          jix.git.autostartGpgAgent = true;
-
           programs.gpg.enable = true;
 
           services.gpg-agent = {
             enable = true;
             pinentry.package = pkgs.pinentry-gtk2;
+            enableExtraSocket = true;
           };
 
           programs.ssh = {
             enable = true;
             enableDefaultConfig = false;
 
-            matchBlocks = {
-              "adair" = {
-                remoteForwards = [
-                  {
-                    bind.address = "/run/user/1000/gnupg/S.gpg-agent";
-                    host.address = "/run/user/1000/gnupg/S.gpg-agent.extra";
-                  }
-                  {
-                    bind.address = "/home/jess/.gnupg/S.gpg-agent";
-                    host.address = "/run/user/1000/gnupg/S.gpg-agent.extra";
-                  }
-                ];
-              };
+            matchBlocks =
+              let
+                gpgAgentForwardSocket = {
+                  remoteForwards = [
+                    {
+                      bind.address = "/run/user/1000/gnupg/S.gpg-agent";
+                      host.address = "/run/user/1000/gnupg/S.gpg-agent.extra";
+                    }
+                  ];
+                };
+              in
+              {
+                "ari" = gpgAgentForwardSocket;
+                "adair" = gpgAgentForwardSocket;
 
-              "ari" = {
-                remoteForwards = [
-                  {
-                    bind.address = "/run/user/1000/gnupg/S.gpg-agent";
-                    host.address = "/run/user/1000/gnupg/S.gpg-agent.extra";
-                  }
-                  {
-                    bind.address = "/home/jess/.gnupg/S.gpg-agent";
-                    host.address = "/run/user/1000/gnupg/S.gpg-agent.extra";
-                  }
-                ];
+                "*" = {
+                  forwardAgent = false;
+                  addKeysToAgent = "no";
+                  compression = false;
+                  serverAliveInterval = 0;
+                  serverAliveCountMax = 3;
+                  hashKnownHosts = false;
+                  userKnownHostsFile = "~/.ssh/known_hosts";
+                  controlMaster = "no";
+                  controlPath = "~/.ssh/master-%r@%n:%p";
+                  controlPersist = "no";
+                };
               };
-
-              "*" = {
-                forwardAgent = false;
-                addKeysToAgent = "no";
-                compression = false;
-                serverAliveInterval = 0;
-                serverAliveCountMax = 3;
-                hashKnownHosts = false;
-                userKnownHostsFile = "~/.ssh/known_hosts";
-                controlMaster = "no";
-                controlPath = "~/.ssh/master-%r@%n:%p";
-                controlPersist = "no";
-              };
-            };
           };
 
           xdg.mimeApps = {
