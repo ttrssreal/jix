@@ -19,7 +19,14 @@ let
   cfg = config.jix.zsh;
 in
 {
-  options.jix.zsh.enable = lib.mkEnableOption "zsh";
+  options.jix.zsh = {
+    enable = lib.mkEnableOption "zsh";
+
+    createGpgSocketDir = lib.mkOption {
+      type = lib.types.bool;
+      default = true;
+    };
+  };
 
   config.programs.zsh = lib.mkIf cfg.enable {
     enable = true;
@@ -60,16 +67,17 @@ in
     enableCompletion = true;
     history.ignoreSpace = true;
 
-    initContent =
+    initContent = ''
       # https://github.com/nix-community/home-manager/issues/2751
-      ''
-        export EDITOR="nvim" # ??
-      ''
-      + lib.concatLines (
-        map builtins.readFile [
-          ./nix-direnv-utils.sh
-          ./nix-clean.sh
-        ]
-      );
+      export EDITOR="nvim" # ??
+
+      ${lib.optionalString cfg.createGpgSocketDir "${lib.getExe' pkgs.gnupg "gpgconf"} --create-socketdir"}
+    ''
+    + lib.concatLines (
+      map builtins.readFile [
+        ./nix-direnv-utils.sh
+        ./nix-clean.sh
+      ]
+    );
   };
 }
