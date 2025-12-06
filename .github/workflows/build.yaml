@@ -21,10 +21,12 @@ jobs:
       - name: Calculate jobs
         id: plan
         run: |
-          ./.github/ci.py \
-            -c ./.github/ci.yaml \
-            plan build \
-            >> "$GITHUB_OUTPUT"
+          # ./.github/ci.py \
+          #   -c ./.github/ci.yaml \
+          #   plan build \
+          #   >> "$GITHUB_OUTPUT"
+
+          echo "plan=[{\"name\":\"meow\",\"command\":\"'nix' '--extra-experimental-features' 'nix-command flakes' 'build' '.#nixosConfigurations.jess-laptop.config.system.build.toplevel' '-L'\"}]" >> "$GITHUB_OUTPUT"
 
   build:
     needs: plan
@@ -32,9 +34,11 @@ jobs:
       matrix:
         os:
           - ubuntu-latest
-        build-command: ${{ fromJSON(needs.plan.outputs.plan) }}
+        job-spec: ${{ fromJSON(needs.plan.outputs.plan) }}
 
     runs-on: ${{ matrix.os }}
+
+    name: ${{ matrix.job-spec.name }}
 
     steps:
       - name: Free Disk Space (Ubuntu)
@@ -70,4 +74,8 @@ jobs:
           sops-file: secrets/buildtime.yaml
 
       - name: Build
-        run: ${{ matrix.build-command }}
+        run: ${{ matrix.job-spec.command }}
+
+      - name: Setup upterm session
+        if: always()
+        uses: owenthereal/action-upterm@v1

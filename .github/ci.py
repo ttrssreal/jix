@@ -16,11 +16,12 @@ import shutil
 import json
 from enum import Enum
 
+GITHUB_OUTPUT_ENV = "GITHUB_OUTPUT"
+GITHUB_OUTPUT_NAME = "plan"
+
 class JobType(Enum):
     EVAL = 1
     BUILD = 2
-
-GITHUB_OUTPUT_ENV = "GITHUB_OUTPUT"
 
 def format_nix_cmd(cmd, local=True):
     return [
@@ -58,7 +59,14 @@ def home_jobs(jobs, job_type):
     for home in home_configs:
         attr_path = f"homeConfigurations.{home}.activationPackage"
         subcommand = "eval" if job_type == JobType.EVAL else "build"
-        jobs.append(format_nix_cmd([subcommand, f".#{attr_path}", "-L"], local=False))
+
+        command = format_nix_cmd([subcommand, f".#{attr_path}", "-L"], local=False)
+        command_quoted = " ".join(map(lambda x: f"'{x}'", command))
+
+        jobs.append({
+            "name": f"{home} (home-manager configuration)",
+            "command": command_quoted
+        })
 
 def nixos_jobs(jobs, job_type):
     raw = nix([
@@ -73,7 +81,14 @@ def nixos_jobs(jobs, job_type):
     for nixos in nixos_configs:
         attr_path = f"nixosConfigurations.{nixos}.config.system.build.toplevel"
         subcommand = "eval" if job_type == JobType.EVAL else "build"
-        jobs.append(format_nix_cmd([subcommand, f".#{attr_path}", "-L"], local=False))
+
+        command = format_nix_cmd([subcommand, f".#{attr_path}", "-L"], local=False)
+        command_quoted = " ".join(map(lambda x: f"'{x}'", command))
+
+        jobs.append({
+            "name": f"{nixos} (nixos configuration)",
+            "command": command_quoted
+        })
 
 def package_jobs(jobs, job_type):
     currentSystem = nix([
@@ -95,7 +110,14 @@ def package_jobs(jobs, job_type):
     packages = json.loads(raw.stdout)
     for package in packages:
         subcommand = "eval" if job_type == JobType.EVAL else "build"
-        jobs.append(format_nix_cmd([subcommand, f".#{package}", "-L"], local=False))
+
+        command = format_nix_cmd([subcommand, f".#{package}", "-L"], local=False)
+        command_quoted = " ".join(map(lambda x: f"'{x}'", command))
+
+        jobs.append({
+            "name": f"{package} (package)",
+            "command": command_quoted
+        })
 
 def plan(args, config, job_type):
     config = config["build"]
@@ -122,11 +144,7 @@ def main(args):
         if args.plan_command == "build":
             jobs = plan(args, config, JobType.BUILD)
 
-        serialized = list()
-        for job in jobs:
-            serialized.append(" ".join(map(lambda x: f"'{x}'", job)))
-
-        print(f"plan={json.dumps(serialized)}")
+        print(f"{GITHUB_OUTPUT_NAME}={json.dumps(jobs)}")
 
     return 0
 

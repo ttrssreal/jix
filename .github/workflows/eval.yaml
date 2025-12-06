@@ -32,9 +32,11 @@ jobs:
       matrix:
         os:
           - ubuntu-latest
-        eval-command: ${{ fromJSON(needs.plan.outputs.plan) }}
+        job-spec: ${{ fromJSON(needs.plan.outputs.plan) }}
 
     runs-on: ${{ matrix.os }}
+
+    name: ${{ matrix.job-spec.name }}
 
     steps:
       - name: Checkout
@@ -49,4 +51,4 @@ jobs:
           use-flakehub: false
 
       - name: Eval
-        run: ${{ matrix.eval-command }}
+        run: ${{ matrix.job-spec.command }}
