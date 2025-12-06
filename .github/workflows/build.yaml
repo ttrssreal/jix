@@ -32,9 +32,11 @@ jobs:
       matrix:
         os:
           - ubuntu-latest
-        build-command: ${{ fromJSON(needs.plan.outputs.plan) }}
+        job-spec: ${{ fromJSON(needs.plan.outputs.plan) }}
 
     runs-on: ${{ matrix.os }}
+
+    name: ${{ matrix.job-spec.name }}
 
     steps:
       - name: Free Disk Space (Ubuntu)
@@ -70,4 +72,8 @@ jobs:
           sops-file: secrets/buildtime.yaml
 
       - name: Build
-        run: ${{ matrix.build-command }}
+        run: ${{ matrix.job-spec.command }}
+
+      - name: Setup upterm session
+        if: always()
+        uses: owenthereal/action-upterm@v1
