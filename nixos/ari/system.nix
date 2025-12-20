@@ -2,6 +2,7 @@
   imports = [
     ./radicale
     ./availability-listener.nix
+    ./mc-monitor.nix
   ];
 
   # for minecraft docker compose in systemd
