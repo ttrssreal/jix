@@ -57,5 +57,6 @@
     binary-ninja
     resetti
     pavucontrol
+    mission-center
   ];
 }
