@@ -41,6 +41,7 @@
               "/home/jess/silver-desktop-var-dir"
               "/home/jess/media/raw" # obs
               "/home/jess/vm" # obs
+              "/home/jess/mnt" # obs
             ];
           };
 
