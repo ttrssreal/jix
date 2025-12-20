@@ -2,7 +2,6 @@
 { pkgs, lib, ... }:
 {
   imports = [
-    ./wireguard.nix
     ./displaylink.nix
   ];
 
@@ -21,6 +20,7 @@
   services = {
     thermald.enable = true;
     tlp.enable = true;
+    tailscale.enable = true;
 
     # auto configure monitors
     udev.extraRules = ''
