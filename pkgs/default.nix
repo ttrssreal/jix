@@ -44,6 +44,8 @@
           resetti = final.callPackage ./resetti.nix { };
 
           ninjabrain-bot = final.callPackage ./ninjabrain-bot { };
+
+          mc-monitor = final.callPackage ./mc-monitor.nix { };
         })
       ];
 
@@ -57,6 +59,7 @@
           pwninit
           resetti
           ninjabrain-bot
+          mc-monitor
           ;
 
         inherit (pkgs.scripts)
