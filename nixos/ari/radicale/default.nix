@@ -7,8 +7,16 @@
 {
   sops.secrets = {
     radicale-htpasswd-file.owner = "radicale";
-    radicale-cert.owner = "radicale";
-    radicale-key.owner = "radicale";
+
+    ari-cert-radicale = {
+      owner = "radicale";
+      key = "ari-cert";
+    };
+
+    ari-cert-key-radicale = {
+      owner = "radicale";
+      key = "ari-cert-key";
+    };
   };
 
   services = {
@@ -24,8 +32,8 @@
         server = {
           ssl = true;
           hosts = "0.0.0.0:5232";
-          certificate = config.sops.secrets.radicale-cert.path;
-          key = config.sops.secrets.radicale-key.path;
+          certificate = config.sops.secrets.ari-cert-radicale.path;
+          key = config.sops.secrets.ari-cert-key-radicale.path;
         };
       };
     };

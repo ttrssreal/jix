@@ -1,6 +1,6 @@
 {
   imports = [
-    ./radicale.nix
+    ./radicale
     ./availability-listener.nix
   ];
 
