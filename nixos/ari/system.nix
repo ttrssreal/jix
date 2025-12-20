@@ -2,6 +2,7 @@
   imports = [
     ./radicale
     ./availability-listener.nix
+    ./prometheus.nix
     ./mc-monitor.nix
   ];
 
