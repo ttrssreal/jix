@@ -4,6 +4,11 @@
     ./availability-listener.nix
   ];
 
+  # for minecraft docker compose in systemd
+  systemd.tmpfiles.rules = [
+    "f /var/lib/systemd/linger/jess"
+  ];
+
   # let colmena escalate to root
   security.sudo.wheelNeedsPassword = false;
 
