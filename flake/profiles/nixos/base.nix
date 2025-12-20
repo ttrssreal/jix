@@ -7,7 +7,11 @@ let
   cfg = config.profiles.base;
 in
 {
-  options.profiles.base.enable = lib.mkEnableOption "the base profile";
+  options.profiles.base = {
+    enable = lib.mkEnableOption "the base profile";
+
+    cache = lib.mkEnableOption "configuring the nix cache";
+  };
 
   config.modules = lib.mkIf cfg.enable [
     {
@@ -27,6 +31,34 @@ in
         optimise.automatic = true;
       };
     }
+
+    (lib.mkIf cfg.cache (
+      { config, ... }:
+      {
+        assertions = [
+          {
+            assertion = config.jix.sops.enable;
+            message = ''
+              We need `jix.sops.enable = true` in order to authenticate with the nix cache
+            '';
+          }
+        ];
+
+        sops.secrets.nix-cache-creds-file = { };
+
+        nix.settings = {
+          netrc-file = config.sops.secrets.nix-cache-creds-file.path;
+
+          substituters = [
+            "https://ari.mudpuppy-cod.ts.net/nix-cache/main"
+          ];
+
+          trusted-public-keys = [
+            "main:So8rfJkbLv5Vrd+y3agvPrDAA/9/SnTZz6RFHo+oFMM="
+          ];
+        };
+      }
+    ))
 
     (
       {

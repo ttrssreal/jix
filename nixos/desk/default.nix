@@ -8,9 +8,13 @@
   jix.nixos.nodes.desk = {
     system = "x86_64-linux";
 
-    profiles.graphical = {
-      enable = true;
-      windowManager = "dwm";
+    profiles = {
+      graphical = {
+        enable = true;
+        windowManager = "dwm";
+      };
+
+      base.cache = true;
     };
 
     users.jess = {

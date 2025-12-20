@@ -119,8 +119,9 @@
             };
           };
 
-          home.packages = [
-            pkgs.ninjabrain-bot
+          home.packages = with pkgs; [
+            ninjabrain-bot
+            attic-client
           ];
         }
       )

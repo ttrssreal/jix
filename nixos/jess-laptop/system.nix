@@ -15,6 +15,7 @@
       generate = true;
       publicKey = ./hostKey.pub;
     };
+    sops.enable = true;
   };
 
   services = {

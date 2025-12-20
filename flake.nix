@@ -48,6 +48,9 @@
 
     buildtime-secrets-nix.url = "github:ttrssreal/buildtime-secrets-nix";
     buildtime-secrets-nix.inputs.nixpkgs.follows = "nixpkgs";
+
+    attic.url = "github:zhaofengli/attic";
+    attic.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs =

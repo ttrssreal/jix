@@ -5,6 +5,7 @@
     ./grafana.nix
     ./prometheus.nix
     ./mc-monitor.nix
+    ./nix-cache.nix
   ];
 
   # for minecraft docker compose in systemd

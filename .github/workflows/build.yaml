@@ -45,13 +45,22 @@ jobs:
       - name: Free Disk Space
         uses: wimpysworld/nothing-but-nix@v6
 
+      - name: Setup tailscale (make cache reachable)
+        uses: tailscale/github-action@v4
+        with:
+          oauth-client-id: ${{ secrets.TS_OAUTH_CLIENT_ID }}
+          oauth-secret: ${{ secrets.TS_OAUTH_SECRET }}
+          tags: tag:ci
+
       - name: Install nix
         uses: DeterminateSystems/nix-installer-action@v20
 
-      - name: Setup gha cache
-        uses: DeterminateSystems/magic-nix-cache-action@v13
+      - name: Setup Attic cache
+        uses: ryanccn/attic-action@v0.4.0
         with:
-          use-flakehub: false
+          endpoint: https://ari.mudpuppy-cod.ts.net/nix-cache/
+          cache: ${{ secrets.ATTIC_CACHE }}
+          token: ${{ secrets.ATTIC_TOKEN }}
 
       - name: Write key to disk
         id: key_file

@@ -33,6 +33,7 @@
                 ssh.desk
                 ssh."jess@desk"
                 ssh."jess@jess-laptop"
+                ssh.jess-laptop
               ];
             }
           ];

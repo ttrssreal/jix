@@ -2,9 +2,13 @@
   jix.nixos.nodes.jess-laptop = {
     system = "x86_64-linux";
 
-    profiles.graphical = {
-      enable = true;
-      windowManager = "dwm";
+    profiles = {
+      graphical = {
+        enable = true;
+        windowManager = "dwm";
+      };
+
+      base.cache = true;
     };
 
     users.jess = {

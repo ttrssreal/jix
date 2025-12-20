@@ -143,6 +143,9 @@ def main(args):
         if args.plan_command == "build":
             jobs = plan(args, config, JobType.BUILD)
 
+        if args.test:
+            jobs = jobs[:1]
+
         print(f"{GITHUB_OUTPUT_NAME}={json.dumps(jobs)}")
 
     return 0
@@ -151,6 +154,7 @@ def main(args):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("-c", "--config", help="YAML config")
+    parser.add_argument("-t", "--test", action="store_true", help="Only output the first planed job")
 
     sub = parser.add_subparsers(dest="command", required=True)
 

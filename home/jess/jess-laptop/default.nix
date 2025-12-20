@@ -57,6 +57,10 @@
               "headphones" = "AC:80:0A:73:8A:3E";
             };
           };
+
+          home.packages = [
+            pkgs.attic-client
+          ];
         }
       )
     ];

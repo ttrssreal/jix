@@ -16,7 +16,10 @@
       };
     };
 
-    profiles.base.enable = true;
+    profiles.base = {
+      enable = true;
+      cache = true;
+    };
 
     users.jess = {
       enable = true;
