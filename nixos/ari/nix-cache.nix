@@ -54,7 +54,7 @@
 
   services.nginx = {
     enable = true;
-    clientMaxBodySize = 0;
+    clientMaxBodySize = "0";
 
     virtualHosts."ari.mudpuppy-cod.ts.net" = {
       locations."/nix-cache/" = {
