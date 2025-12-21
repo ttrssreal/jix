@@ -25,10 +25,48 @@
           jix.backblaze-rclone.enable = true;
           jix.sops.enable = true;
 
-          programs.gpg.enable = true;
+          programs.gpg = {
+            enable = true;
+            settings.default-key = "BA3350686C918606";
+          };
+
           services.gpg-agent = {
             enable = true;
             pinentry.package = pkgs.pinentry-gtk2;
+            enableExtraSocket = true;
+          };
+
+          programs.ssh = {
+            enable = true;
+            enableDefaultConfig = false;
+
+            matchBlocks =
+              let
+                gpgAgentForwardSocket = {
+                  remoteForwards = [
+                    {
+                      bind.address = "/run/user/1000/gnupg/S.gpg-agent";
+                      host.address = "/run/user/1000/gnupg/S.gpg-agent.extra";
+                    }
+                  ];
+                };
+              in
+              {
+                "ari" = gpgAgentForwardSocket;
+
+                "*" = {
+                  forwardAgent = false;
+                  addKeysToAgent = "no";
+                  compression = false;
+                  serverAliveInterval = 0;
+                  serverAliveCountMax = 3;
+                  hashKnownHosts = false;
+                  userKnownHostsFile = "~/.ssh/known_hosts";
+                  controlMaster = "no";
+                  controlPath = "~/.ssh/master-%r@%n:%p";
+                  controlPersist = "no";
+                };
+              };
           };
 
           sops.secrets.home-backup-repo-password-jess-at-jess-laptop = { };
