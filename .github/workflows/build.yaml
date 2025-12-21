@@ -2,6 +2,11 @@ name: Build
 
 on:
   workflow_dispatch:
+    inputs:
+        job_name:
+          description: "Dispatch this single job for testing"
+          required: false
+          type: string
   pull_request:
 
 jobs:
@@ -21,8 +26,16 @@ jobs:
       - name: Calculate jobs
         id: plan
         run: |
+          test_arg=()
+
+          if [[ -n "${{ inputs.job_name }}" ]]; then
+            test_arg+=(-t)
+            test_arg+=("${{ inputs.job_name }}")
+          fi
+
           ./.github/ci.py \
             -c ./.github/ci.yaml \
+            "${test_arg[@]}" \
             plan build \
             >> "$GITHUB_OUTPUT"
 
