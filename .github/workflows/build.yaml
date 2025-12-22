@@ -91,4 +91,5 @@ jobs:
           sops-file: secrets/buildtime.yaml
 
       - name: Build
-        run: ${{ matrix.job-spec.command }}
+        # capture logs to generate a summary
+        run: ./.github/ci.py run ${{ matrix.job-spec.command }}

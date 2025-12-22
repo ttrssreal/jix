@@ -51,4 +51,5 @@ jobs:
           use-flakehub: false
 
       - name: Eval
-        run: ${{ matrix.job-spec.command }}
+        # capture logs to generate a summary
+        run: ./.github/ci.py run ${{ matrix.job-spec.command }}

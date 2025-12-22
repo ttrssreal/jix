@@ -15,9 +15,34 @@ import shutil
 import shutil
 import json
 from enum import Enum
+import re
 
 GITHUB_OUTPUT_ENV = "GITHUB_OUTPUT"
 GITHUB_OUTPUT_NAME = "plan"
+GITHUB_STEP_SUMMARY_ENV = "GITHUB_STEP_SUMMARY"
+NIX_INTERNAL_JSON_PREFIX = "@nix "
+
+# https://github.com/NixOS/nix/blob/d85e5dfa60e7ac33b2c427f226b147982b8bd4e7/src/libutil/include/nix/util/error.hh#L33
+NIX_LOG_LEVELS = {
+    "error": 0,
+    "warn": 1,
+    "notice": 2,
+    "info": 3,
+}
+
+# https://stackoverflow.com/a/14693789
+# 7-bit C1 ANSI sequences
+ANSI_ESCAPE = re.compile(r'''
+    \x1B  # ESC
+    (?:   # 7-bit C1 Fe (except CSI)
+        [@-Z\\-_]
+    |     # or [ for CSI, followed by a control sequence
+        \[
+        [0-?]*  # Parameter bytes
+        [ -/]*  # Intermediate bytes
+        [@-~]   # Final byte
+    )
+''', re.VERBOSE)
 
 class JobType(Enum):
     EVAL = 1
@@ -148,6 +173,61 @@ def main(args):
 
         print(f"{GITHUB_OUTPUT_NAME}={json.dumps(jobs)}")
 
+    if args.command == "run":
+        if args.nix_command[0] != "nix":
+            print("error: run: not a nix command")
+            return 1
+
+        nix_command = [ shutil.which("nix") ]
+        nix_command += args.nix_command[1:]
+        nix_command += [ "--log-format", "internal-json" ]
+
+        messages = list()
+        process = subprocess.Popen(
+            nix_command,
+            env={ "NO_COLOR": "1" },
+            text=True,
+            stderr=subprocess.PIPE
+        )
+
+        for line in process.stderr:
+            raw_json = line.lstrip(NIX_INTERNAL_JSON_PREFIX)
+            log = json.loads(raw_json)
+
+            if "text" in log:
+                print(log["text"])
+
+            if log["action"] == "msg" and log["level"] < NIX_LOG_LEVELS["info"]:
+                msg = log["msg"]
+                print(log["msg"])
+
+                message = {
+                    "level": log["level"],
+                    "msg": msg
+                }
+
+                messages += [ message ]
+
+        summary = list()
+        summary += [ "<details>" ]
+        summary += [ f"<summary>⚠️ ({len(messages)})</summary>\n\n" ]
+
+        def ansi_escape(msg):
+            return ANSI_ESCAPE.sub("", msg)
+
+        for message in messages:
+            summary += [ f"- {ansi_escape(message["msg"])}"  ]
+
+        summary += [ "</details>" ]
+
+        summary_file = os.environ.get(GITHUB_STEP_SUMMARY_ENV)
+        if not summary_file:
+            print(f"error: no {GITHUB_STEP_SUMMARY_ENV} environment variable")
+            return 1
+
+        with open(summary_file, "w") as f:
+            f.write("\n".join(summary))
+
     return 0
 
 
@@ -162,6 +242,9 @@ if __name__ == "__main__":
     plan_sub = plan_parser.add_subparsers(dest="plan_command", required=True)
     plan_sub.add_parser("eval")
     plan_sub.add_parser("build")
+
+    run_parser = sub.add_parser("run")
+    run_parser.add_argument(dest="nix_command", help="The nix command to run", nargs=argparse.REMAINDER)
 
     args = parser.parse_args()
 
