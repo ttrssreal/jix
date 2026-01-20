@@ -27,6 +27,7 @@
 
           jix.backblaze-rclone.enable = true;
           jix.sops.enable = true;
+          jix.git.enableGitSendEmail = true;
 
           sops.secrets.home-backup-repo-password-jess-at-desk = { };
           jix.home-backup = {
