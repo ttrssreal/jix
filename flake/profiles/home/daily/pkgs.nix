@@ -51,9 +51,9 @@
     baobab
     jetbrains.clion
     pwninit
-    scripts.nix-conf-edit
+    jess-scripts.nix-conf-edit
     perf
-    scripts.nixpkgs-print-out-paths
+    jess-scripts.nixpkgs-print-out-paths
     binary-ninja
     resetti
     pavucontrol

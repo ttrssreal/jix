@@ -36,7 +36,7 @@
             debugger = config.packages.pwndbg;
           };
 
-          scripts = {
+          jess-scripts = {
             nix-conf-edit = final.callPackage ./scripts/nix-conf-edit.nix { };
             nixpkgs-print-out-paths = final.callPackage ./scripts/nixpkgs-print-out-paths.nix { };
           };
@@ -62,7 +62,7 @@
           mc-monitor
           ;
 
-        inherit (pkgs.scripts)
+        inherit (pkgs.jess-scripts)
           nix-conf-edit
           nixpkgs-print-out-paths
           ;
