@@ -58,5 +58,7 @@
     resetti
     pavucontrol
     mission-center
+    pwndbg
+    kdePackages.kolourpaint
   ];
 }
