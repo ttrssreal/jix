@@ -21,6 +21,11 @@
 
   services.tailscale.enable = true;
 
+  # kindle mtp
+  services.udev.extraRules = ''
+    SUBSYSTEM=="usb", ATTRS{idVendor}=="1949", ATTRS{idProduct}=="9981", MODE="0666"
+  '';
+
   jix.hostKey = {
     enable = true;
     generate = true;
