@@ -7,6 +7,7 @@
   hardware.graphics.enable = true;
   programs.virt-manager.enable = true;
   users.groups.libvirtd.members = [ "jess" ];
+  virtualisation.docker.enable = true;
   virtualisation.libvirtd.enable = true;
   virtualisation.spiceUSBRedirection.enable = true;
   virtualisation.libvirtd.qemu.vhostUserPackages = [
