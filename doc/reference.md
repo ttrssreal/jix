@@ -32,3 +32,25 @@ home-manager: `home-manager switch --flake . --override-input home-manager <hm-p
 ## Wireguard
 
 Start and stop the `wireguard-wg0.service` unit
+
+## Cache
+
+To use the cache when building flake outputs add the following `nixConfig` to `flake.nix`:
+```nix
+    description = ...;
+
+    nixConfig = {
+      extra-substituters = [
+        "https://ari.mudpuppy-cod.ts.net/nix-cache/main"
+      ];
+
+      trusted-public-keys = [
+        "main:So8rfJkbLv5Vrd+y3agvPrDAA/9/SnTZz6RFHo+oFMM="
+      ];
+
+      netrc-file = "<cache-creds-file>";
+    };
+
+    inputs = {
+        ...
+```
