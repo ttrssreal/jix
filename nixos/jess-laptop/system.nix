@@ -31,6 +31,8 @@
           --no-block \
           autorandr.service
       ''}"
+
+      SUBSYSTEM=="usb", ATTRS{idVendor}=="1949", ATTRS{idProduct}=="9981", MODE="0666"
     '';
 
     # used by status bar
