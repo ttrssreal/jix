@@ -14,6 +14,11 @@
     pkgs.virtiofsd
   ];
 
+  boot.binfmt = {
+    emulatedSystems = [ "armv7l-linux" ];
+    preferStaticEmulators = true;
+  };
+
   services.tailscale.enable = true;
 
   jix.hostKey = {
