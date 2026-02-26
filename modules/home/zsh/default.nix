@@ -72,12 +72,18 @@ in
       export EDITOR="nvim" # ??
 
       ${lib.optionalString cfg.createGpgSocketDir "${lib.getExe' pkgs.gnupg "gpgconf"} --create-socketdir"}
-    ''
-    + lib.concatLines (
-      map builtins.readFile [
-        ./nix-direnv-utils.sh
-        ./nix-clean.sh
-      ]
-    );
+
+      ${lib.concatLines (
+        map builtins.readFile [
+          ./nix-direnv-utils.sh
+          ./nix-clean.sh
+        ]
+      )}
+
+      # https://lobste.rs/s/rcffs8/make_ts#c_g47l2u
+      autoload -U edit-command-line
+      zle -N edit-command-line
+      bindkey "^X" edit-command-line
+    '';
   };
 }
