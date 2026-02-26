@@ -16,6 +16,7 @@
           pkgs,
           lib,
           config,
+          inputs,
           ...
         }:
         {
@@ -123,6 +124,7 @@
           home.packages = with pkgs; [
             ninjabrain-bot
             attic-client
+            inputs.hytale-launcher.packages.x86_64-linux.hytale-launcher
           ];
         }
       )
