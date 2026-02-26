@@ -383,6 +383,26 @@
         "type": "github"
       }
     },
+    "hytale-launcher": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1771967346,
+        "narHash": "sha256-0oaaaBCJb5+ORLF+ZRsJmsqRIiEQzbwyrJRTPHtv46c=",
+        "owner": "JPyke3",
+        "repo": "hytale-launcher-nix",
+        "rev": "4e274e41a2ec324d48bb23cd2597cb93a9b11f0e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "JPyke3",
+        "repo": "hytale-launcher-nix",
+        "type": "github"
+      }
+    },
     "nix-2-31-nixpkgs": {
       "locked": {
         "lastModified": 1759210499,
@@ -631,6 +651,7 @@
         "flake-parts": "flake-parts_3",
         "git-hooks-nix": "git-hooks-nix",
         "home-manager": "home-manager",
+        "hytale-launcher": "hytale-launcher",
         "nixos-generators": "nixos-generators",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs",
