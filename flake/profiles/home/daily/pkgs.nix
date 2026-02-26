@@ -60,5 +60,6 @@
     mission-center
     pwndbg
     kdePackages.kolourpaint
+    psmisc
   ];
 }
