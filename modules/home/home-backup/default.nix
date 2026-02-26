@@ -48,6 +48,12 @@ in
           repositoryFile = config.sops.templates.homeBackupRepositoryFile.path;
           passwordFile = cfg.passwordFile;
           environmentFile = config.sops.templates.homeBackupCredsEnvironmentFile.path;
+          pruneOpts = [
+            "--keep-last 50"
+            "--keep-weekly 50"
+            "--keep-monthly 50"
+            "--keep-yearly 50"
+          ];
           paths = [
             config.home.homeDirectory
           ];
