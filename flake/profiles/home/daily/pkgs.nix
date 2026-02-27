@@ -47,7 +47,7 @@
     obs-studio
     gimp
     p7zip
-    jetbrains.idea-ultimate
+    jetbrains.idea
     baobab
     jetbrains.clion
     pwninit
