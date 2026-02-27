@@ -228,6 +228,9 @@ def main(args):
         with open(summary_file, "w") as f:
             f.write("\n".join(summary))
 
+        process.wait()
+        return process.returncode
+
     return 0
 
 
