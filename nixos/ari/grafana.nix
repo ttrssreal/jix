@@ -35,6 +35,9 @@
       security = {
         admin_user = "jess";
         admin_password = "$__file{${config.sops.secrets.grafana-password.path}}";
+        # Add to sops?
+        # https://github.com/NixOS/nixpkgs/pull/484374
+        secret_key = "SW2YcwTIb9zpOOhoPsMm";
       };
     };
   };
