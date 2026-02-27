@@ -6,7 +6,7 @@
   ...
 }:
 let
-  deployable = lib.filterAttrs (_: host: host.deployment.enable) config.jix.nodes.nixos;
+  deployable = lib.filterAttrs (_: host: host.deployment.enable) config.jix.nixos.nodes;
   mapDeployable = f: lib.mapAttrs f deployable;
 in
 {
