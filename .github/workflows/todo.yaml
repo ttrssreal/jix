@@ -4,6 +4,8 @@ name: File issues for todo comments
 
 on:
   push:
+    branches:
+      - main
   workflow_dispatch:
     inputs:
       MANUAL_COMMIT_REF:
