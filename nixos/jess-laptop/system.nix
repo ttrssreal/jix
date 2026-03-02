@@ -5,6 +5,17 @@
     ./displaylink.nix
   ];
 
+  # TODO: remove once #491981 is merged
+  _module.args.pkgs = pkgs.applyPatches {
+    src = pkgs.path;
+    patches = [
+      (pkgs.fetchpatch {
+        url = "https://github.com/NixOS/nixpkgs/pull/491981.patch";
+        sha256 = "sha256-awa9J5ZNUyz4Z2RqPVEovBTNng4AdhzS03Bqg8jejWQ=";
+      })
+    ];
+  };
+
   jix = {
     pipewire.enable = true;
     dwm.fontSize = 15;
