@@ -74,6 +74,7 @@ jobs:
 
       - name: Setup Attic cache
         uses: ryanccn/attic-action@v0.4.0
+        continue-on-error: true
         with:
           endpoint: https://ari.mudpuppy-cod.ts.net/nix-cache/
           cache: ${{ secrets.ATTIC_CACHE }}
@@ -94,6 +95,9 @@ jobs:
           ci-key-file: ${{ steps.key_file.outputs.key_file }}
           sops-file: secrets/buildtime.yaml
 
-      - name: Build
-        # capture logs to generate a summary
-        run: ./.github/ci.py run ${{ matrix.job-spec.command }}
+      # - name: Build
+      #   # capture logs to generate a summary
+      #   run: ./.github/ci.py run ${{ matrix.job-spec.command }}
+
+      - name: Setup upterm session
+        uses: owenthereal/action-upterm@v1
