@@ -29,6 +29,10 @@
           "networkmanager"
           "docker"
         ];
+
+        openssh.authorizedKeys.keys = [
+          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILvi4RDyE8TlqzV4/z1VEsttNZENou7Bct5/Q+p9BYag jess@desk"
+        ];
       };
     };
 
