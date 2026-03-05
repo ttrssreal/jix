@@ -78,6 +78,7 @@
 
   boot.loader.grub = {
     enable = true;
-    device = "/dev/disk/by-id/ata-Samsung_SSD_840_PRO_Series_S1ATNSADC61770E";
+    device = "/dev/disk/by-id/ata-TOSHIBA_MQ01ABD100M_X6FXT74JT";
+    useOSProber = true;
   };
 }
