@@ -58,22 +58,6 @@
   networking = {
     networkmanager.enable = true;
     firewall.enable = false;
-
-    interfaces.eno1 = {
-      ipv4.addresses = [
-        {
-          address = "192.168.150.2";
-          prefixLength = 24;
-        }
-      ];
-    };
-
-    defaultGateway = {
-      address = "192.168.150.1";
-      interface = "eno1";
-    };
-
-    nameservers = [ "192.168.150.1" ];
   };
 
   boot.loader.grub = {
