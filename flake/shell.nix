@@ -35,6 +35,7 @@
           # secrets manager
           sops
           ssh-to-age
+          jq
 
           inputs'.home-manager.packages.default
 
