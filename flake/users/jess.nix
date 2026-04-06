@@ -49,7 +49,9 @@ in
     )
 
     {
-      virtualisation.vmVariant.users.users.jess.password = "password";
+      virtualisation.vmVariant = {
+        users.users.jess.password = "password";
+      };
     }
 
     {
