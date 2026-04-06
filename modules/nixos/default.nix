@@ -7,5 +7,6 @@
     ./buildtime-secrets
     ./fuzzing-metrics
     ./aflplusplus
+    ./sway
   ];
 }

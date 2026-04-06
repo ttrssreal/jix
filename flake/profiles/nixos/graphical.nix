@@ -13,6 +13,7 @@ in
     windowManager = lib.mkOption {
       type = lib.types.enum [
         "dwm"
+        "sway"
       ];
     };
   };

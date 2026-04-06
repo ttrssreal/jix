@@ -18,6 +18,7 @@ in
     windowManager = lib.mkOption {
       type = lib.types.enum [
         "dwm"
+        "sway"
       ];
     };
   };
@@ -56,6 +57,13 @@ in
               '';
             };
           };
+        }
+      )
+
+      (
+        { lib, ... }:
+        lib.mkIf (cfg.windowManager == "sway") {
+          jix.sway.enable = true;
         }
       )
     ];

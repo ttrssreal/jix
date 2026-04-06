@@ -12,5 +12,6 @@
     ./home-key
     ./sops
     ./backblaze-rclone
+    ./sway
   ];
 }
