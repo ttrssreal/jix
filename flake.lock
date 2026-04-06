@@ -210,6 +210,27 @@
     "flake-parts_3": {
       "inputs": {
         "nixpkgs-lib": [
+          "mcsr-nixos",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1772408722,
+        "narHash": "sha256-rHuJtdcOjK7rAHpHphUb1iCvgkU3GpfvicLMwwnfMT0=",
+        "owner": "hercules-ci",
+        "repo": "flake-parts",
+        "rev": "f20dc5d9b8027381c474144ecabc9034d6a839a3",
+        "type": "github"
+      },
+      "original": {
+        "owner": "hercules-ci",
+        "repo": "flake-parts",
+        "type": "github"
+      }
+    },
+    "flake-parts_4": {
+      "inputs": {
+        "nixpkgs-lib": [
           "nixvim",
           "nixpkgs"
         ]
@@ -326,6 +347,25 @@
         "type": "github"
       }
     },
+    "mcsr-nixos": {
+      "inputs": {
+        "flake-parts": "flake-parts_3",
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1774908394,
+        "narHash": "sha256-d/SLw/5B4mPzZtwuU1xzGq5+b2fpHB3wrGI/POinAFE=",
+        "rev": "e6347d9528b21a01d164251783ac60cdbba646f4",
+        "type": "tarball",
+        "url": "https://git.uku3lig.net/api/v1/repos/uku/mcsr-nixos/archive/e6347d9528b21a01d164251783ac60cdbba646f4.tar.gz"
+      },
+      "original": {
+        "type": "tarball",
+        "url": "https://git.uku3lig.net/uku/mcsr-nixos/archive/main.tar.gz"
+      }
+    },
     "nix-2-31-nixpkgs": {
       "locked": {
         "lastModified": 1759210499,
@@ -433,7 +473,7 @@
     },
     "nixvim": {
       "inputs": {
-        "flake-parts": "flake-parts_3",
+        "flake-parts": "flake-parts_4",
         "nixpkgs": [
           "nixpkgs"
         ],
@@ -537,6 +577,7 @@
         "git-hooks-nix": "git-hooks-nix",
         "home-manager": "home-manager",
         "hytale-launcher": "hytale-launcher",
+        "mcsr-nixos": "mcsr-nixos",
         "nixos-generators": "nixos-generators",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs",

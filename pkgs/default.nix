@@ -1,18 +1,14 @@
 {
-  # mkWindowsApp from erosanix uses a system parameterized lib?
-  # would be nice to do:
-  #   `transposition.lib.noOutput = true;`
-  # TODO: flake-parts: input only transpositions?
-  # Issue URL: https://github.com/ttrssreal/jix/issues/6
-  perInput = system: flake: {
-    lib = flake.lib.${system};
-  };
-
+  inputs,
+  ...
+}:
+{
   perSystem =
     {
       inputs',
       pkgs,
       config,
+      system,
       ...
     }:
     {
@@ -23,7 +19,7 @@
           pwndbg-unwrapped = inputs'.pwndbg.packages.pwndbg;
           pwndbg = final.callPackage ./jesspwn { };
 
-          inherit (inputs'.erosanix.lib) mkWindowsApp;
+          inherit (inputs.erosanix.lib.${system}) mkWindowsApp;
           xgpro = final.callPackage ./xgpro.nix { };
 
           binary-ninja = final.callPackage ./binary-ninja.nix { };
@@ -43,8 +39,6 @@
 
           resetti = final.callPackage ./resetti.nix { };
 
-          ninjabrain-bot = final.callPackage ./ninjabrain-bot { };
-
           mc-monitor = final.callPackage ./mc-monitor.nix { };
         })
       ];
@@ -58,7 +52,6 @@
           pwntools
           pwninit
           resetti
-          ninjabrain-bot
           mc-monitor
           ;
 

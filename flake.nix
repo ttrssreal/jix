@@ -51,6 +51,9 @@
 
     hytale-launcher.url = "github:JPyke3/hytale-launcher-nix";
     hytale-launcher.inputs.nixpkgs.follows = "nixpkgs";
+
+    mcsr-nixos.url = "https://git.uku3lig.net/uku/mcsr-nixos/archive/main.tar.gz";
+    mcsr-nixos.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs =

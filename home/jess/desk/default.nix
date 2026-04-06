@@ -122,12 +122,14 @@
           };
 
           home.packages = with pkgs; [
-            ninjabrain-bot
             attic-client
             inputs.hytale-launcher.packages.x86_64-linux.hytale-launcher
+            waywall
           ];
         }
       )
+
+      ./waywall.nix
     ];
 
     # This value determines the Home Manager release that your
