@@ -58,6 +58,13 @@
 
   hardware.bluetooth.enable = true;
 
+  virtualisation.vmVariant = {
+    virtualisation = {
+      cores = 4;
+      memorySize = 1024 * 4; # 4Gib
+    };
+  };
+
   # Bootloader.
   boot = {
     loader.grub = {
