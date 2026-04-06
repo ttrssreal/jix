@@ -11,7 +11,7 @@
     profiles = {
       graphical = {
         enable = true;
-        windowManager = "dwm";
+        windowManager = "sway";
       };
 
       base.cache = true;

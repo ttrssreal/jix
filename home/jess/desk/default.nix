@@ -2,7 +2,7 @@
   jix.home."jess@desk" = {
     profiles = {
       daily.enable = true;
-      graphical.windowManager = "dwm";
+      graphical.windowManager = "sway";
     };
 
     system = "x86_64-linux";
