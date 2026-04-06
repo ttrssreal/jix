@@ -15,7 +15,7 @@ in
     privateKey = lib.mkOption {
       type = lib.types.attrs;
       default = {
-        path = "/etc/ssh/jix_ssh_host_ed25519_key";
+        path = "/etc/ssh/jix/jix_ssh_host_ed25519_key";
         type = "ed25519";
         bits = 521;
       };
@@ -28,33 +28,37 @@ in
   };
 
   config = {
+    # these scripts need deps on "etc" as ssh-keygen relies on /etc/passwd existing.
     system.activationScripts = {
       # https://github.com/NixOS/nixpkgs/blob/f593188ca95a/nixos/modules/services/networking/ssh/sshd.nix#L792-L806
       generateHostKey = lib.mkIf (cfg.enable && cfg.generate) (
         let
           key = cfg.privateKey;
         in
-        ''
-          if ! [ -s "${key.path}" ]; then
-              if ! [ -h "${key.path}" ]; then
-                  rm -f "${key.path}"
-              fi
-              mkdir -p "$(dirname '${key.path}')"
-              chmod 0755 "$(dirname '${key.path}')"
-              ${lib.getExe' pkgs.openssh "ssh-keygen"} \
-                -t "${key.type}" \
-                -C "root@${config.networking.hostName}" \
-                ${lib.optionalString (key ? bits) "-b ${toString key.bits}"} \
-                ${lib.optionalString (key ? rounds) "-a ${toString key.rounds}"} \
-                ${lib.optionalString (key ? openSSHFormat && key.openSSHFormat) "-o"} \
-                -f "${key.path}" \
-                -N ""
-          fi
-        ''
+        {
+          deps = [ "etc" ];
+          text = ''
+            if ! [ -s "${key.path}" ]; then
+                if ! [ -h "${key.path}" ]; then
+                    rm -f "${key.path}"
+                fi
+                mkdir -p "$(dirname '${key.path}')"
+                chmod 0755 "$(dirname '${key.path}')"
+                ${lib.getExe' pkgs.openssh "ssh-keygen"} \
+                  -t "${key.type}" \
+                  -C "root@${config.networking.hostName}" \
+                  ${lib.optionalString (key ? bits) "-b ${toString key.bits}"} \
+                  ${lib.optionalString (key ? rounds) "-a ${toString key.rounds}"} \
+                  ${lib.optionalString (key ? openSSHFormat && key.openSSHFormat) "-o"} \
+                  -f "${key.path}" \
+                  -N ""
+            fi
+          '';
+        }
       );
 
       checkHostKey = lib.mkIf (cfg.enable && cfg.generate) {
-        deps = lib.optional cfg.generate "generateHostKey";
+        deps = [ "etc" ] ++ lib.optional cfg.generate "generateHostKey";
         text = ''
           key=${cfg.privateKey.path}
           pub=${cfg.publicKey}
@@ -78,6 +82,16 @@ in
             fi
           fi
         '';
+      };
+    };
+
+    # share the host's sops decryption key with test vm's
+    virtualisation.vmVariant = {
+      virtualisation.sharedDirectories = {
+        keys = {
+          source = "/etc/ssh/jix";
+          target = "/etc/ssh/jix";
+        };
       };
     };
   };

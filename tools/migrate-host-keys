@@ -1,0 +1,12 @@
+#!/usr/bin/env nix
+#! nix develop ..
+#! nix --extra-experimental-features ``nix-command flakes``
+#! nix --command bash
+
+set -exo pipefail
+
+mkdir -p "/etc/ssh/jix"
+chmod 0755 "/etc/ssh/jix"
+
+mv /etc/ssh/jix_ssh_host_ed25519_key /etc/ssh/jix
+mv /etc/ssh/jix_ssh_host_ed25519_key.pub /etc/ssh/jix
