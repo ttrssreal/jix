@@ -41,6 +41,9 @@ in
 
           extraConfig = lib.mkIf cfg.githubForceSSH {
             url."ssh://git@github.com/".insteadOf = "https://github.com/";
+            diff."sopsdiffer".textconv = "${pkgs.writeShellScript "sopsdiffer" ''
+              sops -d --input-type yaml --output-type yaml "$1" || true -
+            ''}";
           };
 
           signing.signer = "${pkgs.writeShellScript "gnupg-signer" ''
