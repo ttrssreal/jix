@@ -54,7 +54,7 @@ in
           ];
 
           trusted-public-keys = [
-            "main:So8rfJkbLv5Vrd+y3agvPrDAA/9/SnTZz6RFHo+oFMM="
+            "main:CQvMVlbvoG+oXkC+d4ODlylKKh06rt0qPQlc0XQ3L5g="
           ];
         };
       }
