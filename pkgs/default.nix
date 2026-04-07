@@ -35,6 +35,7 @@
           jess-scripts = {
             nix-conf-edit = final.callPackage ./scripts/nix-conf-edit.nix { };
             nixpkgs-print-out-paths = final.callPackage ./scripts/nixpkgs-print-out-paths.nix { };
+            edit-managed-file = final.callPackage ./scripts/edit-managed-file.nix { };
           };
 
           resetti = final.callPackage ./resetti.nix { };
@@ -58,6 +59,7 @@
         inherit (pkgs.jess-scripts)
           nix-conf-edit
           nixpkgs-print-out-paths
+          edit-managed-file
           ;
       };
     };

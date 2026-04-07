@@ -60,5 +60,6 @@
     pwndbg
     kdePackages.kolourpaint
     psmisc
+    jess-scripts.edit-managed-file
   ];
 }
