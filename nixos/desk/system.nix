@@ -4,6 +4,14 @@
     ./ghidra-server.nix
   ];
 
+  xdg.portal = {
+    enable = true;
+    extraPortals = [
+      pkgs.xdg-desktop-portal-wlr
+      pkgs.xdg-desktop-portal-gtk
+    ];
+  };
+
   hardware.graphics.enable = true;
   programs.virt-manager.enable = true;
   users.groups.libvirtd.members = [ "jess" ];
