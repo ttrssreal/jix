@@ -44,6 +44,7 @@
               "/home/jess/media/raw" # obs
               "/home/jess/vm" # obs
               "/home/jess/mnt" # obs
+              "/home/jess/hack/kindle-jailbreak/qemu-kindle/filesystems/shadow"
             ];
           };
 
