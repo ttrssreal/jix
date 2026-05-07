@@ -122,6 +122,17 @@
             };
           };
 
+          services.flameshot = {
+            enable = true;
+            settings = {
+              General = {
+                useGrimAdapter = true;
+                copyPathAfterSave = true;
+                savePath = "/home/jess/picture";
+              };
+            };
+          };
+
           home.packages = with pkgs; [
             attic-client
             inputs.hytale-launcher.packages.x86_64-linux.hytale-launcher
