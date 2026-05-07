@@ -6,6 +6,24 @@ local NORMAL_SENSITIVITY = 32.28912797;
 local EYE_MEASURE_RES = { x = 384, y = 16384 }
 local PLANAR_FOG_ABUSE_RES = { x = 1920, y = 300 }
 local FIND_BASTION_RES = { x = 340, y = 1080 }
+-- cant get dynamically?
+local MAIN_MONITOR_RES = { x = 1920, y = 1080 }
+
+local ENTITY_COUNT_SCALE = 13;
+local ENTITY_COUNT_PADDING = 10;
+local ENTITY_COUNT_SRC = {
+  x = 10,
+  y = 37,
+  w = 20,
+  h = 10,
+};
+local ENTITY_COUNT_DST = {
+  x = (MAIN_MONITOR_RES.x + FIND_BASTION_RES.x) / 2 + ENTITY_COUNT_PADDING,
+  y = (MAIN_MONITOR_RES.y - ENTITY_COUNT_SRC.w * ENTITY_COUNT_SCALE) / 2,
+  w = ENTITY_COUNT_SRC.w * ENTITY_COUNT_SCALE,
+  h = ENTITY_COUNT_SRC.h * ENTITY_COUNT_SCALE,
+};
+
 local EYE_SRC_WIDTH = 30;
 local EYE_SRC_HEIGHT = 580;
 
@@ -31,6 +49,8 @@ helpers.res_mirror({ src = EYE_SRC, dst = EYE_DST, }, EYE_MEASURE_RES.x, EYE_MEA
 helpers.res_image("/home/jess/.config/waywall/overlay.png", {
   dst = EYE_DST
 }, EYE_MEASURE_RES.x, EYE_MEASURE_RES.y)
+
+helpers.res_mirror({ src = ENTITY_COUNT_SRC, dst = ENTITY_COUNT_DST, }, FIND_BASTION_RES.x, FIND_BASTION_RES.y)
 
 local config = {
   input = {
