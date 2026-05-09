@@ -102,6 +102,7 @@ in
   services.nginx = {
     enable = true;
     clientMaxBodySize = "0";
+    recommendedProxySettings = true;
     proxyTimeout = "3600"; # 1hr
 
     virtualHosts."ari.mudpuppy-cod.ts.net" = {
