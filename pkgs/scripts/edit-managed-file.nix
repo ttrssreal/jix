@@ -21,7 +21,7 @@ writeShellApplication {
       exit 1
     fi
 
-    if ! [ -w "$1" ]; then
+    if ! [ -h "$1" ] && ! [ -w "$1" ]; then
       >&2 echo "error: can't edit file '$1' (do you have permissions?)"
       exit 1
     fi
