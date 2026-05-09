@@ -16,7 +16,6 @@
           pkgs,
           lib,
           config,
-          inputs,
           ...
         }:
         {
@@ -135,7 +134,6 @@
 
           home.packages = with pkgs; [
             attic-client
-            inputs.hytale-launcher.packages.x86_64-linux.hytale-launcher
             waywall
           ];
         }
