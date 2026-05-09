@@ -71,6 +71,7 @@ in
                 "${lib.getExe' pkgs.dmenu "dmenu"}"
                 "${lib.getExe' pkgs.findutils "xargs"} swaymsg exec --"
               ];
+            "${modifier}+o" = "exec " + "${lib.getExe' pkgs.bluetooth-connect "bluetooth-connect"}";
           };
         output = {
           HDMI-A-1 = {
