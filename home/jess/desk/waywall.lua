@@ -73,6 +73,11 @@ config.actions = {
     waywall.show_floating(true)
   end,
   ["F4"] = function()
+    -- allow for F3+F4 gamemode quick-switching
+    if waywall.get_key("F3") then
+      return false
+    end
+
     toggle_eye_measure_res_fn()
   end,
   ["grave"] = function()
