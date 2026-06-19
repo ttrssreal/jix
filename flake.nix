@@ -25,9 +25,11 @@
     # mkWindowsApp
     erosanix.url = "github:emmanuelrosa/erosanix";
     erosanix.inputs.nixpkgs.follows = "nixpkgs";
+    erosanix.inputs.flake-compat.follows = "flake-compat";
 
     git-hooks-nix.url = "github:cachix/git-hooks.nix";
     git-hooks-nix.inputs.nixpkgs.follows = "nixpkgs";
+    git-hooks-nix.inputs.flake-compat.follows = "flake-compat";
 
     nixos-generators.url = "github:nix-community/nixos-generators";
     nixos-generators.inputs.nixpkgs.follows = "nixpkgs";
@@ -39,6 +41,7 @@
 
     colmena.url = "github:zhaofengli/colmena";
     colmena.inputs.nixpkgs.follows = "nixpkgs";
+    colmena.inputs.flake-compat.follows = "flake-compat";
 
     # TODO: sops-nix: remove pr patch once merged
     # Issue URL: https://github.com/ttrssreal/jix/issues/38
@@ -51,6 +54,10 @@
 
     mcsr-nixos.url = "https://git.uku3lig.net/uku/mcsr-nixos/archive/main.tar.gz";
     mcsr-nixos.inputs.nixpkgs.follows = "nixpkgs";
+
+    # this is used by quite a few inputs, so lock it
+    flake-compat.url = "github:NixOS/flake-compat";
+    flake-compat.flake = false;
   };
 
   outputs =
