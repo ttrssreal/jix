@@ -65,11 +65,13 @@
         ./nixos/jess-laptop
         ./nixos/ari
         ./nixos/adair
+        ./nixos/laptop
 
         ./home/jess/desk
         ./home/jess/jess-laptop
         ./home/jess/ari.nix
         ./home/jess/adair.nix
+        ./home/jess/laptop
       ];
 
       systems = [

@@ -67,7 +67,7 @@
               --right-of HDMI-0
           '';
 
-          programs.alacritty.settings.font.size = lib.mkForce 10;
+          jix.alacritty.defaultFontSize = 10;
 
           programs.gpg.enable = true;
 
@@ -75,6 +75,19 @@
             enable = true;
             pinentry.package = pkgs.pinentry-gtk2;
             enableExtraSocket = true;
+          };
+
+          jix.sway = {
+            output = {
+              HDMI-A-1 = {
+                mode = "1920x1080";
+                position = "0 0";
+              };
+              DP-1 = {
+                mode = "1280x1024";
+                position = "1920 0";
+              };
+            };
           };
 
           programs.ssh = {

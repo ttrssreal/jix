@@ -10,6 +10,16 @@ in
 {
   options.jix.sway = {
     enable = lib.mkEnableOption "sway";
+
+    laptop = lib.mkOption {
+      type = lib.types.bool;
+      default = false;
+    };
+
+    output = lib.mkOption {
+      type = lib.types.attrs;
+      default = { };
+    };
   };
 
   config = lib.mkIf cfg.enable {
@@ -24,14 +34,6 @@ in
           position = 0;
           settings = {
             format = "D: %free";
-          };
-        };
-        "ethernet _first_" = {
-          enable = true;
-          position = 1;
-          settings = {
-            format_up = "%ip (%speed)";
-            format_down = "Eth: down";
           };
         };
         "memory" = {
@@ -50,12 +52,50 @@ in
             format = "%a %d %b %H:%M:%S";
           };
         };
-      };
+      }
+      // (lib.optionalAttrs cfg.laptop {
+        "battery all" = {
+          enable = true;
+          position = 0;
+          settings = {
+            format = "%status %remaining (%percentage %consumption)";
+            format_percentage = "%.00f%s";
+            format_down = "No battery";
+            status_chr = "⚡ CHR";
+            status_bat = "🔋 BAT";
+            status_unk = "? UNK";
+            status_full = "☻ FULL";
+            status_idle = "☻ IDLE";
+            low_threshold = 10;
+          };
+        };
+
+        "wireless _first_" = {
+          enable = true;
+          position = 1;
+          settings = {
+            format_up = "W: (%essid, %bitrate) %ip";
+            format_down = "W: down";
+          };
+        };
+      })
+      // (lib.optionalAttrs (!cfg.laptop) {
+        "ethernet _first_" = {
+          enable = true;
+          position = 1;
+          settings = {
+            format_up = "%ip (%speed)";
+            format_down = "Eth: down";
+          };
+        };
+      });
     };
 
     wayland.windowManager.sway = {
       enable = true;
       config = {
+        inherit (cfg) output;
+
         modifier = "Mod4";
         terminal = "alacritty";
         keybindings =
@@ -73,14 +113,12 @@ in
               ];
             "${modifier}+o" = "exec " + "${lib.getExe' pkgs.bluetooth-connect "bluetooth-connect"}";
           };
-        output = {
-          HDMI-A-1 = {
-            mode = "1920x1080";
-            position = "0 0";
-          };
-          DP-1 = {
-            mode = "1280x1024";
-            position = "1920 0";
+        input = lib.optionalAttrs cfg.laptop {
+          "type:touchpad" = {
+            dwt = "enabled";
+            tap = "enabled";
+            natural_scroll = "enabled";
+            middle_emulation = "enabled";
           };
         };
         startup = lib.mapAttrsToList (k: _: {
