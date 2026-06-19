@@ -15,6 +15,20 @@
             { name = "path"; }
             { name = "buffer"; }
           ];
+          mapping = {
+            __raw = ''
+              cmp.mapping.preset.insert({
+                ["<Tab>"] = cmp.mapping(function(fallback)
+                  if cmp.visible() then
+                    cmp.select_next_item()
+                  else
+                    fallback() -- The fallback function sends a already mapped key. In this case, it's probably `<Tab>`.
+                  end
+                end, { "i", "s" }),
+                ["<C-y>"] = cmp.mapping.confirm({ select = true }),
+              })
+            '';
+          };
         };
       };
 
