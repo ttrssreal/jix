@@ -60,6 +60,10 @@
         };
       };
     };
+
+    extraPlugins = [
+      pkgs.vimPlugins.vim-tidal
+    ];
   };
 
   # for live_grep

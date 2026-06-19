@@ -58,6 +58,9 @@
     # this is used by quite a few inputs, so lock it
     flake-compat.url = "github:NixOS/flake-compat";
     flake-compat.flake = false;
+
+    tidalcycles.url = "github:mitchmindtree/tidalcycles.nix";
+    tidalcycles.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs =

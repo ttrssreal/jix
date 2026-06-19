@@ -32,6 +32,7 @@ in
 
         jix.overlays = [
           inputs.buildtime-secrets-nix.overlays.default
+          inputs.tidalcycles.overlays.default
 
           (final: prev: {
             displaylink = prev.displaylink.overrideAttrs {
