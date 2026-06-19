@@ -7,6 +7,8 @@
       pgp = {
         # https://jessie.cafe/gpg.asc
         jess = "80923BD1ECD0E436671DC8E9BA3350686C918606";
+        # laptop subkey
+        jess-laptop = "3B2B3B753452DC1AD25DED1C447A0766118B05B9";
       };
 
       ssh = lib.mapAttrs (_: key: lib.trim (lib.readFile key)) {
@@ -15,6 +17,8 @@
         jess-laptop = ../nixos/jess-laptop/hostKey.pub;
         "jess@desk" = ../home/jess/desk/homeKey.pub;
         "jess@jess-laptop" = ../home/jess/jess-laptop/homeKey.pub;
+        "jess@laptop" = ../home/jess/laptop/homeKey.pub;
+        laptop = ../nixos/laptop/hostKey.pub;
         ci = ../.github/ci.pub;
       };
     in
@@ -27,6 +31,7 @@
             {
               pgp = [
                 pgp.jess
+                pgp.jess-laptop
               ];
               age = [
                 ssh.ari
@@ -34,6 +39,8 @@
                 ssh."jess@desk"
                 ssh."jess@jess-laptop"
                 ssh.jess-laptop
+                ssh.laptop
+                ssh."jess@laptop"
               ];
             }
           ];
@@ -44,11 +51,13 @@
             {
               pgp = [
                 pgp.jess
+                pgp.jess-laptop
               ];
               age = [
                 ssh.desk
                 ssh.ci
                 ssh.jess-laptop
+                ssh.laptop
               ];
             }
           ];
