@@ -26,6 +26,10 @@ in
         settings = {
           auto-optimise-store = true;
           trusted-users = [ "@wheel" ];
+          experimental-features = [
+            "flakes"
+            "nix-command"
+          ];
         };
 
         optimise.automatic = true;
