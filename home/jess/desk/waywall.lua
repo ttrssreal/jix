@@ -1,7 +1,7 @@
 local waywall = require("waywall")
 local helpers = require("waywall.helpers")
 
-local NORMAL_SENSITIVITY = 32.28912797;
+local NORMAL_SENSITIVITY = 5;
 
 local EYE_MEASURE_RES = { x = 384, y = 16384 }
 local PLANAR_FOG_ABUSE_RES = { x = 1920, y = 300 }
