@@ -29,7 +29,6 @@
     feh
     mpv
     prismlauncher
-    minikube
     qpwgraph
     ffmpeg
     cntr
