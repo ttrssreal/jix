@@ -138,7 +138,6 @@
             enable = true;
             settings = {
               General = {
-                useGrimAdapter = true;
                 copyPathAfterSave = true;
                 savePath = "/home/jess/picture";
               };
