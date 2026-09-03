@@ -44,6 +44,7 @@ jobs:
   build:
     needs: plan
     strategy:
+      max-parallel: 2
       matrix:
         os:
           - ubuntu-latest
@@ -75,7 +76,7 @@ jobs:
       - name: Setup Attic cache
         uses: ryanccn/attic-action@v0.4.0
         with:
-          endpoint: https://ari.mudpuppy-cod.ts.net/nix-cache/
+          endpoint: https://nix-cache.app.jessie.cafe/
           cache: ${{ secrets.ATTIC_CACHE }}
           token: ${{ secrets.ATTIC_TOKEN }}
 
@@ -97,3 +98,7 @@ jobs:
       - name: Build
         # capture logs to generate a summary
         run: ./.github/ci.py run ${{ matrix.job-spec.command }}
+
+      - name: Setup upterm session
+        uses: owenthereal/action-upterm@v1
+        if: ${{ failure() }}

@@ -182,10 +182,13 @@ def main(args):
         nix_command += args.nix_command[1:]
         nix_command += [ "--log-format", "internal-json" ]
 
+        proc_env = os.environ.copy()
+        proc_env["NO_COLOR"] = "1"
+
         messages = list()
         process = subprocess.Popen(
             nix_command,
-            env={ "NO_COLOR": "1" },
+            env=proc_env,
             text=True,
             stderr=subprocess.PIPE
         )
