@@ -40,6 +40,8 @@
           sort_by = "case_sensitive";
           auto_reload_on_write = true;
           disable_netrw = true;
+          # updates the root directory of the tree on `DirChanged` (when your run `:cd` usually)
+          sync_root_with_cwd = false;
         };
       };
 
