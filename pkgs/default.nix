@@ -41,6 +41,24 @@
           resetti = final.callPackage ./resetti.nix { };
 
           mc-monitor = final.callPackage ./mc-monitor.nix { };
+
+          # Use the development release (has the Akahu provider)
+          firefly-iii-data-importer = prev.firefly-iii-data-importer.overrideAttrs (prevAttrs: rec {
+            src = final.fetchFromGitHub {
+              owner = "firefly-iii";
+              repo = "data-importer";
+              tag = "develop-20260901";
+              hash = "sha256-i9pQBGGpIfXc+fd+t5cfcVcv4ZrWsZa/uMK065xmpvI=";
+            };
+
+            vendorHash = "sha256-7Cr9u9+BImRTh6l6srT7BldDvQCBwtQuCHEHrYn7aCQ=";
+
+            npmDeps = final.fetchNpmDeps {
+              inherit src;
+              name = "${prevAttrs.pname}-npm-deps";
+              hash = "sha256-UKEm+4DNbQbWpDVg65BTdyGeisC/EFyJNcbxkqiLOrs=";
+            };
+          });
         })
       ];
 

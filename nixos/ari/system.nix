@@ -6,6 +6,8 @@
     ./prometheus.nix
     ./mc-monitor.nix
     ./nix-cache.nix
+    ./firefly-iii.nix
+    ./firefly-iii-data-importer.nix
   ];
 
   # for minecraft docker compose in systemd
