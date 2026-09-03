@@ -31,9 +31,9 @@ home-manager: `home-manager switch --flake . --override-input home-manager <hm-p
 
 ## Renew certificates
  - Get new certs: `sudo tailscale cert ari.mudpuppy-cod.ts.net`
- - Set ari-cert `sops set secrets/nixos.yaml '["ari-cert"]' "$(cat ari.mudpuppy-cod.ts.net.crt | jq -Rsa)"`
- - Set ari-cert-key `sops set secrets/nixos.yaml '["ari-cert-key"]' "$(sudo cat ari.mudpuppy-cod.ts.net.key | jq -Rsa)"`
  - `certbot certonly -n --agree-tos --logs-dir certs/logs --config-dir certs/config --work-dir certs/work --dns-cloudflare --dns-cloudflare-credentials cf-creds -d '*.app.jessie.cafe'`
+ - Set wildcard cert key `sops set secrets/nixos.yaml '["wildcard-app-cert-key"]' "$(cat certs/config/live/app.jessie.cafe/privkey.pem | jq -Rsa)"`
+ - Set wildcard cert `sops set secrets/nixos.yaml '["wildcard-app-cert"]' "$(cat certs/config/live/app.jessie.cafe/fullchain.pem | jq -Rsa)"`
 
 ## Wireguard
 
@@ -47,7 +47,7 @@ To use the cache when building flake outputs add the following `nixConfig` to `f
 
     nixConfig = {
       extra-substituters = [
-        "https://ari.mudpuppy-cod.ts.net/nix-cache/main"
+        "https://nix-cache.app.jessie.cafe"
       ];
 
       trusted-public-keys = [

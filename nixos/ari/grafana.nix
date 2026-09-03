@@ -6,14 +6,14 @@
 }:
 {
   sops.secrets = {
-    ari-cert-grafana = {
+    cert-grafana = {
       owner = "nginx";
-      key = "ari-cert";
+      key = "wildcard-app-cert";
     };
 
-    ari-cert-key-grafana = {
+    cert-key-grafana = {
       owner = "nginx";
-      key = "ari-cert-key";
+      key = "wildcard-app-cert-key";
     };
 
     grafana-password = {
@@ -27,8 +27,8 @@
       server = {
         http_addr = "127.0.0.1";
         http_port = 3000;
-        domain = "ari.mudpuppy-cod.ts.net";
-        root_url = "https://ari.mudpuppy-cod.ts.net/grafana/";
+        domain = "grafana.app.jessie.cafe";
+        root_url = "https://grafana.app.jessie.cafe/";
         serve_from_sub_path = true;
       };
 
@@ -57,7 +57,7 @@
         text = ''
           set -xeo pipefail
 
-          response=$(curl --fail https://ari.mudpuppy-cod.ts.net/grafana/api/health)
+          response=$(curl --fail https://grafana.app.jessie.cafe/api/health)
 
           database=$(echo "$response" | jq -r '.database')
           if [ "$database" != "ok" ]; then
@@ -99,12 +99,12 @@
   services.nginx = {
     enable = true;
 
-    virtualHosts."ari.mudpuppy-cod.ts.net" = {
+    virtualHosts."grafana.app.jessie.cafe" = {
       forceSSL = true;
-      sslCertificate = config.sops.secrets.ari-cert-grafana.path;
-      sslCertificateKey = config.sops.secrets.ari-cert-key-grafana.path;
+      sslCertificate = config.sops.secrets.cert-grafana.path;
+      sslCertificateKey = config.sops.secrets.cert-key-grafana.path;
 
-      locations."/grafana/" = {
+      locations."/" = {
         proxyPass = "http://127.0.0.1:3000";
         proxyWebsockets = true;
         recommendedProxySettings = true;

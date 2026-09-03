@@ -54,7 +54,7 @@ in
           netrc-file = config.sops.secrets.nix-cache-creds-file.path;
 
           substituters = [
-            "https://ari.mudpuppy-cod.ts.net/nix-cache/main"
+            "https://nix-cache.app.jessie.cafe"
           ];
 
           trusted-public-keys = [

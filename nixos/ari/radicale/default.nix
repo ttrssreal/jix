@@ -8,14 +8,14 @@
   sops.secrets = {
     radicale-htpasswd-file.owner = "radicale";
 
-    ari-cert-radicale = {
+    cert-radicale = {
       owner = "radicale";
-      key = "ari-cert";
+      key = "wildcard-app-cert";
     };
 
-    ari-cert-key-radicale = {
+    cert-key-radicale = {
       owner = "radicale";
-      key = "ari-cert-key";
+      key = "wildcard-app-cert-key";
     };
   };
 
@@ -32,8 +32,8 @@
         server = {
           ssl = true;
           hosts = "0.0.0.0:5232";
-          certificate = config.sops.secrets.ari-cert-radicale.path;
-          key = config.sops.secrets.ari-cert-key-radicale.path;
+          certificate = config.sops.secrets.cert-radicale.path;
+          key = config.sops.secrets.cert-key-radicale.path;
         };
       };
     };
@@ -45,7 +45,7 @@
     serviceConfig = {
       Environment = [
         "CALDAV_USERNAME=test-user"
-        "CALDAV_URL=https://ari.mudpuppy-cod.ts.net:5232"
+        "CALDAV_URL=https://calendar.app.jessie.cafe:5232"
         "CALDAV_PASSWORD=test-user"
       ];
       ExecStart = "${lib.getExe (

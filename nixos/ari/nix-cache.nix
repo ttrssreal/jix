@@ -5,13 +5,30 @@
   ...
 }:
 let
-  api-endpoint = "https://ari.mudpuppy-cod.ts.net/nix-cache/";
+  api-endpoint = "https://nix-cache.app.jessie.cafe";
 in
 {
   sops.secrets.attic-server-token = { };
 
+  sops.secrets = {
+    cert-nix-cache = {
+      owner = "nginx";
+      key = "wildcard-app-cert";
+    };
+
+    cert-key-nix-cache = {
+      owner = "nginx";
+      key = "wildcard-app-cert-key";
+    };
+
+    firefly-app-key = {
+      owner = config.services.firefly-iii.user;
+    };
+  };
+
   sops.templates.atticEnvFile.content = ''
     ATTIC_SERVER_TOKEN_RS256_SECRET_BASE64=${config.sops.placeholder.attic-server-token}
+    RUST_LOG=debug
   '';
 
   systemd.services.config-attic = {
@@ -85,7 +102,7 @@ in
         #
         # If 0, chunking is disabled entirely for newly-uploaded NARs.
         # If 1, all NARs are chunked.
-        nar-size-threshold = 64 * 1024; # 64 KiB
+        nar-size-threshold = 0; # Off
 
         # The preferred minimum size of a chunk, in bytes
         min-size = 16 * 1024; # 16 KiB
@@ -96,6 +113,8 @@ in
         # The preferred maximum size of a chunk, in bytes
         max-size = 256 * 1024; # 256 KiB
       };
+
+      compression.type = "zstd";
     };
   };
 
@@ -105,9 +124,22 @@ in
     recommendedProxySettings = true;
     proxyTimeout = "3600"; # 1hr
 
-    virtualHosts."ari.mudpuppy-cod.ts.net" = {
-      locations."/nix-cache/" = {
+    virtualHosts."nix-cache.app.jessie.cafe" = {
+      forceSSL = true;
+      sslCertificate = config.sops.secrets.cert-nix-cache.path;
+      sslCertificateKey = config.sops.secrets.cert-key-nix-cache.path;
+
+      locations."/" = {
         proxyPass = "http://127.0.0.1:1234/";
+
+        # if atticd is down tell nix to try the next cache instead of failing
+        extraConfig = ''
+          error_page 502 = @fallback;
+        '';
+      };
+
+      locations."@fallback" = {
+        return = 404;
       };
     };
   };

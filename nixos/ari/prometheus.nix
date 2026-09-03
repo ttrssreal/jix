@@ -5,9 +5,21 @@
   ...
 }:
 {
+  sops.secrets = {
+    cert-prometheus = {
+      owner = "nginx";
+      key = "wildcard-app-cert";
+    };
+
+    cert-key-prometheus = {
+      owner = "nginx";
+      key = "wildcard-app-cert-key";
+    };
+  };
+
   services.prometheus = {
     enable = true;
-    webExternalUrl = "https://ari.mudpuppy-cod.ts.net/prometheus";
+    webExternalUrl = "https://prometheus.app.jessie.cafe";
     port = 9001;
 
     exporters.node = {
@@ -49,8 +61,12 @@
   services.nginx = {
     enable = true;
 
-    virtualHosts."ari.mudpuppy-cod.ts.net" = {
-      locations."/prometheus" = {
+    virtualHosts."prometheus.app.jessie.cafe" = {
+      forceSSL = true;
+      sslCertificate = config.sops.secrets.cert-prometheus.path;
+      sslCertificateKey = config.sops.secrets.cert-key-prometheus.path;
+
+      locations."/" = {
         proxyPass = "http://127.0.0.1:9001";
       };
     };
@@ -70,8 +86,8 @@
         text = ''
           set -xeo pipefail
 
-          curl --fail https://ari.mudpuppy-cod.ts.net/prometheus/-/healthy
-          curl --fail https://ari.mudpuppy-cod.ts.net/prometheus/-/ready
+          curl --fail https://prometheus.app.jessie.cafe/-/healthy
+          curl --fail https://prometheus.app.jessie.cafe/-/ready
 
           curl https://hc-ping.com/3a811a39-18c7-40ea-9039-a8a4d311b6b9
         '';
