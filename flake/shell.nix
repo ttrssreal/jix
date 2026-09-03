@@ -40,6 +40,15 @@
           inputs'.home-manager.packages.default
 
           inputs'.colmena.packages.colmena
+
+          (certbot.withPlugins (_: [
+            (import inputs.nixpkgs {
+              system = "x86_64-linux";
+              config = {
+                problems.handlers.certbot-dns-cloudflare.broken = "warn";
+              };
+            }).python314Packages.certbot-dns-cloudflare
+          ]))
         ];
 
         NIX_CONFIG = "extra-experimental-features = nix-command flakes";
