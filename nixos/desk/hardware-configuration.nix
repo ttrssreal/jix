@@ -30,6 +30,11 @@
     fsType = "ext4";
   };
 
+  fileSystems."/hdd" = {
+    device = "/dev/disk/by-id/ata-ST1000DM010-2EP102_ZN1VRBQH";
+    fsType = "ext4";
+  };
+
   swapDevices = [
     {
       device = "/var/lib/swapfile";
