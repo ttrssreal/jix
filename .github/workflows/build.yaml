@@ -44,6 +44,7 @@ jobs:
   build:
     needs: plan
     strategy:
+      max-parallel: 1
       matrix:
         os:
           - ubuntu-latest
@@ -52,6 +53,9 @@ jobs:
     runs-on: ${{ matrix.os }}
 
     name: ${{ matrix.job-spec.name }}
+
+    permissions:
+      id-token: write
 
     steps:
       - name: Checkout
@@ -72,12 +76,10 @@ jobs:
         with:
           summarize: false
 
-      - name: Setup Attic cache
-        uses: ryanccn/attic-action@v0.4.0
+      - name: Setup nix cache
+        uses: Mic92/niks3-action@v1
         with:
-          endpoint: https://nix-cache.app.jessie.cafe/
-          cache: ${{ secrets.ATTIC_CACHE }}
-          token: ${{ secrets.ATTIC_TOKEN }}
+          server-url: https://nix-cache.app.jessie.cafe/
 
       - name: Write key to disk
         id: key_file

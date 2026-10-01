@@ -53,7 +53,10 @@ def format_nix_cmd(cmd, local=True):
         shutil.which("nix") if local else "nix",
         "--extra-experimental-features",
         "nix-command flakes"
-    ] + cmd
+    ] + cmd + ([
+       "--extra-substituters", "https://nix-cache.app.jessie.cafe",
+       "--extra-trusted-public-keys", "nix-cache.app.jessie.cafe-1:yVpljo1a+Iz+tfVcxmj1f3OIfAgE9rJJH2FWPhtXluw=",
+    ] if cmd[0] == "build" else [])
 
 def nix(cmd):
     return subprocess.run(
